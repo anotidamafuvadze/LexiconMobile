@@ -80,7 +80,7 @@ function GameLab() {
             onPress={() => handleButtonPress("Difficulty")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            imageAdjust={{ left: layouts.DIFFICULTY_MARGIN_LEFT }}
+            iconAdjust={{ left: layouts.DIFFICULTY_MARGIN_LEFT }}
           />
 
           {/* Edit Tile */}
@@ -91,7 +91,7 @@ function GameLab() {
             onPress={() => handleButtonPress("EditTile")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            imageAdjust={{ marginTop: layouts.EDIT_TILE_MARGIN_TOP }}
+            iconAdjust={{ marginTop: layouts.EDIT_TILE_MARGIN_TOP }}
           />
 
           {/* Jump Tile */}
@@ -102,7 +102,7 @@ function GameLab() {
             onPress={() => handleButtonPress("JumpTile")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            imageAdjust={{ transform: [{ scale: layouts.JUMP_TILE_ICON_SCALE }] }}
+            iconAdjust={{ transform: [{ scale: layouts.JUMP_TILE_ICON_SCALE }] }}
           />
 
           {/* Eraser Tile */}
@@ -113,7 +113,7 @@ function GameLab() {
             onPress={() => handleButtonPress("EraserTile")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            imageAdjust={{
+            iconAdjust={{
               marginTop: layouts.ERASER_TILE_MARGIN_TOP,
               transform: [{ scale: layouts.ERASER_TILE_ICON_SCALE }],
             }}
@@ -127,7 +127,7 @@ function GameLab() {
             onPress={() => handleButtonPress("QuestMode")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            imageAdjust={{ left: layouts.QUEST_MODE_MARGIN_LEFT }}
+            iconAdjust={{ left: layouts.QUEST_MODE_MARGIN_LEFT }}
           />
         </View>
       </ImageBackground>

@@ -77,6 +77,7 @@ function WordPacks() {
             onPress={() => handleButtonPress("nature")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
+            iconAdjust={{top: layouts.NATURE_ICON_TOP}} // Move up slightly
           />
 
           {/* Food Pack */}

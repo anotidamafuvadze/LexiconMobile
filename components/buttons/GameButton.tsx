@@ -19,7 +19,7 @@ function GameButton({
   onPress,
   entering,
   style: styleSet,
-  imageAdjust,
+  iconAdjust: imageAdjust,
   styleAdjust,
 }: {
   title?: string;
@@ -35,7 +35,7 @@ function GameButton({
     textRow?: ViewStyle;
     textColumn?: ViewStyle;
   };
-  imageAdjust?: ImageStyle;
+  iconAdjust?: ImageStyle;
   styleAdjust?: ViewStyle;
 }): React.JSX.Element {
   return (
