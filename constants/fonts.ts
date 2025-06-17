@@ -28,7 +28,7 @@ const fonts = {
     // Game Lab
     gameLabHeaderTitle: 50,
     gameLabSubtitle: 21,
-    gameLabButtonTitle: 24,
+    gameLabButtonTitle: 25,
     gameLabButtonSubtitle: 17,
 
     // Target section
@@ -56,12 +56,12 @@ const fonts = {
 
   // Shadows and text effects
   shadow: {
-    gameBoard: "0px 5px 0px rgba(64, 59, 53, 0.8)",
-    homeButton: "0px 3.5px 0px rgba(74, 71, 71, 0.9)",
-    menuButton: "0px 7px 0px rgba(178, 169, 143, 0.5)",
-    wordPackButton: "0px 8px 0px rgba(178, 169, 143, 0.5)",
-    gameLabButton: "0px 8px 0px rgba(160, 152, 127, 0.5)",
-    packGameBoard: "0px 5px 0px rgba(0, 0, 0, 0.7)",
+    gameBoard: "0px 6px 0px rgba(64, 59, 53, 0.8)",
+    homeButton: "0px 4px 0px rgba(74, 71, 71, 0.9)",
+    menuButton: "0px 6px 0px rgba(112, 106, 89, 0.7)",
+    wordPackButton: "0px 6px 0px rgba(134, 128, 109, 0.5)",
+    gameLabButton: "0px 6px 0px rgba(129, 124, 105, 0.6)",
+    packGameBoard: "0px 6px 0px rgba(0, 0, 0, 0.7)",
     difficultyButton: "0px 6px 0px rgba(0, 0, 0, 01)",
 
     offset: {

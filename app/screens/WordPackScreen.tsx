@@ -88,6 +88,7 @@ function WordPacks() {
             onPress={() => handleButtonPress("food")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
+            iconAdjust={{top: layouts.FOOD_ICON_TOP}} // Move up slightly
           />
 
           {/* Animals Pack */}
@@ -98,6 +99,7 @@ function WordPacks() {
             onPress={() => handleButtonPress("animals")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
+            iconAdjust={{ transform: [{ scale: layouts.ANIMALS_ICON_SCALE }] }}
           />
 
           {/* Story Pack */}

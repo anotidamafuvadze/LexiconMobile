@@ -86,7 +86,7 @@ function GameLab() {
           {/* Edit Tile */}
           <GameButton
             title="EDIT TILE"
-            subtitle="Pick any letter"
+            subtitle="Pick any new letter"
             icon={images.icons.editTile}
             onPress={() => handleButtonPress("EditTile")}
             entering={asEntry(animations.SLIDE_IN())}
@@ -113,21 +113,17 @@ function GameLab() {
             onPress={() => handleButtonPress("EraserTile")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            iconAdjust={{
-              marginTop: layouts.ERASER_TILE_MARGIN_TOP,
-              transform: [{ scale: layouts.ERASER_TILE_ICON_SCALE }],
-            }}
+            iconAdjust={{ transform: [{ scale: layouts.ERASER_TILE_ICON_SCALE }] }}
           />
 
           {/* Quest Mode */}
           <GameButton
-            title="QUEST MODE"
+            title="QUESTS"
             subtitle="Timed levels and stars"
             icon={images.icons.questMode}
             onPress={() => handleButtonPress("QuestMode")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.gameLab}
-            iconAdjust={{ left: layouts.QUEST_MODE_MARGIN_LEFT }}
           />
         </View>
       </ImageBackground>

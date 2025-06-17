@@ -17,7 +17,7 @@ const colors = {
   MENU_BUTTON_BG: "rgba(197, 196, 196, 1)",
   MENU_SCREEN_BUTTON_BG: "rgba(247, 244, 239, 1)",
   WORD_PACK_BUTTON_BG: "rgba(241, 237, 229, 1)",
-  GAME_LAB_BUTTON_BG: "rgb(243, 240, 235), 1)",
+  GAME_LAB_BUTTON_BG: "rgb(250, 247, 241), 1)",
 
   // Button borders
   HOME_BUTTON_BORDER_COLOR: "rgb(55, 55, 53)",
@@ -29,8 +29,8 @@ const colors = {
   // Button text
   MENU_SCREEN_BUTTON: "rgb(69, 67, 64)",
   DIFFICULTY_BUTTON_TEXT: "rgba(255, 255, 255, 1)",
-  GAME_LAB_BUTTON_TITLE: "rgba(70, 69, 65, 1)",
-  WORD_PACK_BUTTON_TITLE: "rgba(70, 69, 65, 1)",
+  GAME_LAB_BUTTON_TITLE: "rgb(68, 66, 61)",
+  WORD_PACK_BUTTON_TITLE: "rgb(68, 66, 61)",
   SOUND_BUTTON_TITLE: "rgb(59, 58, 55)",
 
   // Game Boards

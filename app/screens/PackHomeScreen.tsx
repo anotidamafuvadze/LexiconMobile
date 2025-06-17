@@ -40,6 +40,8 @@ function PackHomeScreen() {
 
   const { packName } = useLocalSearchParams<{ packName: string }>();
   const theme = packThemes[packName as keyof typeof packThemes];
+  
+  // Background images to be changed
   const backgroundImage =
     images.backgrounds.packs[packName as keyof typeof images.backgrounds.packs];
   const gridImage = images.grids[`${packName}` as keyof typeof images.grids];
