@@ -1,26 +1,42 @@
 import colors from "@/constants/colors";
 import fonts from "@/constants/fonts";
 import layouts from "@/constants/layouts";
+import { TextStyle, ViewStyle } from "react-native";
 
 /**
  * Theme-based style overrides for each Word Pack
- * - Used to apply unique visual styles (colors, fonts, shadows) to game elements
+ * - Applies unique colors, fonts, and shadows to game UI elements
  */
 const packThemes = {
+  // ======================= NATURE PACK =======================
   nature: {
-    // Game board appearance
+    // Styling for score and pops boards
     gameBoard: {
-      backgroundColor: colors.NATURE_PACK_BOARD,
-      borderColor: colors.BLACK,
-      boxShadow: fonts.shadow.packGameBoard,
+      board: {
+        backgroundColor: colors.NATURE_PACK_BOARD,
+        borderColor: colors.BLACK,
+        boxShadow: fonts.shadow.packGameBoard,
+      } as ViewStyle,
+      text: {
+        color: colors.GAME_BOARD_TITLE,
+      } as TextStyle,
     },
 
-    // Shared text color for score/pops titles
-    text: {
-      color: colors.GAME_BOARD_TITLE,
+    // Styling for the 4x4 tile grid
+    gameGrid: {
+      grid: {
+        backgroundColor: colors.HOME_GRID_BG,
+      } as ViewStyle,
+      cell: {
+        backgroundColor: colors.HOME_GRID_CELL_BG,
+      } as ViewStyle,
+      text: {
+        fontFamily: fonts.family.regular,
+        color: colors.WORD_PACK_TITLE,
+      } as TextStyle,
     },
 
-    // Label above the target word (e.g., "TARGET")
+    // "YOUR WORD" label above the target
     targetLabel: {
       color: colors.WHITE,
       textShadowColor: colors.BLACK,
@@ -28,7 +44,7 @@ const packThemes = {
       textShadowRadius: 0,
     },
 
-    // Stylized target word
+    // Styling for the main target word
     targetWord: {
       fontFamily: "Nature",
       fontSize: fonts.size.targetPack.nature,
@@ -41,21 +57,43 @@ const packThemes = {
     },
   },
 
+  // ======================= FOOD PACK =======================
   food: {
+    // Styling for score and pops boards
     gameBoard: {
-      backgroundColor: colors.FOOD_PACK_BOARD,
-      borderColor: colors.BLACK,
-      boxShadow: fonts.shadow.packGameBoard,
+      board: {
+        backgroundColor: colors.FOOD_PACK_BOARD,
+        borderColor: colors.BLACK,
+        boxShadow: fonts.shadow.packGameBoard,
+      } as ViewStyle,
+      text: {
+        color: colors.GAME_BOARD_TITLE,
+      } as TextStyle,
     },
-    text: {
-      color: colors.GAME_BOARD_TITLE,
+
+    // Styling for the 4x4 tile grid
+    gameGrid: {
+      grid: {
+        backgroundColor: colors.HOME_GRID_BG,
+      } as ViewStyle,
+      cell: {
+        backgroundColor: colors.HOME_GRID_CELL_BG,
+      } as ViewStyle,
+      text: {
+        fontFamily: fonts.family.regular,
+        color: colors.WORD_PACK_TITLE,
+      } as TextStyle,
     },
+
+    // "YOUR WORD" label above the target
     targetLabel: {
       color: colors.WHITE,
       textShadowColor: colors.BLACK,
       textShadowOffset: fonts.shadow.offset.foodLabel,
       textShadowRadius: 0,
     },
+
+    // Styling for the main target word
     targetWord: {
       fontFamily: "Food",
       fontSize: fonts.size.targetPack.food,
@@ -68,21 +106,43 @@ const packThemes = {
     },
   },
 
+  // ======================= ANIMALS PACK =======================
   animals: {
+    // Styling for score and pops boards
     gameBoard: {
-      backgroundColor: colors.ANIMALS_PACK_BOARD,
-      borderColor: colors.BLACK,
-      boxShadow: fonts.shadow.packGameBoard,
+      board: {
+        backgroundColor: colors.ANIMALS_PACK_BOARD,
+        borderColor: colors.BLACK,
+        boxShadow: fonts.shadow.packGameBoard,
+      } as ViewStyle,
+      text: {
+        color: colors.GAME_BOARD_TITLE,
+      } as TextStyle,
     },
-    text: {
-      color: colors.WHITE,
+
+    // Styling for the 4x4 tile grid
+    gameGrid: {
+      grid: {
+        backgroundColor: colors.HOME_GRID_BG,
+      } as ViewStyle,
+      cell: {
+        backgroundColor: colors.HOME_GRID_CELL_BG,
+      } as ViewStyle,
+      text: {
+        fontFamily: fonts.family.regular,
+        color: colors.WORD_PACK_TITLE,
+      } as TextStyle,
     },
+
+    // "YOUR WORD" label above the target
     targetLabel: {
       color: colors.WHITE,
       textShadowColor: colors.BLACK,
       textShadowOffset: fonts.shadow.offset.animalsLabel,
       textShadowRadius: 0,
     },
+
+    // Styling for the main target word
     targetWord: {
       fontFamily: "Animals",
       fontSize: fonts.size.targetPack.animals,
@@ -90,27 +150,49 @@ const packThemes = {
       textShadowColor: colors.BLACK,
       textShadowOffset: fonts.shadow.offset.animalsWord,
       textShadowRadius: 0,
-      marginTop: layouts.ANIMALS_TEXT_MARGIN_TOP,
       letterSpacing: layouts.ANIMALS_LETTER_SPACING,
+      marginTop: layouts.ANIMALS_TEXT_MARGIN_TOP,
       marginBottom: layouts.ANIMALS_TEXT_MARGIN_BOTTOM,
     },
   },
 
+  // ======================= STORY PACK =======================
   story: {
+    // Styling for score and pops boards
     gameBoard: {
-      backgroundColor: colors.STORY_PACK_BOARD,
-      borderColor: colors.BLACK,
-      boxShadow: fonts.shadow.packGameBoard,
+      board: {
+        backgroundColor: colors.STORY_PACK_BOARD,
+        borderColor: colors.BLACK,
+        boxShadow: fonts.shadow.packGameBoard,
+      } as ViewStyle,
+      text: {
+        color: colors.GAME_BOARD_TITLE,
+      } as TextStyle,
     },
-    text: {
-      color: colors.GAME_BOARD_TITLE,
+
+    // Styling for the 4x4 tile grid
+    gameGrid: {
+      grid: {
+        backgroundColor: colors.HOME_GRID_BG,
+      } as ViewStyle,
+      cell: {
+        backgroundColor: colors.HOME_GRID_CELL_BG,
+      } as ViewStyle,
+      text: {
+        fontFamily: fonts.family.regular,
+        color: colors.WORD_PACK_TITLE,
+      } as TextStyle,
     },
+
+    // "YOUR WORD" label above the target
     targetLabel: {
       color: colors.WHITE,
       textShadowColor: colors.BLACK,
       textShadowOffset: fonts.shadow.offset.storyLabel,
       textShadowRadius: 0,
     },
+
+    // Styling for the main target word
     targetWord: {
       fontFamily: "Story",
       fontSize: fonts.size.targetPack.story,

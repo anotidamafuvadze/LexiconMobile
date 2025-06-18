@@ -13,11 +13,15 @@ const colors = {
   WORD_PACK_TITLE: "rgb(59, 58, 55)",
 
   // Button backgrounds
-  NEW_GAME_BUTTON: "rgba(224, 224, 224, 1)",
+  NEW_GAME_BUTTON_BG: "rgba(224, 224, 224, 1)",
   MENU_BUTTON_BG: "rgba(197, 196, 196, 1)",
   MENU_SCREEN_BUTTON_BG: "rgba(247, 244, 239, 1)",
   WORD_PACK_BUTTON_BG: "rgba(241, 237, 229, 1)",
   GAME_LAB_BUTTON_BG: "rgb(250, 247, 241), 1)",
+
+  EASY_BUTTON: "rgba(115, 170, 115, 1)",
+  NORMAL_BUTTON: "rgba(226, 205, 103, 1)",
+  HARD_BUTTON: "rgba(158, 89, 89, 1)",
 
   // Button borders
   HOME_BUTTON_BORDER_COLOR: "rgb(55, 55, 53)",
@@ -34,10 +38,13 @@ const colors = {
   SOUND_BUTTON_TITLE: "rgb(59, 58, 55)",
 
   // Game Boards
-  GAME_BOARD_TITLE: "rgba(98, 98, 94, 1)",
-  GAME_BOARD_COUNT: "rgba(255, 255, 255, 1)",
-  GAME_BOARD_BG: "rgba(247, 244, 239, 1)",
+  GAME_BOARD_TITLE: "rgb(81, 81, 78)",
+  GAME_BOARD_BG: "rgb(246, 243, 240)",
   GAME_BOARD_BORDER: "rgb(52, 51, 49)",
+
+  // Game Grid
+  HOME_GRID_BG: "rgb(58, 54, 49)",
+  HOME_GRID_CELL_BG: "rgb(142, 137, 128)",
 
   // Theme-specific board backgrounds
   NATURE_PACK_BOARD: "rgba(247, 244, 235, 1)",
@@ -51,10 +58,6 @@ const colors = {
   FOOD_PACK_TEXT: "rgba(255, 255, 255, 1)", 
   STORY_PACK_TEXT: "rgba(253, 253, 253, 1)",
 
-  // Difficulty button colors
-  EASY_BUTTON: "rgba(115, 170, 115, 1)",
-  NORMAL_BUTTON: "rgba(226, 205, 103, 1)",
-  HARD_BUTTON: "rgba(158, 89, 89, 1)",
 };
 
 export default colors;

@@ -1,6 +1,6 @@
 // React and React Native
 import React from "react";
-import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // Context Hooks
@@ -21,8 +21,10 @@ import GameBoard from "@/components/status/GameBoard";
 import TargetWord from "@/components/status/TargetWord";
 
 // Styles
+import GameGrid from "@/components/status/GameGrid";
 import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
+import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
 
 /**
@@ -59,19 +61,19 @@ function HomeScreen() {
             title="SCORE"
             count="0"
             style={gameBoard}
-            styleAdjust={{ width: layouts.SCORE_BOARD_WIDTH }}
+            width={{width: layouts.SCORE_BOARD_WIDTH}}
           />
           {/* Pops Board */}
           <GameBoard
             title="POPS"
             count="3"
             style={gameBoard}
-            styleAdjust={{ width: layouts.POPS_BOARD_WIDTH }}
+            width={{width: layouts.POPS_BOARD_WIDTH}}
           />
         </View>
 
-         {/* Grid (Used to visualize game layout) 
-        <Image source={images.grids.home} style={styles.grid} /> */}
+        {/* Grid */}
+        <GameGrid style={gameGrid} />
 
         {/* Target Word */}
         <TargetWord />
@@ -85,7 +87,7 @@ function HomeScreen() {
               playClickSound();
               generateNewWord(currentTheme);
             }}
-            styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON }}
+            styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
           />
 
           {/* Menu */}
@@ -106,14 +108,6 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  grid: {
-    width: 390,
-    height: 390,
-    alignSelf: "center",
-    position: "absolute",
-    top: 240,
-    zIndex: 0,
   },
   background: {
     flex: 1,

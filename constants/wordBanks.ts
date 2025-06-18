@@ -1,4 +1,4 @@
-const targetWordBank = [
+const wordBank = [
   {
     name: "Default",
     words: [
@@ -79,4 +79,4 @@ const targetWordBank = [
   }
 ];
 
-export default targetWordBank;
+export default wordBank;

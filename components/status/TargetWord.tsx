@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.family.targetWord,
     color: colors.WORD_PACK_TITLE,
     letterSpacing: metrics.LETTER_SPACING_SMALL,
-    marginTop: metrics.TARGET_WORD_MARGIN_TOP,
   } as TextStyle,
 });
 

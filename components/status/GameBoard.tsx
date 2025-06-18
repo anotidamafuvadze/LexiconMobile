@@ -19,9 +19,10 @@ function GameBoard({
   title,
   count,
   entering,
-  style: styleSet,
+  style,
   styleAdjust,
-  textAdjust,
+  width,
+
 }: {
   title?: string;
   count?: string;
@@ -33,19 +34,22 @@ function GameBoard({
     title?: TextStyle;
     count?: TextStyle;
   };
-  styleAdjust?: ViewStyle;
-  textAdjust?: TextStyle;
+  styleAdjust?: { // Style override for themed packs
+      board: ViewStyle;
+      text: TextStyle;
+  };
+  width: ViewStyle;
 }): React.JSX.Element {
   return (
-    <Animated.View style={[styleSet.board, styleAdjust]} entering={asEntry(entering)}>
-      <View style={styleSet.container}>
+    <Animated.View style={[style.board, styleAdjust?.board, width]} entering={asEntry(entering)}>
+      <View style={style.container}>
         {/* Title label */}
-        <Text style={[styleSet.title, textAdjust]}>{title}</Text>
+        <Text style={[style.title, styleAdjust?.text]}>{title}</Text>
 
         {/* Count value */}
-        <View style={styleSet.countWrapper}>
+        <View style={style.countWrapper}>
           <Text
-            style={[styleSet.count, textAdjust]}
+            style={[style.count, styleAdjust?.text]}
             adjustsFontSizeToFit
             numberOfLines={1}
             minimumFontScale={0.5}

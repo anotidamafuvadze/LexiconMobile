@@ -16,15 +16,6 @@ const images = {
     },
   },
 
-  grids: {
-     // Used to visualize board layout
-    home: require("@/app/assets/images/grids/home-screen-grid.png"),
-    // animals: require("@/app/assets/images/grids/animals-screen-grid.png"),
-    // food: require("@/app/assets/images/grids/food-screen-grid.png"),
-    // nature: require("@/app/assets/images/grids/nature-screen-grid.png"),
-    // story: require("@/app/assets/images/grids/story-screen-grid.png"),
-  },
-
   icons: {
     backButton: require("@/app/assets/images/icons/back-button-icon.png"),
     resumeButton: require("@/app/assets/images/icons/resume-button-icon.png"),
@@ -46,6 +37,8 @@ const images = {
     eraserTile: require("@/app/assets/images/icons/gameLab/eraser-tile-icon.png"),
   },
 
+
+  // App branding images (logos, splash)
   branding: {
     appLogo: require("@/app/assets/images/branding/app-logo.png"),
     adaptiveLogo: require("@/app/assets/images/branding/adaptive-logo.png"),

@@ -1,6 +1,6 @@
 import colors from "@/constants/colors";
 import fonts from "@/constants/fonts";
-import metrics from "@/constants/layouts";
+import layouts from "@/constants/layouts";
 import { TextStyle, ViewStyle } from "react-native";
 
 const gameBoard = {
@@ -8,9 +8,9 @@ const gameBoard = {
   board: {
     backgroundColor: colors.GAME_BOARD_BG,
     borderColor: colors.GAME_BOARD_BORDER,
-    borderRadius: metrics.GAME_BOARD_BORDER_RADIUS,
-    borderWidth: metrics.GAME_BOARD_BORDER_WIDTH,
-    height: metrics.GAME_BOARD_HEIGHT,
+    borderRadius: layouts.GAME_BOARD_BORDER_RADIUS,
+    borderWidth: layouts.GAME_BOARD_BORDER_WIDTH,
+    height: layouts.GAME_BOARD_HEIGHT,
     justifyContent: "flex-start",
     alignItems: "center",
     boxShadow: fonts.shadow.gameBoard,
@@ -33,7 +33,7 @@ const gameBoard = {
     color: colors.GAME_BOARD_TITLE,
     textAlign: "center",
     textAlignVertical: "bottom",
-    paddingHorizontal: metrics.GAME_BOARD_PADDING_HORIZONTAL,
+    paddingHorizontal: layouts.GAME_BOARD_PADDING_HORIZONTAL,
   } as TextStyle,
 
   // Wrapper for layout positioning
@@ -45,7 +45,7 @@ const gameBoard = {
 
   // Wrapper for aligning the count inside the board
   countWrapper: {
-    height: metrics.GAME_BOARD_COUNT_HEIGHT,
+    height: layouts.GAME_BOARD_COUNT_HEIGHT,
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",

@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import wordBanks from "../constants/targetWordBank";
+import wordBanks from "../constants/wordBanks";
 
 /**
  * WordContext manages the current target word and theme state.

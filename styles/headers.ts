@@ -1,7 +1,6 @@
 import colors from "@/constants/colors";
 import fonts from "@/constants/fonts";
 import layouts from "@/constants/layouts";
-import metrics from "@/constants/layouts";
 import { TextStyle, ViewStyle } from "react-native";
 
 const headers = {
@@ -10,7 +9,7 @@ const headers = {
   // ============================
   home: {
     container: {
-      top: metrics.HOME_HEADER_TOP,
+      top: layouts.HOME_HEADER_TOP,
       alignItems: "center",
     } as ViewStyle,
 
@@ -19,7 +18,7 @@ const headers = {
       fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
       fontFamily: fonts.family.regular,
       color: colors.HOME_TITLE,
-      letterSpacing: metrics.LETTER_SPACING_SMALL,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
       textAlign: "center",
     } as TextStyle,
 
@@ -48,11 +47,11 @@ const headers = {
       fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
       fontFamily: fonts.family.regular,
       color: colors.WORD_PACK_TITLE,
-      letterSpacing: metrics.LETTER_SPACING_XS,
+      letterSpacing: layouts.LETTER_SPACING_XS,
       textAlign: "center",
-      maxWidth: metrics.WORD_PACK_TITLE_WIDTH,
-      lineHeight: metrics.WORD_PACK_TITLE_HEIGHT,
-      marginBottom: metrics.WORD_PACK_TITLE_MARGIN_BOTTOM,
+      maxWidth: layouts.WORD_PACK_TITLE_WIDTH,
+      lineHeight: layouts.WORD_PACK_TITLE_HEIGHT,
+      marginBottom: layouts.WORD_PACK_TITLE_MARGIN_BOTTOM,
     } as TextStyle,
 
     subtitle: {
@@ -60,7 +59,7 @@ const headers = {
       fontFamily: fonts.family.regular,
       color: colors.BLACK,
       textAlign: "center",
-      maxWidth: metrics.WORD_PACK_SUBTITLE_WIDTH,
+      maxWidth: layouts.WORD_PACK_SUBTITLE_WIDTH,
     } as TextStyle,
   },
 
@@ -78,7 +77,7 @@ const headers = {
       fontFamily: fonts.family.regular,
       color: colors.BLACK,
       textAlign: "center",
-      maxWidth: metrics.GAME_LAB_SUBTITLE_WIDTH,
+      maxWidth: layouts.GAME_LAB_SUBTITLE_WIDTH,
     } as TextStyle,
   },
 };

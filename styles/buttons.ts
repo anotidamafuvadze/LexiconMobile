@@ -1,6 +1,6 @@
 import colors from "@/constants/colors";
 import fonts from "@/constants/fonts";
-import metrics from "@/constants/layouts";
+import layouts from "@/constants/layouts";
 import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 const buttons = {
@@ -9,11 +9,11 @@ const buttons = {
   // ============================
   home: {
     button: {
-      paddingVertical: metrics.HOME_BUTTON_PADDING_VERTICAL,
-      paddingHorizontal: metrics.HOME_BUTTON_PADDING_HORIZONTAL,
-      borderRadius: metrics.HOME_BUTTON_BORDER_RADIUS,
+      paddingVertical: layouts.HOME_BUTTON_PADDING_VERTICAL,
+      paddingHorizontal: layouts.HOME_BUTTON_PADDING_HORIZONTAL,
+      borderRadius: layouts.HOME_BUTTON_BORDER_RADIUS,
       borderColor: colors.HOME_BUTTON_BORDER_COLOR,
-      borderWidth: metrics.HOME_BUTTON_BORDER_WIDTH,
+      borderWidth: layouts.HOME_BUTTON_BORDER_WIDTH,
       backgroundColor: colors.MENU_BUTTON_BG,
       boxShadow: fonts.shadow.homeButton,
     } as ViewStyle,
@@ -23,7 +23,7 @@ const buttons = {
       fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
       fontFamily: fonts.family.regular,
       color: colors.WORD_PACK_TITLE,
-      letterSpacing: metrics.LETTER_SPACING_SMALL,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
       textAlign: "center",
     } as TextStyle,
   },
@@ -33,14 +33,14 @@ const buttons = {
   // ============================
   menuScreen: {
     button: {
-      paddingVertical: metrics.MENU_BUTTON_PADDING_VERTICAL,
-      paddingHorizontal: metrics.MENU_BUTTON_PADDING_HORIZONTAL,
+      paddingVertical: layouts.MENU_BUTTON_PADDING_VERTICAL,
+      paddingHorizontal: layouts.MENU_BUTTON_PADDING_HORIZONTAL,
       backgroundColor: colors.MENU_SCREEN_BUTTON_BG,
       borderColor: colors.MENU_BUTTON_BORDER,
-      borderWidth: metrics.MENU_BUTTON_BORDER_WIDTH,
-      borderRadius: metrics.MENU_BUTTON_BORDER_RADIUS,
+      borderWidth: layouts.MENU_BUTTON_BORDER_WIDTH,
+      borderRadius: layouts.MENU_BUTTON_BORDER_RADIUS,
       boxShadow: fonts.shadow.menuButton,
-      marginTop: metrics.MENU_BUTTON_MARGIN_TOP,
+      marginTop: layouts.MENU_BUTTON_MARGIN_TOP,
     } as ViewStyle,
 
     textRow: {
@@ -50,9 +50,9 @@ const buttons = {
     } as ViewStyle,
 
     icon: {
-      width: metrics.RESUME_ICON_SIZE,
-      height: metrics.RESUME_ICON_SIZE,
-      marginRight: metrics.MENU_ICON_MARGIN_RIGHT,
+      width: layouts.RESUME_ICON_SIZE,
+      height: layouts.RESUME_ICON_SIZE,
+      marginRight: layouts.MENU_ICON_MARGIN_RIGHT,
     } as ImageStyle,
 
     title: {
@@ -60,7 +60,7 @@ const buttons = {
       fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
       fontFamily: fonts.family.regular,
       color: colors.MENU_SCREEN_BUTTON,
-      letterSpacing: metrics.LETTER_SPACING_SMALL,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
       textAlign: "center",
     } as TextStyle,
   },
@@ -72,11 +72,11 @@ const buttons = {
     button: {
       backgroundColor: colors.WORD_PACK_BUTTON_BG,
       borderColor: colors.WORD_PACK_BUTTON_BORDER,
-      borderRadius: metrics.WORD_PACK_BUTTON_BORDER_RADIUS,
-      borderWidth: metrics.WORD_PACK_BUTTON_BORDER_WIDTH,
-      height: metrics.WORD_PACK_BUTTON_HEIGHT,
-      width: metrics.WORD_PACK_BUTTON_WIDTH,
-      marginTop: metrics.WORD_PACK_BUTTON_MARGIN_TOP,
+      borderRadius: layouts.WORD_PACK_BUTTON_BORDER_RADIUS,
+      borderWidth: layouts.WORD_PACK_BUTTON_BORDER_WIDTH,
+      height: layouts.WORD_PACK_BUTTON_HEIGHT,
+      width: layouts.WORD_PACK_BUTTON_WIDTH,
+      marginTop: layouts.WORD_PACK_BUTTON_MARGIN_TOP,
       boxShadow: fonts.shadow.wordPackButton,
     } as ViewStyle,
 
@@ -86,14 +86,14 @@ const buttons = {
     } as ViewStyle,
 
     textColumn: {
-      marginTop: metrics.WORD_PACK_TEXT_MARGIN_TOP,
-      marginLeft: metrics.WORD_PACK_TEXT_MARGIN_LEFT,
+      marginTop: layouts.WORD_PACK_TEXT_MARGIN_TOP,
+      marginLeft: layouts.WORD_PACK_TEXT_MARGIN_LEFT,
     } as ViewStyle,
 
     icon: {
-      width: metrics.WORD_PACK_ICON_SIZE,
-      height: metrics.WORD_PACK_ICON_SIZE,
-      marginLeft: metrics.WORD_PACK_ICON_MARGIN_LEFT,
+      width: layouts.WORD_PACK_ICON_SIZE,
+      height: layouts.WORD_PACK_ICON_SIZE,
+      marginLeft: layouts.WORD_PACK_ICON_MARGIN_LEFT,
     } as ImageStyle,
 
     title: {
@@ -101,14 +101,14 @@ const buttons = {
       fontFamily: fonts.family.regular,
       fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
       color: colors.WORD_PACK_BUTTON_TITLE,
-      letterSpacing: metrics.LETTER_SPACING_SMALL,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
     } as TextStyle,
 
     subtitle: {
       fontSize: fonts.size.wordPackButtonSubtitle,
       fontFamily: fonts.family.regular,
       fontWeight: fonts.weight.regular as TextStyle["fontWeight"],
-      marginTop: metrics.WORD_PACK_SUBTITLE_MARGIN_TOP,
+      marginTop: layouts.WORD_PACK_SUBTITLE_MARGIN_TOP,
     } as TextStyle,
   },
 
@@ -119,11 +119,11 @@ const buttons = {
     button: {
       backgroundColor: colors.GAME_LAB_BUTTON_BG,
       borderColor: colors.GAME_LAB_BUTTON_BORDER,
-      borderWidth: metrics.GAME_LAB_BUTTON_BORDER_WIDTH,
-      borderRadius: metrics.GAME_LAB_BUTTON_BORDER_RADIUS,
-      height: metrics.GAME_LAB_BUTTON_HEIGHT,
-      width: metrics.GAME_LAB_BUTTON_WIDTH,
-      marginTop: metrics.GAME_LAB_BUTTON_MARGIN_TOP,
+      borderWidth: layouts.GAME_LAB_BUTTON_BORDER_WIDTH,
+      borderRadius: layouts.GAME_LAB_BUTTON_BORDER_RADIUS,
+      height: layouts.GAME_LAB_BUTTON_HEIGHT,
+      width: layouts.GAME_LAB_BUTTON_WIDTH,
+      marginTop: layouts.GAME_LAB_BUTTON_MARGIN_TOP,
       boxShadow: fonts.shadow.gameLabButton,
     } as ViewStyle,
 
@@ -133,14 +133,14 @@ const buttons = {
     } as ViewStyle,
 
     textColumn: {
-      marginTop: metrics.GAME_LAB_TEXT_MARGIN_TOP,
-      marginLeft: metrics.GAME_LAB_TEXT_MARGIN_LEFT,
+      marginTop: layouts.GAME_LAB_TEXT_MARGIN_TOP,
+      marginLeft: layouts.GAME_LAB_TEXT_MARGIN_LEFT,
     } as ViewStyle,
 
     icon: {
-      width: metrics.GAME_LAB_ICON_SIZE,
-      height: metrics.GAME_LAB_ICON_SIZE,
-      marginLeft: metrics.GAME_LAB_ICON_MARGIN_LEFT,
+      width: layouts.GAME_LAB_ICON_SIZE,
+      height: layouts.GAME_LAB_ICON_SIZE,
+      marginLeft: layouts.GAME_LAB_ICON_MARGIN_LEFT,
     } as ImageStyle,
 
     title: {
@@ -148,14 +148,14 @@ const buttons = {
       fontFamily: fonts.family.regular,
       fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
       color: colors.GAME_LAB_BUTTON_TITLE,
-      letterSpacing: metrics.LETTER_SPACING_SMALL,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
     } as TextStyle,
 
     subtitle: {
       fontSize: fonts.size.gameLabButtonSubtitle,
       fontFamily: fonts.family.regular,
       fontWeight: fonts.weight.regular as TextStyle["fontWeight"],
-      marginTop: metrics.GAME_LAB_SUBTITLE_MARGIN_TOP,
+      marginTop: layouts.GAME_LAB_SUBTITLE_MARGIN_TOP,
     } as TextStyle,
   },
 
@@ -165,11 +165,11 @@ const buttons = {
   difficulty: {
     button: {
       alignItems: "center",
-      width: metrics.DIFFICULTY_BUTTON_WIDTH,
-      height: metrics.DIFFICULTY_BUTTON_HEIGHT,
-      marginTop: metrics.DIFFICULTY_BUTTON_MARGIN_TOP,
-      borderRadius: metrics.DIFFICULTY_BUTTON_BORDER_RADIUS,
-      borderWidth: metrics.DIFFICULTY_BUTTON_BORDER_WIDTH,
+      width: layouts.DIFFICULTY_BUTTON_WIDTH,
+      height: layouts.DIFFICULTY_BUTTON_HEIGHT,
+      marginTop: layouts.DIFFICULTY_BUTTON_MARGIN_TOP,
+      borderRadius: layouts.DIFFICULTY_BUTTON_BORDER_RADIUS,
+      borderWidth: layouts.DIFFICULTY_BUTTON_BORDER_WIDTH,
       borderColor: colors.DIFFICULTY_BUTTON_BORDER,
       boxShadow: fonts.shadow.difficultyButton,
     } as ViewStyle,

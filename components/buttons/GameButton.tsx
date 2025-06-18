@@ -18,8 +18,8 @@ function GameButton({
   icon,
   onPress,
   entering,
-  style: styleSet,
-  iconAdjust: imageAdjust,
+  style,
+  iconAdjust,
   styleAdjust,
 }: {
   title?: string;
@@ -45,12 +45,12 @@ function GameButton({
       icon={icon}
       onPress={onPress}
       entering={entering}
-      buttonStyle={[styleSet.button, styleAdjust]}
-      iconStyle={[styleSet.icon, imageAdjust]}
-      titleStyle={styleSet.title}
-      subtitleStyle={styleSet.subtitle}
-      textRowStyle={styleSet.textRow}
-      textColumnStyle={styleSet.textColumn}
+      buttonStyle={[style.button, styleAdjust]}
+      iconStyle={[style.icon, iconAdjust]}
+      titleStyle={style.title}
+      subtitleStyle={style.subtitle}
+      textRowStyle={style.textRow}
+      textColumnStyle={style.textColumn}
     />
   );
 }

@@ -26,8 +26,10 @@ import GameBoard from "@/components/status/GameBoard";
 import TargetWord from "@/components/status/TargetWord";
 
 // Styles
+import GameGrid from "@/components/status/GameGrid";
 import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
+import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
 
 /**
@@ -40,11 +42,10 @@ function PackHomeScreen() {
 
   const { packName } = useLocalSearchParams<{ packName: string }>();
   const theme = packThemes[packName as keyof typeof packThemes];
-  
+
   // Background images to be changed
   const backgroundImage =
     images.backgrounds.packs[packName as keyof typeof images.backgrounds.packs];
-  const gridImage = images.grids[`${packName}` as keyof typeof images.grids];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,11 +68,8 @@ function PackHomeScreen() {
             count="0"
             entering={asEntry(animations.FALL_FAST)}
             style={gameBoard}
-            styleAdjust={{
-              width: layouts.SCORE_BOARD_WIDTH,
-              ...theme?.gameBoard,
-            }}
-            textAdjust={{ ...theme.text }}
+            styleAdjust={theme.gameBoard}
+            width={{width: layouts.SCORE_BOARD_WIDTH}}
           />
 
           {/* Pops Board */}
@@ -80,16 +78,13 @@ function PackHomeScreen() {
             count="0"
             entering={asEntry(animations.FALL_SLOW)}
             style={gameBoard}
-            styleAdjust={{
-              width: layouts.POPS_BOARD_WIDTH,
-              ...theme?.gameBoard,
-            }}
-            textAdjust={{ ...theme.text }}
+            styleAdjust={theme.gameBoard}
+            width={{width: layouts.POPS_BOARD_WIDTH}}
           />
         </View>
 
-        {/* Grid (Used to visualize game layout)
-        <Image source={gridImage} style={styles.grid} /> */}
+        {/* Grid */}
+        <GameGrid style={gameGrid} styleAdjust={theme.gameGrid} />
 
         {/* Target Word */}
         <TargetWord
@@ -105,7 +100,7 @@ function PackHomeScreen() {
               playClickSound();
               generateNewWord(currentTheme);
             }}
-            styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON }}
+            styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
           />
 
           <NavigationButton
