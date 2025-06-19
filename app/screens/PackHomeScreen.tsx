@@ -31,6 +31,7 @@ import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
+import targetWord from "@/styles/targetWord";
 
 /**
  * Pack screen
@@ -38,7 +39,7 @@ import headers from "@/styles/headers";
  */
 function PackHomeScreen() {
   const { playClickSound } = useSound();
-  const { generateNewWord, currentTheme, targetWord } = useWord();
+  const { generateNewWord, currentTheme } = useWord();
 
   const { packName } = useLocalSearchParams<{ packName: string }>();
   const theme = packThemes[packName as keyof typeof packThemes];
@@ -87,9 +88,7 @@ function PackHomeScreen() {
         <GameGrid style={gameGrid} styleAdjust={theme.gameGrid} />
 
         {/* Target Word */}
-        <TargetWord
-          targetLabelStyle={theme.targetLabel}
-          targetWordStyle={theme.targetWord}
+        <TargetWord style={targetWord} styleAdjust={theme.targetWord}
         />
 
         <View style={styles.buttonGroup}>

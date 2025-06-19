@@ -28,11 +28,11 @@ import buttons from "@/styles/buttons";
 function DifficultySelection() {
   const router = useRouter();
   const { generateNewWord, setCurrentTheme } = useWord();
-  const { playClickSound } = useSound();
+  const { playPopSound } = useSound();
 
   // Handles difficulty selection
   const handleButtonPress = (mode: string) => {
-    playClickSound();
+    playPopSound();
     setCurrentTheme(mode);
     generateNewWord(mode); // Update theme and word
     router.replace("/screens/HomeScreen"); // Go to home screen

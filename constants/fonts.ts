@@ -66,13 +66,13 @@ const fonts = {
 
     offset: {
       difficultyButton: { width: 0, height: 3.2 },
-      natureLabel: { width: 1, height: 2 },
-      natureWord: { width: 2, height: 4 },
+      natureTitle: { width: 1, height: 2 },
+      natureTargetTitle: { width: 2, height: 4 },
       foodLabel: { width: 1, height: 4 },
       foodWord: { width: 3, height: 6 },
       animalsLabel: { width: 1, height: 2 },
       animalsWord: { width: 1, height: 4 },
-      storyLabel: { width: 1, height: 2 },
+      foodTargetTitle: { width: 1, height: 2 },
       storyWord: { width: 1, height: 8 },
 
     },

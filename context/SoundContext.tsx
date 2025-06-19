@@ -15,14 +15,17 @@ import React, {
 
 // Sound assets
 const buttonClick = require("../app/assets/sounds/button-click-sound.mp3");
+const buttonPop = require("../app/assets/sounds/button-pop-sound.mp3");
 const backgroundMusic = require("../app/assets/sounds/background-music.mp3");
 const screenWhoosh = require("../app/assets/sounds/screen-whoosh-sound.mp3");
+
 
 // Type definition for the Sound Context API
 type SoundContextType = {
   soundOn: boolean;
   setSoundOn: (val: boolean) => void;
   playClickSound: (forcePlay?: boolean) => void;
+  playPopSound: (forcePlay?: boolean) => void;
   playWhooshSound: (forcePlay?: boolean) => void;
   playBackgroundMusic: (play?: boolean) => void;
   stopBackgroundMusic: () => void;
@@ -33,6 +36,7 @@ const SoundContext = createContext<SoundContextType>({
   soundOn: true,
   setSoundOn: () => {},
   playClickSound: () => {},
+  playPopSound: () => {},
   playWhooshSound: () => {},
   playBackgroundMusic: () => {},
   stopBackgroundMusic: () => {},
@@ -49,6 +53,7 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
   
   // Audio player instances for different sound effects
   const buttonClickPlayer = useAudioPlayer(buttonClick);
+  const buttonPopPlayer = useAudioPlayer(buttonPop);
   const backgroundMusicPlayer = useAudioPlayer(backgroundMusic);
   const screenWhooshPlayer = useAudioPlayer(screenWhoosh);
   
@@ -83,6 +88,20 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
       }
     },
     [soundOn, buttonClickPlayer]
+  );
+
+  // Plays button pop sound effect
+  const playPopSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        buttonPopPlayer.seekTo(0.5); // Rewind to start
+        buttonPopPlayer.play();
+      } catch (error) {
+        console.error("Pop sound error:", error);
+      }
+    },
+    [soundOn, buttonPopPlayer]
   );
 
   // Plays screen transition whoosh effect
@@ -122,6 +141,7 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     soundOn,
     setSoundOn,
     playClickSound,
+    playPopSound,
     playWhooshSound,
     playBackgroundMusic,
     stopBackgroundMusic,

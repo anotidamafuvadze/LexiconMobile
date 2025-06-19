@@ -26,6 +26,7 @@ import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
+import targetWord from "@/styles/targetWord";
 
 /**
  * Home screen
@@ -76,7 +77,7 @@ function HomeScreen() {
         <GameGrid style={gameGrid} />
 
         {/* Target Word */}
-        <TargetWord />
+        <TargetWord style={targetWord}/>
 
         <View style={styles.buttonGroup}>
           {/* New Game */}

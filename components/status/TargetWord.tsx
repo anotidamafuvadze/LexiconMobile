@@ -16,18 +16,35 @@ import metrics from "@/constants/layouts";
  * - Supports optional style overrides for label and word text
  */
 function TargetWord({
+  style,
+  styleAdjust,
   targetLabelStyle = styles.title,
   targetWordStyle = styles.targetWord,
 }: {
+  style: {
+    container: ViewStyle;
+    title: TextStyle;
+    word: TextStyle
+
+  }
+  styleAdjust?: {
+    title: TextStyle;
+    word: TextStyle
+
+  }
   targetLabelStyle?: TextStyle;
   targetWordStyle?: TextStyle;
 }): React.JSX.Element {
   const { targetWord } = useWord();
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, targetLabelStyle]}>YOUR WORD:</Text>
-      <Text style={[styles.targetWord, targetWordStyle]}>{targetWord}</Text>
+    // <View style={styles.container}>
+    //   <Text style={[styles.title, targetLabelStyle]}>YOUR WORD:</Text>
+    //   <Text style={[styles.targetWord, targetWordStyle]}>{targetWord}</Text>
+    // </View>
+     <View style={style.container}>
+      <Text style={[style.title, styleAdjust?.title]}>YOUR WORD:</Text>
+      <Text style={[style.word, styleAdjust?.word]}>{targetWord}</Text>
     </View>
   );
 }
