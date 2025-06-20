@@ -3,18 +3,10 @@ import fonts from "@/constants/fonts";
 import layouts from "@/constants/layouts";
 import { TextStyle, ViewStyle } from "react-native";
 
-// TODO: Adjust font sizes and margins to mirror home screen
-
-/**
- * Theme-based style overrides for each Word Pack
- * - Applies unique colors, fonts, and shadows to game UI elements
- */
 const packThemes = {
-  // ============================
-  // Nature Pack
-  // ============================
+  // ======================= NATURE PACK =======================
   nature: {
-    // Score and pops board styling
+    // Score + Pops board
     gameBoard: {
       board: {
         backgroundColor: colors.NATURE_PACK_BOARD,
@@ -22,17 +14,17 @@ const packThemes = {
         boxShadow: fonts.shadow.packGameBoard,
       } as ViewStyle,
       text: {
-        color: colors.GAME_BOARD_TITLE,
+        color: colors.NATURE_PACK_BOARD_TEXT,
       } as TextStyle,
     },
 
-    // 4x4 game grid styling
+    // 4x4 game grid
     gameGrid: {
       grid: {
-        backgroundColor: colors.HOME_GRID_BG,
+        backgroundColor: colors.NATURE_PACK_GRID_BG,
       } as ViewStyle,
       cell: {
-        backgroundColor: colors.HOME_GRID_CELL_BG,
+        backgroundColor: colors.NATURE_PACK_GRID_CELL,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -40,32 +32,32 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // Target word section (label + main word)
+    // Target word label and word
     targetWord: {
       title: {
-        color: colors.WHITE,
+        color: colors.NATURE_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.natureTitle,
+        textShadowOffset: fonts.shadow.offset.natureTargetLabel,
         textShadowRadius: 0,
+        top: layouts.NATURE_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Nature",
         fontSize: fonts.size.targetPack.nature,
-        color: colors.NATURE_PACK_TEXT,
+        color: colors.NATURE_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.natureTargetTitle,
+        textShadowOffset: fonts.shadow.offset.natureTargetWord,
         textShadowRadius: 0,
-        letterSpacing: layouts.NATURE_LETTER_SPACING,
-        marginTop: layouts.NATURE_ICON_TOP,
-        marginBottom: layouts.NATURE_TEXT_MARGIN_BOTTOM,
+        letterSpacing:layouts.NATURE_PACK_LETTER_SPACING,
+        top: layouts.NATURE_PACK_WORD_TOP,
+        marginBottom: layouts.NATURE_PACK_WORD_MARGIN_BOTTOM,
       } as TextStyle,
     },
   },
 
-  // ============================
-  // Food Pack
-  // ============================
+  // ======================= FOOD PACK =======================
   food: {
+    // Score + Pops board
     gameBoard: {
       board: {
         backgroundColor: colors.FOOD_PACK_BOARD,
@@ -73,16 +65,17 @@ const packThemes = {
         boxShadow: fonts.shadow.packGameBoard,
       } as ViewStyle,
       text: {
-        color: colors.GAME_BOARD_TITLE,
+        color: colors.FOOD_PACK_BOARD_TEXT,
       } as TextStyle,
     },
 
+    // 4x4 game grid
     gameGrid: {
       grid: {
-        backgroundColor: colors.HOME_GRID_BG,
+        backgroundColor: colors.FOOD_PACK_GRID_BG,
       } as ViewStyle,
       cell: {
-        backgroundColor: colors.HOME_GRID_CELL_BG,
+        backgroundColor: colors.FOOD_PACK_GRID_CELL,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -90,30 +83,32 @@ const packThemes = {
       } as TextStyle,
     },
 
+    // Target word label and word
     targetWord: {
       title: {
-        color: colors.WHITE,
+        color: colors.FOOD_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.foodTargetTitle,
         textShadowRadius: 0,
+        top: layouts.FOOD_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Food",
         fontSize: fonts.size.targetPack.food,
-        color: colors.FOOD_PACK_TEXT,
+        color: colors.FOOD_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.foodWord,
         textShadowRadius: 0,
-        letterSpacing: layouts.FOOD_LETTER_SPACING,
-        marginBottom: layouts.FOOD_TEXT_MARGIN_BOTTOM,
+        letterSpacing: layouts.FOOD_PACK_LETTER_SPACING,
+        top: layouts.FOOD_PACK_WORD_TOP,
+        marginBottom: layouts.FOOD_PACK_WORD_MARGIN_BOTTOM,
       } as TextStyle,
     },
   },
 
-  // ============================
-  // Animals Pack
-  // ============================
+  // ======================= ANIMALS PACK =======================
   animals: {
+    // Score + Pops board
     gameBoard: {
       board: {
         backgroundColor: colors.ANIMALS_PACK_BOARD,
@@ -121,16 +116,17 @@ const packThemes = {
         boxShadow: fonts.shadow.packGameBoard,
       } as ViewStyle,
       text: {
-        color: colors.GAME_BOARD_TITLE,
+        color: colors.ANIMALS_PACK_BOARD_TEXT,
       } as TextStyle,
     },
 
+    // 4x4 game grid
     gameGrid: {
       grid: {
-        backgroundColor: colors.HOME_GRID_BG,
+        backgroundColor: colors.ANIMALS_PACK_GRID_BG,
       } as ViewStyle,
       cell: {
-        backgroundColor: colors.HOME_GRID_CELL_BG,
+        backgroundColor: colors.ANIMALS_PACK_GRID_CELL,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -138,31 +134,32 @@ const packThemes = {
       } as TextStyle,
     },
 
+    // Target word label and word
     targetWord: {
       title: {
         color: colors.WHITE,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.animalsLabel,
         textShadowRadius: 0,
+        top: layouts.ANIMALS_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Animals",
         fontSize: fonts.size.targetPack.animals,
-        color: colors.ANIMALS_PACK_TEXT,
+        color: colors.ANIMALS_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.animalsWord,
         textShadowRadius: 0,
-        letterSpacing: layouts.ANIMALS_LETTER_SPACING,
-        marginTop: layouts.ANIMALS_TEXT_MARGIN_TOP,
-        marginBottom: layouts.ANIMALS_TEXT_MARGIN_BOTTOM,
+        letterSpacing: layouts.ANIMALS_PACK_LETTER_SPACING,
+        top: layouts.ANIMALS_PACK_WORD_TOP,
+        marginBottom: layouts.ANIMALS_PACK_WORD_MARGIN_BOTTOM,
       } as TextStyle,
     },
   },
 
-  // ============================
-  // Story Pack
-  // ============================
+  // ======================= STORY PACK =======================
   story: {
+    // Score + Pops board
     gameBoard: {
       board: {
         backgroundColor: colors.STORY_PACK_BOARD,
@@ -170,16 +167,17 @@ const packThemes = {
         boxShadow: fonts.shadow.packGameBoard,
       } as ViewStyle,
       text: {
-        color: colors.GAME_BOARD_TITLE,
+        color: colors.STORY_PACK_BOARD_TEXT,
       } as TextStyle,
     },
 
+    // 4x4 game grid
     gameGrid: {
       grid: {
-        backgroundColor: colors.HOME_GRID_BG,
+        backgroundColor: colors.STORY_PACK_GRID_BG,
       } as ViewStyle,
       cell: {
-        backgroundColor: colors.HOME_GRID_CELL_BG,
+        backgroundColor: colors.STORY_PACK_GRID_CELL,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -187,23 +185,25 @@ const packThemes = {
       } as TextStyle,
     },
 
+    // Target word label and word
     targetWord: {
       title: {
-        color: colors.WHITE,
+        color: colors.STORY_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.foodTargetTitle,
         textShadowRadius: 0,
+        top: layouts.STORY_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Story",
         fontSize: fonts.size.targetPack.story,
-        color: colors.STORY_PACK_TEXT,
+        color: colors.STORY_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.storyWord,
         textShadowRadius: 0,
-        letterSpacing: layouts.STORY_LETTER_SPACING,
-        marginTop: layouts.STORY_TEXT_MARGIN_TOP,
-        marginBottom: layouts.STORY_TEXT_MARGIN_BOTTOM,
+        letterSpacing: layouts.STORY_PACK_LETTER_SPACING,
+        top: layouts.STORY_PACK_WORD_TOP,
+        marginBottom: layouts.STORY_PACK_WORD_MARGIN_BOTTOM,
       } as TextStyle,
     },
   },

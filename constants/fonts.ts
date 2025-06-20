@@ -10,7 +10,7 @@ const fonts = {
   // Font sizes
   size: {
     // Home screen
-    homeTitle: 65,
+    homeTitle: 70,
     homeSubtitle: 21,
     homeButton: 30,
 
@@ -41,7 +41,7 @@ const fonts = {
 
     targetPack: {
       nature: 75,
-      food: 78,
+      food: 75,
       animals: 90,
       story: 48,
     },
@@ -66,8 +66,8 @@ const fonts = {
 
     offset: {
       difficultyButton: { width: 0, height: 3.2 },
-      natureTitle: { width: 1, height: 2 },
-      natureTargetTitle: { width: 2, height: 4 },
+      natureTargetLabel: { width: 1, height: 2 },
+      natureTargetWord: { width: 1, height: 3 },
       foodLabel: { width: 1, height: 4 },
       foodWord: { width: 3, height: 6 },
       animalsLabel: { width: 1, height: 2 },

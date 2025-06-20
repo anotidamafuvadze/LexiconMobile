@@ -1,20 +1,19 @@
 const layouts = {
-  // Home Screen
+  // ======================= HOME SCREEN =======================
   HOME_HEADER_TOP: 5,
   HOME_GRID_TOP: 249,
   HOME_GRID_SIZE: 380,
-  TARGET_WORD_TOP: 465,
-  HOME_BUTTON_TOP: 480,
+  TARGET_WORD_TOP: 455,
+  HOME_BUTTON_TOP: 470,
   HOME_BUTTON_GAP: 30,
   HOME_BUTTON_PADDING_HORIZONTAL: 15,
   HOME_BUTTON_PADDING_VERTICAL: 5,
   HOME_BUTTON_BORDER_RADIUS: 20,
   HOME_BUTTON_BORDER_WIDTH: 2,
-  HOME_GRID_BORDER_RADIUS: 8,
- 
+  HOME_GRID_BORDER_RADIUS: 13,
 
-  // Game Board Layout
-  GAME_BOARD_TOP: 30,
+  // ======================= GAME BOARD =======================
+  GAME_BOARD_TOP: 25,
   GAME_BOARD_HEIGHT: 83,
   GAME_BOARD_BORDER_WIDTH: 2,
   GAME_BOARD_BORDER_RADIUS: 27,
@@ -24,10 +23,9 @@ const layouts = {
   SCORE_BOARD_WIDTH: 160,
   POPS_BOARD_WIDTH: 120,
 
- 
-
-  // Menu Screen
-  MENU_BUTTON_TOP: -120,
+  // ======================= MENU SCREEN =======================
+  SOUND_BUTTON_TOP: 135,
+  MENU_BUTTON_TOP: 215,
   MENU_BUTTON_MARGIN_TOP: 25,
   MENU_BUTTON_BORDER_RADIUS: 33,
   MENU_BUTTON_BORDER_WIDTH: 2,
@@ -37,7 +35,7 @@ const layouts = {
   RESUME_BUTTON_SCALE: 1.18,
   RATE_BUTTON_SCALE: 1.1,
 
-  // Word Pack Screen
+  // ======================= WORD PACK SCREEN =======================
   WORD_PACK_BUTTON_WIDTH: 310,
   WORD_PACK_BUTTON_HEIGHT: 80,
   WORD_PACK_BUTTON_BORDER_RADIUS: 30,
@@ -57,7 +55,7 @@ const layouts = {
   FOOD_ICON_TOP: -5,
   ANIMALS_ICON_SCALE: 1.05,
 
-  // Game Lab Screen
+  // ======================= GAME LAB SCREEN =======================
   GAME_LAB_HEADER_TOP: 115,
   GAME_LAB_BUTTON_WIDTH: 320,
   GAME_LAB_BUTTON_HEIGHT: 83,
@@ -73,7 +71,7 @@ const layouts = {
   GAME_LAB_SUBTITLE_WIDTH: 340,
   GAME_LAB_SUBTITLE_MARGIN_TOP: 2,
 
-  // Game Lab Adjustments
+  // ======================= GAME LAB ADJUSTMENTS =======================
   DIFFICULTY_MARGIN_LEFT: -3,
   EDIT_TILE_MARGIN_TOP: 1,
   JUMP_TILE_ICON_SCALE: 1.08,
@@ -81,38 +79,50 @@ const layouts = {
   ERASER_TILE_MARGIN_TOP: 0,
   QUEST_MODE_MARGIN_LEFT: -3,
 
-  // Difficulty Buttons
+  // ======================= DIFFICULTY SCREEN =======================
   DIFFICULTY_BUTTON_WIDTH: 350,
   DIFFICULTY_BUTTON_HEIGHT: 100,
   DIFFICULTY_BUTTON_BORDER_RADIUS: 30,
   DIFFICULTY_BUTTON_BORDER_WIDTH: 6,
   DIFFICULTY_BUTTON_MARGIN_TOP: 25,
 
-  // Icon Sizes & Spacing
+  // ======================= ICON SIZES & SPACING =======================
   BACK_ICON_SIZE: 70,
   SOUND_ICON_SIZE: 70,
   RESUME_ICON_SIZE: 50,
   MENU_ICON_MARGIN_RIGHT: 8,
 
-  // General Letter Spacing
+  // ======================= GENERAL LETTER SPACING =======================
   LETTER_SPACING_XS: 0.5,
   LETTER_SPACING_SMALL: 1,
   LETTER_SPACING_MEDIUM: 1.5,
   LETTER_SPACING_LARGE: 2.5,
 
-  // Target Word Letter Spacing
-  NATURE_LETTER_SPACING: 4,
-  FOOD_LETTER_SPACING: 10,
-  ANIMALS_LETTER_SPACING: 2,
-  STORY_LETTER_SPACING: -2,
+  // ======================= PACKS =======================
 
-  // Target Word Margins
-  NATURE_TEXT_MARGIN_BOTTOM: -20,
-  FOOD_TEXT_MARGIN_BOTTOM: -10,
-  ANIMALS_TEXT_MARGIN_TOP: -5,
-  ANIMALS_TEXT_MARGIN_BOTTOM: -10,
-  STORY_TEXT_MARGIN_TOP: 10,
-  STORY_TEXT_MARGIN_BOTTOM: 5,
+  // Nature Pack
+  NATURE_PACK_TITLE_TOP: -3,
+  NATURE_PACK_WORD_TOP: -8,
+  NATURE_PACK_WORD_MARGIN_BOTTOM: -23,
+  NATURE_PACK_LETTER_SPACING: 5,
+
+  // Food Pack
+  FOOD_PACK_TITLE_TOP: -7,
+  FOOD_PACK_WORD_TOP: -6,
+  FOOD_PACK_WORD_MARGIN_BOTTOM: -3,
+  FOOD_PACK_LETTER_SPACING: 5,
+
+  // Animals Pack
+  ANIMALS_PACK_TITLE_TOP: -5,
+  ANIMALS_PACK_WORD_TOP: -10,
+  ANIMALS_PACK_WORD_MARGIN_BOTTOM: -18,
+  ANIMALS_PACK_LETTER_SPACING: 5,
+
+  // Story Pack
+  STORY_PACK_TITLE_TOP: 4,
+  STORY_PACK_WORD_TOP: 10,
+  STORY_PACK_WORD_MARGIN_BOTTOM: 14,
+  STORY_PACK_LETTER_SPACING: 1,
 };
 
 export default layouts;

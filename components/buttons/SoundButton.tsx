@@ -1,13 +1,6 @@
 // React and React Native
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, TextStyle } from "react-native";
 
 // Constants
 import colors from "@/constants/colors";
@@ -15,8 +8,8 @@ import fonts from "@/constants/fonts";
 import metrics from "@/constants/layouts";
 
 // Context
-import { useSound } from "@/context/SoundContext";
 import images from "@/constants/images";
+import { useSound } from "@/context/SoundContext";
 
 /**
  * SoundButton
@@ -46,37 +39,30 @@ function SoundButton() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={styles.container}>
-        <View style={styles.button}>
-          {/* Sound icon */}
-          <Image
-            source={
-              soundOn
-                ? images.icons.soundOn
-                : images.icons.soundOff
-            }
-            style={styles.icon}
-            resizeMode="contain"
-          />
-          {/* Sound label */}
-          <Text style={styles.title}>{soundOn ? "Sound On" : "Sound Off"}</Text>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
+    <Pressable onPress={handlePress} style={styles.button}>
+      {/* Sound icon */}
+      <Image
+        source={soundOn ? images.icons.soundOn : images.icons.soundOff}
+        style={styles.icon}
+        resizeMode="contain"
+      />
+      {/* Sound label */}
+      <Text style={styles.title}>{soundOn ? "Sound On" : "Sound Off"}</Text>
+    </Pressable>
   );
 }
 
 // Styles
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  // container: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
   button: {
     flexDirection: "row",
     alignItems: "center",
+    padding: 8,
   },
   // Sound label
   title: {

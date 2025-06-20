@@ -71,7 +71,9 @@ function MenuScreen() {
         resizeMode="cover"
       >
         {/* Sound toggle */}
-        <SoundButton />
+        <View style={styles.soundWrapper}>
+          <SoundButton />
+        </View>
 
         <View style={styles.buttonGroup}>
           {/* Resume */}
@@ -129,6 +131,12 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
+  },
+  soundWrapper: {
+    position: "absolute",
+    top: layouts.SOUND_BUTTON_TOP,
+    alignSelf: "center",
+    zIndex: 10,
   },
   buttonGroup: {
     top: layouts.MENU_BUTTON_TOP, // Vertical offset

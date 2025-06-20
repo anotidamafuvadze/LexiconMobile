@@ -17,7 +17,7 @@ const animations = {
     },
     30: {
       opacity: 1,
-      transform: [{ translateY: 30 }, { rotateZ: "0deg" }],
+      transform: [{ translateY: 15 }, { rotateZ: "0deg" }],
       easing: Easing.out(Easing.quad),
     },
     60: {
@@ -42,7 +42,7 @@ const animations = {
     },
     30: {
       opacity: 1,
-      transform: [{ translateY: 30 }, { rotateZ: "0deg" }],
+      transform: [{ translateY: 15 }, { rotateZ: "0deg" }],
       easing: Easing.out(Easing.quad),
     },
     60: {

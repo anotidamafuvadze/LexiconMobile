@@ -24,7 +24,7 @@ const gameGrid = {
     marginBottom: 6,
     marginLeft: 6,
     marginRight: 6,
-    backgroundColor: colors.HOME_GRID_CELL_BG,
+    backgroundColor: colors.HOME_GRID_CELL,
     borderRadius: layouts.HOME_GRID_BORDER_RADIUS,
   } as ViewStyle,
 
