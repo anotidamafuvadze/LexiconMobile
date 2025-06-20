@@ -43,8 +43,6 @@ function PackHomeScreen() {
 
   const { packName } = useLocalSearchParams<{ packName: string }>();
   const theme = packThemes[packName as keyof typeof packThemes];
-
-  // Background images to be changed
   const backgroundImage =
     images.backgrounds.packs[packName as keyof typeof images.backgrounds.packs];
 
@@ -70,7 +68,7 @@ function PackHomeScreen() {
             entering={asEntry(animations.FALL_FAST)}
             style={gameBoard}
             styleAdjust={theme.gameBoard}
-            width={{width: layouts.SCORE_BOARD_WIDTH}}
+            width={{ width: layouts.SCORE_BOARD_WIDTH }}
           />
 
           {/* Pops Board */}
@@ -80,7 +78,7 @@ function PackHomeScreen() {
             entering={asEntry(animations.FALL_SLOW)}
             style={gameBoard}
             styleAdjust={theme.gameBoard}
-            width={{width: layouts.POPS_BOARD_WIDTH}}
+            width={{ width: layouts.POPS_BOARD_WIDTH }}
           />
         </View>
 
@@ -88,8 +86,7 @@ function PackHomeScreen() {
         <GameGrid style={gameGrid} styleAdjust={theme.gameGrid} />
 
         {/* Target Word */}
-        <TargetWord style={targetWord} styleAdjust={theme.targetWord}
-        />
+        <TargetWord style={targetWord} styleAdjust={theme.targetWord} />
 
         <View style={styles.buttonGroup}>
           <GameButton
