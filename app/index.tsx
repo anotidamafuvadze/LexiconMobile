@@ -17,7 +17,7 @@ export default function Index() {
     requestAnimationFrame(() => {
       router.replace("/screens/HomeScreen");
     });
-  }, []);
+  }, [router]);
 
   // Centered loading spinner
   return (

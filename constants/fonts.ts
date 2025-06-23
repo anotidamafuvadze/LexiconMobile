@@ -13,6 +13,7 @@ const fonts = {
     homeTitle: 70,
     homeSubtitle: 21,
     homeButton: 30,
+    tileLetter: 40,
 
     // Menu screen
     menuButton: 40,
@@ -39,7 +40,7 @@ const fonts = {
     scoreLabel: 23,
     scoreValue: 32,
 
-    targetPack: {
+    targetWordSize: {
       nature: 75,
       food: 75,
       animals: 90,
@@ -56,23 +57,33 @@ const fonts = {
 
   // Shadows and text effects
   shadow: {
+    // Home Screen
     gameBoard: "0px 6px 0px rgba(64, 59, 53, 0.8)",
     homeButton: "0px 4px 0px rgba(74, 71, 71, 0.9)",
-    menuButton: "0px 6px 0px rgba(112, 106, 89, 0.7)",
-    wordPackButton: "0px 6px 0px rgba(134, 128, 109, 0.5)",
-    gameLabButton: "0px 6px 0px rgba(129, 124, 105, 0.6)",
+    menuButton: "0px 6px 0px rgba(147, 138, 117, 0.6)",
+
+    // Menu Screen
+    wordPackButton: "0px 6px 0px rgba(165, 155, 134, 0.6)",
+    gameLabButton: "0px 6px 0px rgba(165, 155, 134, 0.6)",
     packGameBoard: "0px 6px 0px rgba(0, 0, 0, 0.7)",
-    difficultyButton: "0px 6px 0px rgba(0, 0, 0, 01)",
+    difficultyButton: "0px 6px 0px rgba(0, 0, 0, 0.8)",
+
 
     offset: {
-      difficultyButton: { width: 0, height: 3.2 },
-      natureTargetLabel: { width: 1, height: 2 },
-      natureTargetWord: { width: 1, height: 3 },
-      foodLabel: { width: 1, height: 4 },
+      tileLetter: { width: 0, height: 2 },
+
+      difficultyLabel: { width: 0, height: 3.2 },
+
+      // Packs
+      natureLabel: { width: 1, height: 2 },
+      natureWord: { width: 1, height: 3 },
+
+      foodLabel: { width: 1, height: 2 },
       foodWord: { width: 3, height: 6 },
+      
       animalsLabel: { width: 1, height: 2 },
       animalsWord: { width: 1, height: 4 },
-      foodTargetTitle: { width: 1, height: 2 },
+
       storyWord: { width: 1, height: 8 },
 
     },

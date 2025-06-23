@@ -1,7 +1,8 @@
 import colors from "@/constants/colors";
-import fonts from "@/constants/fonts";
 import layouts from "@/constants/layouts";
-import { TextStyle, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
+
+//TODO: Convert numbers to constants in layouts
 
 const gameGrid = {
   // Outer grid container
@@ -18,24 +19,18 @@ const gameGrid = {
 
   // Individual empty tile cell
   cell: {
-    width: layouts.HOME_GRID_SIZE / 4.8,
-    height: layouts.HOME_GRID_SIZE / 4.8,
-    marginTop: 6,
-    marginBottom: 6,
-    marginLeft: 6,
-    marginRight: 6,
+    width: layouts.HOME_GRID_SIZE / 4.6,
+    height: layouts.HOME_GRID_SIZE / 4.6,
+    marginTop: 4,
+    marginBottom: 4,
+    marginLeft: 4,
+    marginRight: 4,
     backgroundColor: colors.HOME_GRID_CELL,
+    borderWidth: 3,
+    borderColor: colors.BLACK,
     borderRadius: layouts.HOME_GRID_BORDER_RADIUS,
   } as ViewStyle,
 
-  // Text inside tile
-  text: {
-    fontSize: 10,
-    fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
-    fontFamily: fonts.family.regular,
-    color: "",
-    textAlign: "center",
-  } as TextStyle,
 };
 
 export default gameGrid;

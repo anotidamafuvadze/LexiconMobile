@@ -25,6 +25,8 @@ const packThemes = {
       } as ViewStyle,
       cell: {
         backgroundColor: colors.NATURE_PACK_GRID_CELL,
+        borderWidth: 3,
+        borderColor: colors.BLACK,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -37,16 +39,16 @@ const packThemes = {
       title: {
         color: colors.NATURE_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.natureTargetLabel,
+        textShadowOffset: fonts.shadow.offset.natureLabel,
         textShadowRadius: 0,
         top: layouts.NATURE_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Nature",
-        fontSize: fonts.size.targetPack.nature,
+        fontSize: fonts.size.targetWordSize.nature,
         color: colors.NATURE_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.natureTargetWord,
+        textShadowOffset: fonts.shadow.offset.natureWord,
         textShadowRadius: 0,
         letterSpacing:layouts.NATURE_PACK_LETTER_SPACING,
         top: layouts.NATURE_PACK_WORD_TOP,
@@ -76,6 +78,8 @@ const packThemes = {
       } as ViewStyle,
       cell: {
         backgroundColor: colors.FOOD_PACK_GRID_CELL,
+        borderWidth: 3,
+        borderColor: colors.BLACK,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -88,13 +92,13 @@ const packThemes = {
       title: {
         color: colors.FOOD_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.foodTargetTitle,
+        textShadowOffset: fonts.shadow.offset.foodLabel,
         textShadowRadius: 0,
         top: layouts.FOOD_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Food",
-        fontSize: fonts.size.targetPack.food,
+        fontSize: fonts.size.targetWordSize.food,
         color: colors.FOOD_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.foodWord,
@@ -127,6 +131,8 @@ const packThemes = {
       } as ViewStyle,
       cell: {
         backgroundColor: colors.ANIMALS_PACK_GRID_CELL,
+        borderWidth: 3,
+        borderColor: colors.BLACK,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -145,7 +151,7 @@ const packThemes = {
       } as TextStyle,
       word: {
         fontFamily: "Animals",
-        fontSize: fonts.size.targetPack.animals,
+        fontSize: fonts.size.targetWordSize.animals,
         color: colors.ANIMALS_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.animalsWord,
@@ -178,6 +184,8 @@ const packThemes = {
       } as ViewStyle,
       cell: {
         backgroundColor: colors.STORY_PACK_GRID_CELL,
+        borderWidth: 3,
+        borderColor: colors.BLACK,
       } as ViewStyle,
       text: {
         fontFamily: fonts.family.regular,
@@ -190,13 +198,13 @@ const packThemes = {
       title: {
         color: colors.STORY_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.foodTargetTitle,
+        textShadowOffset: fonts.shadow.offset.foodLabel,
         textShadowRadius: 0,
         top: layouts.STORY_PACK_TITLE_TOP,
       } as TextStyle,
       word: {
         fontFamily: "Story",
-        fontSize: fonts.size.targetPack.story,
+        fontSize: fonts.size.targetWordSize.story,
         color: colors.STORY_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
         textShadowOffset: fonts.shadow.offset.storyWord,

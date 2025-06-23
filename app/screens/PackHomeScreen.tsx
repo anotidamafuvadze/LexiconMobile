@@ -32,6 +32,7 @@ import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
 import targetWord from "@/styles/targetWord";
+import tile from "@/styles/tile";
 
 /**
  * Pack screen
@@ -83,7 +84,7 @@ function PackHomeScreen() {
         </View>
 
         {/* Grid */}
-        <GameGrid style={gameGrid} styleAdjust={theme.gameGrid} />
+        <GameGrid gridStyle={gameGrid} gridStyleAdjust={theme.gameGrid} tileStyle={tile} />
 
         {/* Target Word */}
         <TargetWord style={targetWord} styleAdjust={theme.targetWord} />

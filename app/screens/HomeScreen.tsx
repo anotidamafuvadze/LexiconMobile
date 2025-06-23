@@ -6,7 +6,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // Context Hooks
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-import { useRouter } from "expo-router";
 
 // Constants
 import colors from "@/constants/colors";
@@ -27,13 +26,13 @@ import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
 import targetWord from "@/styles/targetWord";
+import tile from "@/styles/tile";
 
 /**
  * Home screen
  * - Displays game boards, action buttons, and target word
  */
 function HomeScreen() {
-  const router = useRouter();
   const { playClickSound } = useSound();
   const { generateNewWord, currentTheme } = useWord();
 
@@ -62,22 +61,22 @@ function HomeScreen() {
             title="SCORE"
             count="0"
             style={gameBoard}
-            width={{width: layouts.SCORE_BOARD_WIDTH}}
+            width={{ width: layouts.SCORE_BOARD_WIDTH }}
           />
           {/* Pops Board */}
           <GameBoard
             title="POPS"
             count="3"
             style={gameBoard}
-            width={{width: layouts.POPS_BOARD_WIDTH}}
+            width={{ width: layouts.POPS_BOARD_WIDTH }}
           />
         </View>
 
         {/* Grid */}
-        <GameGrid style={gameGrid} />
+        <GameGrid gridStyle={gameGrid} tileStyle={tile} />
 
         {/* Target Word */}
-        <TargetWord style={targetWord}/>
+        <TargetWord style={targetWord} />
 
         <View style={styles.buttonGroup}>
           {/* New Game */}

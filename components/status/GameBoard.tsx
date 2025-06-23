@@ -19,14 +19,14 @@ function GameBoard({
   title,
   count,
   entering,
-  style,
-  styleAdjust,
+  style: style,
+  styleAdjust: styleAdjust,
   width,
-
 }: {
   title?: string;
   count?: string;
   entering?: EntryExitAnimationFunction | LayoutAnimation;
+
   style: {
     board: ViewStyle;
     container: StyleProp<ViewStyle>;
@@ -34,14 +34,18 @@ function GameBoard({
     title?: TextStyle;
     count?: TextStyle;
   };
-  styleAdjust?: { // Style override for themed packs
-      board: ViewStyle;
-      text: TextStyle;
+  styleAdjust?: {
+    // Style override for themed packs
+    board: ViewStyle;
+    text: TextStyle;
   };
   width: ViewStyle;
 }): React.JSX.Element {
   return (
-    <Animated.View style={[style.board, styleAdjust?.board, width]} entering={asEntry(entering)}>
+    <Animated.View
+      style={[style.board, styleAdjust?.board, width]}
+      entering={asEntry(entering)}
+    >
       <View style={style.container}>
         {/* Title label */}
         <Text style={[style.title, styleAdjust?.text]}>{title}</Text>

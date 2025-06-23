@@ -188,7 +188,7 @@ const buttons = {
       color: colors.DIFFICULTY_BUTTON_TEXT,
       textAlign: "center",
       textShadowColor: colors.BLACK,
-      textShadowOffset: fonts.shadow.offset.difficultyButton,
+      textShadowOffset: fonts.shadow.offset.difficultyLabel,
     } as TextStyle,
   },
 };
