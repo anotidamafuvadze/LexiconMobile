@@ -66,14 +66,14 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     hasStarted.current = true;
 
     // Sets music to loop continuously
-    try {
-      backgroundMusicPlayer.loop = true;
-      if (soundOn) {
-        backgroundMusicPlayer.play();
-      }
-    } catch (error) {
-      console.error("Background music initialization failed:", error);
-    }
+    // try {
+    //   backgroundMusicPlayer.loop = true;
+    //   if (soundOn) {
+    //     backgroundMusicPlayer.play();
+    //   }
+    // } catch (error) {
+    //   console.error("Background music initialization failed:", error);
+    // }
   }, []);
 
   // Plays button click sound effect
@@ -120,11 +120,11 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Start or resume background music playback
   const playBackgroundMusic = useCallback(() => {
-    try {
-      backgroundMusicPlayer.play();
-    } catch (error) {
-      console.error("Music play failed:", error);
-    }
+    // try {
+    //   backgroundMusicPlayer.play();
+    // } catch (error) {
+    //   console.error("Music play failed:", error);
+    // }
   }, [backgroundMusicPlayer]);
 
   // Pause background music playback

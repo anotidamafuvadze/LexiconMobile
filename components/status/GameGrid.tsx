@@ -1,7 +1,10 @@
 // React and React Native
-import React from "react";
+import Tile from "@/components/status/Tile";
+import { Tile as TileModel } from "@/models/tile";
+import gameReducer, { initialState } from "@/reducers/gameReducer";
+import React, { useEffect, useReducer, useRef } from "react";
 import { StyleSheet, TextStyle, View, ViewStyle } from "react-native";
-import Tile from "./Tile";
+import GestureRecognizer from "react-native-swipe-gestures";
 
 /**
  * GameGrid
@@ -36,6 +39,9 @@ function GameGrid({
     letter: TextStyle;
   };
 }): React.JSX.Element {
+  const [gameState, dispatch] = useReducer(gameReducer, initialState);
+  const hasStarted = useRef(false);
+
   // Render 16 empty cells
   const renderCells = () => {
     return Array.from({ length: 16 }, (_, index) => (
@@ -43,18 +49,41 @@ function GameGrid({
     ));
   };
 
-  return (
-    <View style={[gridStyle.grid, gridStyleAdjust?.grid]}>
-      <View style={styles.tileContainer}>
+  const renderTiles = () => {
+    return Object.values(gameState.tiles).map((tile: TileModel, index: number) => {
+      return (
         <Tile
+          key={`${index}`}
           tile={tileStyle.tile}
           tileAdjust={tileStyleAdjust?.tile}
           letter={tileStyle.letter}
-          letterAdjust={tileStyleAdjust?.letter}
+          {...tile}
         />
+      );
+    });
+  };
+
+  useEffect(() => {
+    if (hasStarted.current == false) {
+      dispatch({ type: "CREATE_TILE", tile: { position: [0, 0], value: "A" } });
+      dispatch({ type: "CREATE_TILE", tile: { position: [0, 1], value: "A" } });
+      hasStarted.current = true;
+    }
+  }, []);
+
+  return (
+    <GestureRecognizer
+      style={{ position: "absolute", alignSelf: "center" }}
+      onSwipeLeft={() => dispatch({ type: "MOVE_LEFT" })}
+      onSwipeRight={() => dispatch({ type: "MOVE_RIGHT" })}
+      onSwipeUp={() => dispatch({ type: "MOVE_UP" })}
+      onSwipeDown={() => dispatch({ type: "MOVE_DOWN" })}
+    >
+      <View style={[gridStyle.grid, gridStyleAdjust?.grid]}>
+        <View style={styles.tileContainer}>{renderTiles()}</View>
+        <View style={styles.gridContainer}>{renderCells()}</View>
       </View>
-      <View style={styles.gridContainer}>{renderCells()}</View>
-    </View>
+    </GestureRecognizer>
   );
 }
 
@@ -74,7 +103,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     margin: 7,
-  }
+  },
 });
 
 export default GameGrid;

@@ -51,7 +51,7 @@ const colors = {
   NATURE_PACK_BOARD: "rgb(240, 242, 228)",
   NATURE_PACK_BOARD_TEXT: "rgb(43, 40, 33)",
   NATURE_PACK_GRID_BG: "rgb(34, 32, 29)",
-  NATURE_PACK_GRID_CELL: "rgb(93, 94, 80)",
+  NATURE_PACK_GRID_CELL: "rgb(71, 72, 60)",
   NATURE_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
   // ======================= FOOD PACK =======================
@@ -72,7 +72,7 @@ const colors = {
   STORY_PACK_BOARD: "rgb(87, 72, 65)",
   STORY_PACK_BOARD_TEXT: "rgb(255, 255, 255)",
   STORY_PACK_GRID_BG: "rgb(44, 36, 33)",
-  STORY_PACK_GRID_CELL: "rgb(102, 84, 75)",
+  STORY_PACK_GRID_CELL: "rgb(78, 65, 58)",
   STORY_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 };
 
