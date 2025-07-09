@@ -1,6 +1,6 @@
 # Lexicon
 
-**Lexicon** is an interactive mobile word puzzle game built with **React Native**. It blends the tile-sliding mechanics of **Lexicon** with the challenge of **word formation**, offering a twist on both genres.
+**Lexicon** is an interactive mobile word puzzle game built with **React Native**. It blends the tile-sliding mechanics of **2048** with the challenge of **word formation**, offering a twist on both genres.
 
 ---
 

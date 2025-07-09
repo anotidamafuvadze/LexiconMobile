@@ -15,7 +15,7 @@ const targetWord = {
     fontSize: fonts.size.targetTitle,
     fontWeight: fonts.weight.lightBold as TextStyle["fontWeight"],
     fontFamily: fonts.family.regular,
-    color: colors.WORD_PACK_TITLE,
+    color: colors.HOME_TARGET_WORD,
     letterSpacing: layouts.LETTER_SPACING_SMALL,
   } as TextStyle,
 
@@ -24,7 +24,7 @@ const targetWord = {
     fontSize: fonts.size.targetWord,
     fontWeight: fonts.weight.lightBold as TextStyle["fontWeight"],
     fontFamily: fonts.family.targetWord,
-    color: colors.WORD_PACK_TITLE,
+    color: colors.HOME_TARGET_WORD,
     letterSpacing: layouts.LETTER_SPACING_SMALL,
   } as TextStyle,
 

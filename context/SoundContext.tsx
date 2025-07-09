@@ -11,8 +11,6 @@ import React, {
   useState,
 } from "react";
 
-// ADD COMMENTS ABOUT WHEN CLICK SOUND AND WHOOSH SOUND ARE PLAYED
-
 // Sound assets
 const buttonClick = require("../app/assets/sounds/button-click-sound.mp3");
 const buttonPop = require("../app/assets/sounds/button-pop-sound.mp3");
@@ -66,14 +64,14 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     hasStarted.current = true;
 
     // Sets music to loop continuously
-    // try {
-    //   backgroundMusicPlayer.loop = true;
-    //   if (soundOn) {
-    //     backgroundMusicPlayer.play();
-    //   }
-    // } catch (error) {
-    //   console.error("Background music initialization failed:", error);
-    // }
+    try {
+      backgroundMusicPlayer.loop = true;
+      if (soundOn) {
+        backgroundMusicPlayer.play();
+      }
+    } catch (error) {
+      console.error("Background music initialization failed:", error);
+    }
   }, []);
 
   // Plays button click sound effect
@@ -120,11 +118,11 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Start or resume background music playback
   const playBackgroundMusic = useCallback(() => {
-    // try {
-    //   backgroundMusicPlayer.play();
-    // } catch (error) {
-    //   console.error("Music play failed:", error);
-    // }
+    try {
+      backgroundMusicPlayer.play();
+    } catch (error) {
+      console.error("Music play failed:", error);
+    }
   }, [backgroundMusicPlayer]);
 
   // Pause background music playback
@@ -154,7 +152,7 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Custom hook for accessing sound context
+// Custom hook
 export const useSound = () => {
   const context = useContext(SoundContext);
   if (!context) {

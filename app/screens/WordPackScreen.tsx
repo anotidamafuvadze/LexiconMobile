@@ -20,6 +20,7 @@ import GameButton from "@/components/buttons/GameButton";
 import BaseHeader from "@/components/headers/BaseHeader";
 
 // Styles
+import { useGame } from "@/context/GameContext";
 import buttons from "@/styles/buttons";
 import headers from "@/styles/headers";
 
@@ -31,11 +32,13 @@ function WordPacks() {
   const router = useRouter();
   const { playClickSound, playWhooshSound } = useSound();
   const { setCurrentTheme, generateNewWord } = useWord();
+  const { startNewGame } = useGame();
 
   // Handle word pack selection
   const handleButtonPress = (pack: string) => {
     setCurrentTheme(pack);
     generateNewWord(pack); // Update word bank and theme
+    startNewGame();
 
     if (pack === "Default") {
       playClickSound();
@@ -77,7 +80,7 @@ function WordPacks() {
             onPress={() => handleButtonPress("nature")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
-            iconAdjust={{top: layouts.NATURE_ICON_TOP}} // Move up slightly
+            iconAdjust={{ top: layouts.NATURE_ICON_TOP }} // Move up slightly
           />
 
           {/* Food Pack */}
@@ -88,7 +91,7 @@ function WordPacks() {
             onPress={() => handleButtonPress("food")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
-            iconAdjust={{top: layouts.FOOD_ICON_TOP}} // Move up slightly
+            iconAdjust={{ top: layouts.FOOD_ICON_TOP }} // Move up slightly
           />
 
           {/* Animals Pack */}

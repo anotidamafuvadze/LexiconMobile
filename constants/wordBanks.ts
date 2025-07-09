@@ -2,10 +2,11 @@ const wordBank = [
   {
     name: "Default",
     words: [
-    "ABLE", "BACK", "BALL", "BARK", "BARN", "BEND", "BEST", "BITE", "BLUE", "BOLD",
-    "CALM", "CARD", "CART", "CHAT", "CLAP", "CLIP", "COAL", "COOK", "COOL", "CUBE",
-    "DARE", "DART", "DEAL", "DEEP", "DIAL", "DISH", "DIVE", "DOLL", "DOOR", "DROP",
-    "EARN", "EAST", "EDGE", "EGGS", "FALL", "FARM", "FAST", "FEED", "FIND", "FISH"
+      "AAAA"
+    // "ABLE", "BACK", "BALL", "BARK", "BARN", "BEND", "BEST", "BITE", "BLUE", "BOLD",
+    // "CALM", "CARD", "CART", "CHAT", "CLAP", "CLIP", "COAL", "COOK", "COOL", "CUBE",
+    // "DARE", "DART", "DEAL", "DEEP", "DIAL", "DISH", "DIVE", "DOLL", "DOOR", "DROP",
+    // "EARN", "EAST", "EDGE", "EGGS", "FALL", "FARM", "FAST", "FEED", "FIND", "FISH"
   ]
   },
   {

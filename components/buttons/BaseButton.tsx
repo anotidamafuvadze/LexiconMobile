@@ -4,10 +4,10 @@ import {
   Image,
   ImageSourcePropType,
   ImageStyle,
+  Pressable,
   StyleProp,
   Text,
   TextStyle,
-  TouchableOpacity,
   View,
   ViewStyle,
 } from "react-native";
@@ -51,7 +51,10 @@ function BaseButton({
 }): React.JSX.Element {
   return (
     <Animated.View entering={asEntry(entering)}>
-      <TouchableOpacity onPress={onPress} style={buttonStyle}>
+      <Pressable
+        onPress={onPress}
+        style={({ pressed }) => [buttonStyle, { opacity: pressed ? 0.7 : 1 }]}
+      >
         <View style={textRowStyle}>
           {icon && <Image source={icon} style={iconStyle} resizeMode="contain" />}
           <View style={textColumnStyle}>
@@ -59,7 +62,7 @@ function BaseButton({
             {subtitle && <Text style={subtitleStyle}>{subtitle}</Text>}
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     </Animated.View>
   );
 }

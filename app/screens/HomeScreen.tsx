@@ -21,6 +21,7 @@ import TargetWord from "@/components/status/TargetWord";
 
 // Styles
 import GameGrid from "@/components/status/GameGrid";
+import { useGame } from "@/context/GameContext";
 import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
@@ -35,6 +36,7 @@ import tile from "@/styles/tile";
 function HomeScreen() {
   const { playClickSound } = useSound();
   const { generateNewWord, currentTheme } = useWord();
+  const { startNewGame, score } = useGame();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,11 +57,10 @@ function HomeScreen() {
         />
 
         <View style={styles.boardGroup}>
-          {/* TODO: Change score and pops dynamically */}
           {/* Score Board */}
           <GameBoard
             title="SCORE"
-            count="0"
+            count={String(score)}
             style={gameBoard}
             width={{ width: layouts.SCORE_BOARD_WIDTH }}
           />
@@ -86,6 +87,7 @@ function HomeScreen() {
             onPress={() => {
               playClickSound();
               generateNewWord(currentTheme);
+              startNewGame();
             }}
             styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
           />

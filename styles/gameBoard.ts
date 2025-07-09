@@ -4,7 +4,7 @@ import layouts from "@/constants/layouts";
 import { TextStyle, ViewStyle } from "react-native";
 
 const gameBoard = {
-  // Outer board container
+  // Board container
   board: {
     backgroundColor: colors.GAME_BOARD_BG,
     borderColor: colors.GAME_BOARD_BORDER,
@@ -23,6 +23,7 @@ const gameBoard = {
     fontFamily: fonts.family.regular,
     color: colors.GAME_BOARD_TITLE,
     textAlign: "center",
+  
   } as TextStyle,
 
   // Score number text

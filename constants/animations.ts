@@ -2,7 +2,7 @@ import {
   BounceIn,
   Easing,
   Keyframe,
-  LightSpeedInRight,
+  LightSpeedInRight
 } from "react-native-reanimated";
 
 /**
@@ -69,6 +69,7 @@ const animations = {
 
   // Bounce-in animation for difficulty buttons
   BOUNCE_IN: BounceIn.duration(600),
+
 };
 
 export default animations;

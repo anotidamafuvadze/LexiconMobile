@@ -27,6 +27,7 @@ import TargetWord from "@/components/status/TargetWord";
 
 // Styles
 import GameGrid from "@/components/status/GameGrid";
+import { useGame } from "@/context/GameContext";
 import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
@@ -41,6 +42,7 @@ import tile from "@/styles/tile";
 function PackHomeScreen() {
   const { playClickSound } = useSound();
   const { generateNewWord, currentTheme } = useWord();
+  const { startNewGame, score } = useGame();
 
   const { packName } = useLocalSearchParams<{ packName: string }>();
   const theme = packThemes[packName as keyof typeof packThemes];
@@ -65,7 +67,7 @@ function PackHomeScreen() {
           {/* Score Board */}
           <GameBoard
             title="SCORE"
-            count="0"
+            count={String(score)}
             entering={asEntry(animations.FALL_FAST)}
             style={gameBoard}
             styleAdjust={theme.gameBoard}
@@ -84,7 +86,11 @@ function PackHomeScreen() {
         </View>
 
         {/* Grid */}
-        <GameGrid gridStyle={gameGrid} gridStyleAdjust={theme.gameGrid} tileStyle={tile} />
+        <GameGrid
+          gridStyle={gameGrid}
+          gridStyleAdjust={theme.gameGrid}
+          tileStyle={tile}
+        />
 
         {/* Target Word */}
         <TargetWord style={targetWord} styleAdjust={theme.targetWord} />
@@ -96,6 +102,7 @@ function PackHomeScreen() {
             onPress={() => {
               playClickSound();
               generateNewWord(currentTheme);
+              startNewGame();
             }}
             styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
           />

@@ -8,9 +8,10 @@ const colors = {
   BACK_ICON_TINT: "rgba(70, 69, 65, 1)",
 
   // ======================= TEXT COLORS =======================
-  HOME_TITLE: "rgb(59, 58, 55)",
-  HOME_SUBTITLE: "rgba(79, 80, 75, 1)",
+  HOME_TITLE: "rgb(46, 46, 43)",
+  HOME_SUBTITLE: "rgb(46, 46, 43)",
   WORD_PACK_TITLE: "rgb(51, 50, 46)",
+  HOME_TARGET_WORD: "rgb(46, 46, 43)",
 
   MENU_SCREEN_BUTTON: "rgb(69, 67, 64)",
   DIFFICULTY_BUTTON_TEXT: "rgba(255, 255, 255, 1)",
@@ -24,6 +25,7 @@ const colors = {
   MENU_SCREEN_BUTTON_BG: "rgba(247, 244, 239, 1)",
   WORD_PACK_BUTTON_BG: "rgba(241, 237, 229, 1)",
   GAME_LAB_BUTTON_BG: "rgb(250, 247, 241)",
+  GAME_LAB_BUTTON_BG: "rgb(241, 237, 229)",
 
   EASY_BUTTON: "rgba(115, 170, 115, 1)",
   NORMAL_BUTTON: "rgba(226, 205, 103, 1)",
@@ -74,6 +76,9 @@ const colors = {
   STORY_PACK_GRID_BG: "rgb(44, 36, 33)",
   STORY_PACK_GRID_CELL: "rgb(78, 65, 58)",
   STORY_PACK_TARGET_WORD: "rgb(255, 255, 255)",
+
+  // ======================= GAME RESULTS =======================
+  YOU_WIN: "rgb(255, 255, 255)",
 };
 
 export default colors;

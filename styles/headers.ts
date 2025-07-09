@@ -80,6 +80,10 @@ const headers = {
       maxWidth: layouts.GAME_LAB_SUBTITLE_WIDTH,
     } as TextStyle,
   },
+
+
 };
+
+
 
 export default headers;

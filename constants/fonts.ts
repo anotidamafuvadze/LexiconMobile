@@ -29,8 +29,8 @@ const fonts = {
     // Game Lab
     gameLabHeaderTitle: 50,
     gameLabSubtitle: 21,
-    gameLabButtonTitle: 25,
-    gameLabButtonSubtitle: 17,
+    gameLabButtonTitle: 28,
+    gameLabButtonSubtitle: 18,
 
     // Target section
     targetTitle: 30,
@@ -46,6 +46,9 @@ const fonts = {
       animals: 90,
       story: 48,
     },
+
+    // Game results
+    splah: 48,
   },
 
   // Font weights
@@ -64,13 +67,14 @@ const fonts = {
 
     // Menu Screen
     wordPackButton: "0px 6px 0px rgba(165, 155, 134, 0.6)",
-    gameLabButton: "0px 6px 0px rgba(165, 155, 134, 0.6)",
+    gameLabButton: "0px 8px 0px rgba(165, 155, 134, 0.6)",
     packGameBoard: "0px 6px 0px rgba(0, 0, 0, 0.7)",
-    difficultyButton: "0px 6px 0px rgba(0, 0, 0, 0.8)",
+    difficultyButton: "0px 5px 0px rgba(0, 0, 0, 0.8)",
 
 
     offset: {
       tileLetter: { width: 0, height: 2 },
+      splahs: { width: 0, height: 1 },
 
       difficultyLabel: { width: 0, height: 3.2 },
 

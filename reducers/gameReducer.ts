@@ -1,28 +1,38 @@
 // Game Logic
 import game from "@/constants/game";
-import { Tile, TileMap } from "@/models/tile";
-import { isNil } from "lodash";
+import { PartialTileInput, Tile, TileMap } from "@/models/tile";
+import { flattenDeep, isNil } from "lodash";
 import { uid } from "uid";
 
 // -------------------- Types --------------------
 
-type State = {
+// Game status values to track progress
+export type GameStatus = "ONGOING" | "WON" | "LOST"
+
+// Shape of the game state
+export type State = {
   board: string[][];
   tiles: TileMap;
+  tilesByIds: string[];
+  score: number;
+  status: GameStatus;
 };
 
-type Action =
+// Actions dispatched to reducer
+export type Action =
+  | { type: "RESET_GAME" }
+  | { type: "UPDATE_STATUS"; status: GameStatus }
+  | { type: "CREATE_TILE"; tile: PartialTileInput }
   | { type: "CLEAN_UP" }
-  | { type: "CREATE_TILE"; tile: Tile }
   | { type: "MOVE_UP" }
   | { type: "MOVE_DOWN" }
   | { type: "MOVE_LEFT" }
-  | { type: "MOVE_RIGHT" };
-
+  | { type: "MOVE_RIGHT" }
+  
 // -------------------- Helpers --------------------
 
-// Creates an empty game board
-function createBoard(): string[][] {
+// Creates an empty game grid
+function createGrid(): string[][] {
   const board: string[][] = [];
   for (let i = 0; i < game.TILE_COUNT_PER_DIMENSION; i++) {
     board[i] = new Array(game.TILE_COUNT_PER_DIMENSION).fill(undefined);
@@ -30,45 +40,225 @@ function createBoard(): string[][] {
   return board;
 }
 
-// Returns the next letter (e.g., A → B, Z → A)
+// Get next letter (A → B, Z → A)
 function nextLetter(letter: string): string {
   if (letter === "Z") return "A";
   if (letter === "z") return "a";
   return String.fromCharCode(letter.charCodeAt(0) + 1);
+  // For testing purpses
+  // return 'A'
+}
+
+// TODO: Get rid of debugging print lines
+
+// Check if target word appears in a row or column
+export function checkforWin(state: State, targetWord: string): [boolean, string[] | null] {
+  console.log(`🔍 Checking for win with target word: ${targetWord}`);
+
+  // Check each row
+  for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+    console.log(`👉 Checking row ${row}`);
+    const [rowWin, winningTiles] = checkRow(row, state, targetWord);
+    if (rowWin) {
+      console.log(`✅ Found winning row at ${row}:`, winningTiles);
+      return [true, winningTiles];
+    }
+  }
+
+  // Check each column
+  for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+    console.log(`👉 Checking column ${col}`);
+    const [colWin, winningTiles] = checkCol(col, state, targetWord);
+    if (colWin) {
+      console.log(`✅ Found winning column at ${col}:`, winningTiles);
+      return [true, winningTiles];
+    }
+  }
+
+  console.log(`❌ No winning row or column found.`);
+  return [false, null];
+}
+
+// Check single row for target word
+function checkRow(row: number, state: State, targetWord: string): [boolean, string[] | null] {
+  let currentWord = "";
+  const winningTiles: string[] = [];
+
+  for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+    const currTileId = state.board[row][col];
+    console.log(`Row ${row}, Col ${col} — Tile ID:`, currTileId);
+
+    if (isNil(currTileId)) {
+      console.log(`🚫 Empty cell at (${row}, ${col}) — cannot form word.`);
+      return [false, null];
+    }
+
+    const currTile = state.tiles[currTileId];
+    currentWord += currTile.value;
+    winningTiles.push(currTileId);
+  }
+
+  console.log(`Row ${row} formed word: ${currentWord}`);
+  if (currentWord === targetWord) {
+    console.log(`🎯 Row ${row} matches target word!`);
+    return [true, winningTiles];
+  }
+
+  return [false, null];
+}
+
+// Check single column for target word
+function checkCol(col: number, state: State, targetWord: string): [boolean, string[] | null] {
+  let currentWord = "";
+  const winningTiles: string[] = [];
+
+  for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+    const currTileId = state.board[row][col];
+    console.log(`Col ${col}, Row ${row} — Tile ID:`, currTileId);
+
+    if (isNil(currTileId)) {
+      console.log(`🚫 Empty cell at (${row}, ${col}) — cannot form word.`);
+      return [false, null];
+    }
+
+    const currTile = state.tiles[currTileId];
+    currentWord += currTile.value;
+    winningTiles.push(currTileId);
+  }
+
+  console.log(`Column ${col} formed word: ${currentWord}`);
+  if (currentWord === targetWord) {
+    console.log(`🎯 Column ${col} matches target word!`);
+    return [true, winningTiles];
+  }
+
+  return [false, null];
+}
+
+// Print board state for debugging
+export function printBoard(board: string[][], tiles: TileMap) {
+  const rendered = board.map((row) =>
+    row.map((id) => (id ? tiles[id]?.value ?? "?" : "·")).join(" ")
+  );
+  console.log("\n" + rendered.map((r) => `| ${r} |`).join("\n"));
 }
 
 // -------------------- Initial State --------------------
 
+// Initial state of the game
 export const initialState: State = {
-  board: createBoard(),
+  board: createGrid(),
   tiles: {},
+  tilesByIds: [],
+  score: 0,
+  status: "ONGOING",
 };
+
 
 // -------------------- Reducer --------------------
 
+/**
+ * gameReducer
+ * Updates the game state in response to actions like moving, merging, 
+ * resetting, or creating tiles
+ */
 function gameReducer(state: State = initialState, action: Action): State {
   switch (action.type) {
-    // Creates a new tile
-    case "CREATE_TILE": {
-      const tileId = uid();
-      const [x, y] = action.tile.position;
-      const newBoard = JSON.parse(JSON.stringify(state.board));
-      newBoard[y][x] = tileId;
-
+    // Reset to a fresh game state
+    case "RESET_GAME": {
       return {
-        ...state,
-        board: newBoard,
-        tiles: {
-          ...state.tiles,
-          [tileId]: { id: tileId, ...action.tile },
-        },
+        board: createGrid(),
+        tiles: {},
+        tilesByIds: [],
+        score: 0,
+        status: "ONGOING",
       };
     }
 
-    // Moves tiles up
-    case "MOVE_UP": {
-      const newBoard = createBoard();
+     // Update status manually (e.g., to WON/LOST)
+    case "UPDATE_STATUS": {
+      return {
+        ...state,
+        status: action.status
+      }
+    }
+
+    // Add new tile to grid
+   case "CREATE_TILE": {
+    const findRandomPosition = (): [number, number] | null => {
+      const emptyCells: [number, number][] = [];
+
+      for (let y = 0; y < game.TILE_COUNT_PER_DIMENSION; y++) {
+        for (let x = 0; x < game.TILE_COUNT_PER_DIMENSION; x++) {
+          if (isNil(state.board[y][x])) {
+            emptyCells.push([x, y]);
+          }
+        }
+      }
+
+      if (emptyCells.length === 0) return null;
+
+      const index = Math.floor(Math.random() * emptyCells.length);
+      return emptyCells[index];
+    };
+
+    let [x, y] = action.tile.position ?? [];
+
+    // If not given a position, find a random one
+    if (isNil(x) || isNil(y) || !isNil(state.board[y][x])) {
+      const newPosition = findRandomPosition();
+      if (!newPosition) {
+        console.warn("Board is full — no tile created."); // TODO: Flag that the game is over
+        return state;
+      }
+      [x, y] = newPosition;
+    }
+
+    const tileId = uid();
+    const newBoard = JSON.parse(JSON.stringify(state.board));
+    newBoard[y][x] = tileId;
+
+    return {
+      ...state,
+      board: newBoard,
+      tiles: {
+        ...state.tiles,
+        [tileId]: {
+          id: tileId,
+          position: [x, y],
+          value: action.tile.value,
+          justCreated: true,
+        },
+      },
+      tilesByIds: [...state.tilesByIds, tileId],
+    };
+  }
+
+    // Clean up old or removed tiles
+    case "CLEAN_UP": {
+      const flattenBoard = flattenDeep(state.board);
       const newTiles: TileMap = {};
+
+      for (const tileId of flattenBoard) {
+        if (!isNil(tileId) && state.tiles[tileId]) {
+          newTiles[tileId] = state.tiles[tileId];
+        }
+      }
+
+      return {
+        ...state,
+        tiles: newTiles,
+        tilesByIds: flattenBoard.filter((id): id is string => !isNil(id)),
+      };
+    }
+
+
+
+    // Moves tiles up and merge
+    case "MOVE_UP": {
+      const newBoard = createGrid();
+      const newTiles: TileMap = {};
+      let newScore = state.score;
 
       for (let x = 0; x < game.TILE_COUNT_PER_DIMENSION; x++) {
         let newY = 0;
@@ -81,14 +271,11 @@ function gameReducer(state: State = initialState, action: Action): State {
           if (!isNil(tileId)) {
             // Merge with previous tile if values match
             if (previousTile?.value === currentTile.value) {
+              const newLetter = nextLetter(previousTile.value);
+              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
               newTiles[previousTile.id as string] = {
                 ...previousTile,
-                value: nextLetter(previousTile.value),
-              };
-              // Move merged tile one space behind
-              newTiles[tileId] = {
-                ...currentTile,
-                position: [x, newY - 1],
+                value: newLetter
               };
               previousTile = undefined;
               continue;
@@ -99,6 +286,7 @@ function gameReducer(state: State = initialState, action: Action): State {
             newTiles[tileId] = {
               ...currentTile,
               position: [x, newY],
+              justCreated: false,
             };
             previousTile = newTiles[tileId];
             newY++;
@@ -106,17 +294,22 @@ function gameReducer(state: State = initialState, action: Action): State {
         }
       }
 
+      console.log("After MOVE_UP:");
+      printBoard(newBoard, newTiles);
+
       return {
         ...state,
         board: newBoard,
         tiles: newTiles,
+        score: newScore
       };
     }
 
-    // Moves tiles down
+    // Moves tiles down and merge
     case "MOVE_DOWN": {
-      const newBoard = createBoard();
+      const newBoard = createGrid();
       const newTiles: TileMap = {};
+      let newScore = state.score;
 
       for (let x = 0; x < game.TILE_COUNT_PER_DIMENSION; x++) {
         let newY = game.TILE_COUNT_PER_DIMENSION - 1;
@@ -129,14 +322,11 @@ function gameReducer(state: State = initialState, action: Action): State {
           if (!isNil(tileId)) {
             // Merge with previous tile if values match
             if (previousTile?.value === currentTile.value) {
+              const newLetter = nextLetter(previousTile.value);
+              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
               newTiles[previousTile.id as string] = {
                 ...previousTile,
-                value: nextLetter(previousTile.value),
-              };
-              // Move merged tile one space ahead
-              newTiles[tileId] = {
-                ...currentTile,
-                position: [x, newY + 1],
+                value: newLetter,
               };
               previousTile = undefined;
               continue;
@@ -147,6 +337,7 @@ function gameReducer(state: State = initialState, action: Action): State {
             newTiles[tileId] = {
               ...currentTile,
               position: [x, newY],
+              justCreated: false,
             };
             previousTile = newTiles[tileId];
             newY--;
@@ -154,17 +345,22 @@ function gameReducer(state: State = initialState, action: Action): State {
         }
       }
 
+      console.log("After MOVE_DOWN:");
+      printBoard(newBoard, newTiles);
+
       return {
         ...state,
         board: newBoard,
         tiles: newTiles,
+        score: newScore
       };
     }
 
-    // Moves tiles left
+    // Moves tiles left and merge
     case "MOVE_LEFT": {
-      const newBoard = createBoard();
+      const newBoard = createGrid();
       const newTiles: TileMap = {};
+      let newScore = state.score;
 
       for (let y = 0; y < game.TILE_COUNT_PER_DIMENSION; y++) {
         let newX = 0;
@@ -177,14 +373,11 @@ function gameReducer(state: State = initialState, action: Action): State {
           if (!isNil(tileId)) {
             // Merge with previous tile if values match
             if (previousTile?.value === currentTile.value) {
+              const newLetter = nextLetter(previousTile.value);
+              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
               newTiles[previousTile.id as string] = {
                 ...previousTile,
-                value: nextLetter(previousTile.value),
-              };
-              // Move merged tile one space behind
-              newTiles[tileId] = {
-                ...currentTile,
-                position: [newX - 1, y],
+                value: newLetter,
               };
               previousTile = undefined;
               continue;
@@ -195,6 +388,7 @@ function gameReducer(state: State = initialState, action: Action): State {
             newTiles[tileId] = {
               ...currentTile,
               position: [newX, y],
+              justCreated: false,
             };
             previousTile = newTiles[tileId];
             newX++;
@@ -202,17 +396,23 @@ function gameReducer(state: State = initialState, action: Action): State {
         }
       }
 
+      console.log("After MOVE_LEFT:");
+      printBoard(newBoard, newTiles);
+
       return {
         ...state,
         board: newBoard,
         tiles: newTiles,
+        score: newScore
       };
+      
     }
 
-    // Moves tiles right
+    // Moves tiles right and merge
     case "MOVE_RIGHT": {
-      const newBoard = createBoard();
+      const newBoard = createGrid();
       const newTiles: TileMap = {};
+      let newScore = state.score;
 
       for (let y = 0; y < game.TILE_COUNT_PER_DIMENSION; y++) {
         let newX = game.TILE_COUNT_PER_DIMENSION - 1;
@@ -225,14 +425,11 @@ function gameReducer(state: State = initialState, action: Action): State {
           if (!isNil(tileId)) {
             // Merge with previous tile if values match
             if (previousTile?.value === currentTile.value) {
+              const newLetter = nextLetter(previousTile.value);
+              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
               newTiles[previousTile.id as string] = {
                 ...previousTile,
-                value: nextLetter(previousTile.value),
-              };
-              // Move merged tile one space ahead
-              newTiles[tileId] = {
-                ...currentTile,
-                position: [newX + 1, y],
+                value: newLetter
               };
               previousTile = undefined;
               continue;
@@ -243,6 +440,7 @@ function gameReducer(state: State = initialState, action: Action): State {
             newTiles[tileId] = {
               ...currentTile,
               position: [newX, y],
+              justCreated: false,
             };
             previousTile = newTiles[tileId];
             newX--;
@@ -250,10 +448,14 @@ function gameReducer(state: State = initialState, action: Action): State {
         }
       }
 
+      console.log("After MOVE_RIGHT:");
+      printBoard(newBoard, newTiles);
+
       return {
         ...state,
         board: newBoard,
         tiles: newTiles,
+        score: newScore
       };
     }
 
