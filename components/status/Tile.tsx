@@ -72,6 +72,8 @@ function Tile({
 
   // Trigger animation when position or tile state changes
   useEffect(() => {
+    if (!position || TILE_DIMENSION === 0) return;
+    
     const animateTile = () => {
       const x = position[0] * TILE_DIMENSION;
       const y = position[1] * TILE_DIMENSION;
