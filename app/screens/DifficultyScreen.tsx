@@ -51,29 +51,44 @@ function DifficultySelection() {
         <View style={styles.buttonGroup}>
           {/* Easy */}
           <GameButton
-            title="EASY"
+            icon={images.labels.easy}
             onPress={() => handleButtonPress("Easy")}
             style={buttons.difficulty}
             entering={asEntry(animations.BOUNCE_IN)}
             styleAdjust={{ backgroundColor: colors.EASY_BUTTON }}
+            iconAdjust={{
+              transform: [{ scale: 0.23 }],
+              alignContent: "center",
+              position: "absolute",
+            }}
           />
 
           {/* Normal */}
           <GameButton
-            title="NORMAL"
+            icon={images.labels.normal}
             onPress={() => handleButtonPress("Normal")}
             style={buttons.difficulty}
             entering={asEntry(animations.BOUNCE_IN)}
             styleAdjust={{ backgroundColor: colors.NORMAL_BUTTON }}
+            iconAdjust={{
+              transform: [{ scale: 0.3 }],
+              alignContent: "center",
+              position: "absolute",
+            }}
           />
 
           {/* Hard */}
           <GameButton
-            title="HARD"
+            icon={images.labels.hard}
             onPress={() => handleButtonPress("Hard")}
             style={buttons.difficulty}
             entering={asEntry(animations.BOUNCE_IN)}
             styleAdjust={{ backgroundColor: colors.HARD_BUTTON }}
+            iconAdjust={{
+              transform: [{ scale: 0.32 }],
+              alignContent: "center",
+              position: "absolute",
+            }}
           />
         </View>
       </ImageBackground>

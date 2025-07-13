@@ -69,13 +69,12 @@ const fonts = {
     wordPackButton: "0px 6px 0px rgba(165, 155, 134, 0.6)",
     gameLabButton: "0px 8px 0px rgba(165, 155, 134, 0.6)",
     packGameBoard: "0px 6px 0px rgba(0, 0, 0, 0.7)",
-    difficultyButton: "0px 5px 0px rgba(0, 0, 0, 0.8)",
+    difficultyButton: "0px 5px 0px rgb(117, 109, 95)",
 
 
     offset: {
       tileLetter: { width: 0, height: 2 },
-      splahs: { width: 0, height: 1 },
-
+      splash: { width: 0, height: 1 },
       difficultyLabel: { width: 0, height: 3.2 },
 
       // Packs

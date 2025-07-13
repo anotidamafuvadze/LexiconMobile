@@ -2,7 +2,7 @@ const wordBank = [
   {
     name: "Default",
     words: [
-      "AAAA"
+      "AAAA", "BBBB"
     // "ABLE", "BACK", "BALL", "BARK", "BARN", "BEND", "BEST", "BITE", "BLUE", "BOLD",
     // "CALM", "CARD", "CART", "CHAT", "CLAP", "CLIP", "COAL", "COOK", "COOL", "CUBE",
     // "DARE", "DART", "DEAL", "DEEP", "DIAL", "DISH", "DIVE", "DOLL", "DOOR", "DROP",

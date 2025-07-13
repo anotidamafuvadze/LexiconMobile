@@ -14,7 +14,7 @@ const colors = {
   HOME_TARGET_WORD: "rgb(46, 46, 43)",
 
   MENU_SCREEN_BUTTON: "rgb(69, 67, 64)",
-  DIFFICULTY_BUTTON_TEXT: "rgba(255, 255, 255, 1)",
+  DIFFICULTY_BUTTON_TEXT: "rgb(255, 255, 255)",
   GAME_LAB_BUTTON_TITLE: "rgb(68, 66, 61)",
   WORD_PACK_BUTTON_TITLE: "rgb(68, 66, 61)",
   SOUND_BUTTON_TITLE: "rgb(59, 58, 55)",
@@ -24,19 +24,18 @@ const colors = {
   MENU_BUTTON_BG: "rgba(197, 196, 196, 1)",
   MENU_SCREEN_BUTTON_BG: "rgba(247, 244, 239, 1)",
   WORD_PACK_BUTTON_BG: "rgba(241, 237, 229, 1)",
-  GAME_LAB_BUTTON_BG: "rgb(250, 247, 241)",
   GAME_LAB_BUTTON_BG: "rgb(241, 237, 229)",
 
-  EASY_BUTTON: "rgba(115, 170, 115, 1)",
-  NORMAL_BUTTON: "rgba(226, 205, 103, 1)",
-  HARD_BUTTON: "rgba(158, 89, 89, 1)",
+  EASY_BUTTON: "rgb(122, 161, 122)",
+  NORMAL_BUTTON: "rgb(231, 205, 102)",
+  HARD_BUTTON: "rgb(151, 76, 68)",
 
   // ======================= BUTTON BORDERS =======================
   HOME_BUTTON_BORDER_COLOR: "rgb(0, 0, 0)",
   MENU_BUTTON_BORDER: "rgb(0, 0, 0)",
   WORD_PACK_BUTTON_BORDER: "rgb(66, 65, 61)",
   GAME_LAB_BUTTON_BORDER: "rgb(66, 65, 61)",
-  DIFFICULTY_BUTTON_BORDER: "rgb(36, 34, 30)",
+  DIFFICULTY_BUTTON_BORDER: "rgb(37, 34, 30)",
 
   // ======================= GAME BOARDS =======================
   GAME_BOARD_TITLE: "rgb(51, 50, 46)",
@@ -44,37 +43,38 @@ const colors = {
   GAME_BOARD_BORDER: "rgb(0, 0, 0)",
 
   // ======================= GAME GRID (DEFAULT) =======================,
-  HOME_GRID_BG: "rgb(68, 56, 47)",
-  HOME_GRID_CELL:"rgb(125, 107, 94)",
-  HOME_GRID_TILE: "rgb(115, 121, 105)",
+  HOME_GRID_BG: "rgb(66, 56, 48)",
+  HOME_GRID_CELL:"rgb(132, 114, 100)",
+  HOME_GRID_TILE: "rgb(89, 83, 74)",
   HOME_GRID_LETTER: "rgb(255, 255, 255)",
+  TARGET_GRID_TILE: "rgb(115, 121, 105)",
 
   // ======================= NATURE PACK =======================
   NATURE_PACK_BOARD: "rgb(240, 242, 228)",
   NATURE_PACK_BOARD_TEXT: "rgb(43, 40, 33)",
   NATURE_PACK_GRID_BG: "rgb(34, 32, 29)",
-  NATURE_PACK_GRID_CELL: "rgb(71, 72, 60)",
+  NATURE_PACK_GRID_CELL: "rgb(110, 111, 93)",
   NATURE_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
   // ======================= FOOD PACK =======================
-  FOOD_PACK_BOARD: "rgb(63, 51, 46)",
-  FOOD_PACK_BOARD_TEXT: "rgb(255, 255, 255)",
-  FOOD_PACK_GRID_BG: "rgb(40, 33, 31)",
-  FOOD_PACK_GRID_CELL: "rgb(79, 66, 59)",
+  FOOD_PACK_BOARD: "rgb(228, 205, 183)",
+  FOOD_PACK_BOARD_TEXT: "rgb(35, 32, 32)",
+  FOOD_PACK_GRID_BG: "rgb(61, 43, 29)",
+  FOOD_PACK_GRID_CELL: "rgb(164, 136, 109)",
   FOOD_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
   // ======================= ANIMALS PACK =======================
-  ANIMALS_PACK_BOARD: "rgb(232, 240, 243)",
+  ANIMALS_PACK_BOARD: "rgb(237, 243, 246)",
   ANIMALS_PACK_BOARD_TEXT: "rgb(37, 35, 32)",
   ANIMALS_PACK_GRID_BG: "rgb(47, 43, 39)",
-  ANIMALS_PACK_GRID_CELL: "rgb(114, 109, 101)",
+  ANIMALS_PACK_GRID_CELL: "rgb(134, 126, 115)",
   ANIMALS_PACK_TARGET_WORD: "rgba(117, 110, 100, 1)",
 
   // ======================= STORY PACK =======================
   STORY_PACK_BOARD: "rgb(87, 72, 65)",
   STORY_PACK_BOARD_TEXT: "rgb(255, 255, 255)",
   STORY_PACK_GRID_BG: "rgb(44, 36, 33)",
-  STORY_PACK_GRID_CELL: "rgb(78, 65, 58)",
+  STORY_PACK_GRID_CELL: "rgb(135, 117, 105)",
   STORY_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
   // ======================= GAME RESULTS =======================

@@ -12,10 +12,11 @@ import React, {
 } from "react";
 
 // Sound assets
+const backgroundMusic = require("../app/assets/sounds/background-music.mp3");
 const buttonClick = require("../app/assets/sounds/button-click-sound.mp3");
 const buttonPop = require("../app/assets/sounds/button-pop-sound.mp3");
-const backgroundMusic = require("../app/assets/sounds/background-music.mp3");
 const screenWhoosh = require("../app/assets/sounds/screen-whoosh-sound.mp3");
+const winSound = require("../app/assets/sounds/win-sound.mp3");
 
 
 // Type definition for the Sound Context API
@@ -25,6 +26,7 @@ type SoundContextType = {
   playClickSound: (forcePlay?: boolean) => void;
   playPopSound: (forcePlay?: boolean) => void;
   playWhooshSound: (forcePlay?: boolean) => void;
+  playWinSound: (forcePlay?: boolean) => void;
   playBackgroundMusic: (play?: boolean) => void;
   stopBackgroundMusic: () => void;
 };
@@ -36,6 +38,7 @@ const SoundContext = createContext<SoundContextType>({
   playClickSound: () => {},
   playPopSound: () => {},
   playWhooshSound: () => {},
+  playWinSound: () => {},
   playBackgroundMusic: () => {},
   stopBackgroundMusic: () => {},
 });
@@ -50,9 +53,10 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
   const [soundOn, setSoundOn] = useState(true);
   
   // Audio player instances for different sound effects
+  const backgroundMusicPlayer = useAudioPlayer(backgroundMusic);
   const buttonClickPlayer = useAudioPlayer(buttonClick);
   const buttonPopPlayer = useAudioPlayer(buttonPop);
-  const backgroundMusicPlayer = useAudioPlayer(backgroundMusic);
+  const winSoundPlayer = useAudioPlayer(winSound);
   const screenWhooshPlayer = useAudioPlayer(screenWhoosh);
   
   // Flag to prevent duplicate initialization
@@ -116,6 +120,24 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     [soundOn, screenWhooshPlayer]
   );
 
+  const playWinSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        stopBackgroundMusic();
+        winSoundPlayer.seekTo(0); // Rewind to start
+        winSoundPlayer.play();
+        setTimeout(() => {
+          playBackgroundMusic()
+        }, 8000)
+      } catch (error) {
+        console.error("Win sound error:", error);
+      }
+    },
+    [soundOn, winSoundPlayer]
+
+  )
+
   // Start or resume background music playback
   const playBackgroundMusic = useCallback(() => {
     try {
@@ -141,6 +163,7 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     playClickSound,
     playPopSound,
     playWhooshSound,
+    playWinSound,
     playBackgroundMusic,
     stopBackgroundMusic,
   };

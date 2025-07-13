@@ -5,7 +5,6 @@ import GestureRecognizer from "react-native-swipe-gestures";
 
 // Context Hooks
 import { useGame } from "@/context/GameContext";
-import { useWord } from "@/context/WordContext";
 
 // Constants
 import game from "@/constants/game";
@@ -47,8 +46,7 @@ function GameGrid({
     letter: TextStyle;
   };
 }): React.JSX.Element {
-  const { getTiles, moveTiles, dispatch, checkGameStatus, status } = useGame();
-  const { targetWord } = useWord();
+  const { getTiles, moveTiles, dispatch, status } = useGame();
 
   // Render 16 empty cells
   const renderCells = () => {
@@ -65,11 +63,14 @@ function GameGrid({
           tileStyle={tileStyle.tile}
           letterStyle={tileStyle.letter}
           key={tile.id}
+          tileID={tile.id}
           {...tile}
         />
       );
     });
   };
+
+
 
   // Handle swipe gestures to move tiles and update state
   const handleSwiping = (swipeType: string) => {
@@ -98,7 +99,6 @@ function GameGrid({
           tile: { value: "A", justCreated: true },
         });
       }, 20); // small delay to let CLEAN_UP finish
-      checkGameStatus(targetWord);
     }, game.MOVE_ANIMATION_DURATION);
   };
 
@@ -110,7 +110,7 @@ function GameGrid({
       onSwipeLeft={() => handleSwiping("left")}
       onSwipeRight={() => handleSwiping("right")}
     >
-     {status === "WON" && <Splash />}
+      {status === "WON" && <Splash />}
       <View style={[gridStyle.grid, gridStyleAdjust?.grid]}>
         <View style={styles.tileContainer}>{renderTiles()}</View>
         <View style={styles.gridContainer}>{renderCells()}</View>

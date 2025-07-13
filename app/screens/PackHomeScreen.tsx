@@ -85,6 +85,8 @@ function PackHomeScreen() {
           />
         </View>
 
+        {/*  TODO: Adjust tile color in packs */}
+
         {/* Grid */}
         <GameGrid
           gridStyle={gameGrid}
@@ -124,9 +126,11 @@ function PackHomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF'
   },
   background: {
     flex: 1,
+    backgroundColor: '#FFFFFF'
   },
   grid: {
     width: 390,

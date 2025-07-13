@@ -36,7 +36,7 @@ import tile from "@/styles/tile";
 function HomeScreen() {
   const { playClickSound } = useSound();
   const { generateNewWord, currentTheme } = useWord();
-  const { startNewGame, score } = useGame();
+  const { startNewGame, score, pops } = useGame();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,7 +67,7 @@ function HomeScreen() {
           {/* Pops Board */}
           <GameBoard
             title="POPS"
-            count="3"
+            count={String(pops)}
             style={gameBoard}
             width={{ width: layouts.POPS_BOARD_WIDTH }}
           />
@@ -110,9 +110,11 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
   },
   background: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
   },
   boardGroup: {
     flexDirection: "row",

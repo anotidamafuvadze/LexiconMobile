@@ -15,7 +15,7 @@ const splash = {
     position: 'absolute',
     zIndex: 3,
     borderRadius: layouts.GAME_GRID_BORDER_RADIUS,
-    backgroundColor: 'rgba(197, 188, 147, 0.6)',
+    backgroundColor: 'rgba(197, 188, 147, 0.05)',
     width: layouts.GAME_GRID_SIZE,
     height: layouts.GAME_GRID_SIZE,
   } as ViewStyle,
@@ -30,7 +30,7 @@ const splash = {
     fontFamily: fonts.family.bold,
     fontSize: fonts.size.splah,
     textShadowColor: colors.BLACK,
-    textShadowOffset: fonts.shadow.offset.splahs, 
+    textShadowOffset: fonts.shadow.offset.splash, 
   } as TextStyle,
 
 

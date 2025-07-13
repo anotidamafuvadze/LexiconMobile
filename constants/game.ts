@@ -10,7 +10,7 @@ const game = {
   CONTAINER_WIDTH: 366,              // Container width (px)
   MERGE_ANIMATION_DURATION: 150,    // Merge animation (ms)
   MOVE_ANIMATION_DURATION: 130,     // Move animation (ms)
-  POP_ANIMATION_DURATION: 200,      // Pop animation (ms)
+  POP_ANIMATION_DURATION: 1000,      // Pop animation (ms)
   POINTS_FROM_MERGE,                 // Merge points by letter
   NUMBER_OF_ROWS: 4,                 // Board rows
   NUMBER_OF_COLS: 4,                 // Board columns

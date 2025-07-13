@@ -16,6 +16,13 @@ const images = {
     },
   },
 
+  labels: {
+    easy: require("@/app/assets/images/labels/easy-label.png"),
+    normal: require("@/app/assets/images/labels/normal-label.png"),
+    hard: require("@/app/assets/images/labels/hard-label.png"),
+
+  },
+
   icons: {
     backButton: require("@/app/assets/images/icons/back-button-icon.png"),
     resumeButton: require("@/app/assets/images/icons/resume-button-icon.png"),

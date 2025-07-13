@@ -1,0 +1,52 @@
+
+// -------- CORE GAME FEATURES --------
+
+// TODO: FIX - Have theme reset to default after reloading
+// TODO: GAME OVER — Implement game loss logic
+// TODO: POPPING — Implement tile pop functionality (long press and hold) board changes dynamically (pop with react native animatable pulse)
+// TODO: UI — Add tile locking via double-tap
+// TODO: ORIENTATION — Lock app to portrait mode (disable landscape)
+// TODO: GAME MODE — Add special tiles: Edit, Jump, Eraser
+// TODO: LOGIC — Reset pop count in useEffect on app launch (index.tsx)
+// TODO: WIN - Lower opacity of win splash and have winning tiles turn gold
+
+
+// -------- HOW TO PLAY --------
+
+// TODO: DESIGN — Create Canva template and have Yulie design splash screen and instruction page
+Instructions explain tile merging and swiping + tile locking + popping + game lab + word packs
+// TODO: LOGO — Crop splash screen to generate app icon
+// TODO: UI — Connect “How to Play” button to Instructions screen
+// TODO: UI — Build Instructions screen with forward/back buttons and page indicators
+// TODO: UX — Auto-show “How to Play” on first app launch using AsyncStorage
+
+
+// -------- APP STORE INTEGRATION --------
+
+// TODO: INTEGRATION — Link “Rate Us” button to App Store
+// TODO: UX — Save first-time user state using AsyncStorage
+
+
+// -------- FINAL TOUCHES --------
+
+// TODO: FIX - Fix weird shadow that appears when you reload (need outside helpe)
+// TODO: FIX - Disable button clicking while you win animation is playing
+// TODO: ANDROID — Test and polish Android version
+// TODO: WEB — Make a web version using React Native for Web
+// TODO: ADS & SHOP — Add AdScreen and ShopScreen (for buying word packs/tiles)
+// TODO: UTILS — Create AdManager and ShopManager (research logic via videos/open-source)
+// TODO: GITHUB — Publish final project repo to GitHub
+
+
+
+// -------- LEARNING --------
+
+// TODO: LEARNING — Watch key videos to solidify understanding
+// - useContext: https://www.youtube.com/watch?v=05ZM4ymK9Nc
+// - AsyncStorage: https://www.youtube.com/watch?v=UQrkf0kKLTM
+// - Reanimated: https://www.youtube.com/watch?v=8hW5Dnuu99Q
+
+
+
+
+

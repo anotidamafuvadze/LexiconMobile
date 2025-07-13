@@ -15,11 +15,13 @@ export type State = {
   tiles: TileMap;
   tilesByIds: string[];
   score: number;
+  pops: number
   status: GameStatus;
 };
 
 // Actions dispatched to reducer
 export type Action =
+  | { type: "POP_TILE" }
   | { type: "RESET_GAME" }
   | { type: "UPDATE_STATUS"; status: GameStatus }
   | { type: "CREATE_TILE"; tile: PartialTileInput }
@@ -42,40 +44,70 @@ function createGrid(): string[][] {
 
 // Get next letter (A → B, Z → A)
 function nextLetter(letter: string): string {
-  if (letter === "Z") return "A";
-  if (letter === "z") return "a";
-  return String.fromCharCode(letter.charCodeAt(0) + 1);
-  // For testing purpses
-  // return 'A'
+  // if (letter === "Z") return "A";
+  // if (letter === "z") return "a";
+  // return String.fromCharCode(letter.charCodeAt(0) + 1);
+  return "A"
 }
 
 // TODO: Get rid of debugging print lines
 
+export function checkForLoss(state: State): boolean {
+  // Check if all tiles are occupied
+   for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+     for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+      if (isNil(state.board[row][col])){
+        return false;  // Found an empty tile, game is not over
+      }
+     }
+   }
+
+   // Check if no tiles can merge (no adjacent same tiles)
+   for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+     for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+      const currTileId = state.board[row][col];
+      if (!isNil(currTileId)){
+
+        // Check if the tile can merge with its right neighbor
+        const rightTileId = state.board[row][col + 1];
+        if (col < game.NUMBER_OF_COLS - 1 && !isNil(rightTileId) && state.tiles[currTileId]?.value === state.tiles[rightTileId]?.value ){
+          return false; // Found a merge-able pair horizontally
+        }
+
+        // Check if the tile can merge with its bottom neighbor
+        const downTileId = state.board[row][col + 1];
+        if (row < game.NUMBER_OF_ROWS - 1 && !isNil(downTileId) && state.tiles[currTileId]?.value === state.tiles[downTileId]?.value ){
+          return false; // Found a merge-able pair vertically
+        }
+
+      }
+     }
+    }
+
+    return state.pops > 0;
+
+
+
+  
+
+}
+
 // Check if target word appears in a row or column
 export function checkforWin(state: State, targetWord: string): [boolean, string[] | null] {
-  console.log(`🔍 Checking for win with target word: ${targetWord}`);
-
   // Check each row
   for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
-    console.log(`👉 Checking row ${row}`);
     const [rowWin, winningTiles] = checkRow(row, state, targetWord);
     if (rowWin) {
-      console.log(`✅ Found winning row at ${row}:`, winningTiles);
       return [true, winningTiles];
     }
   }
-
   // Check each column
   for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
-    console.log(`👉 Checking column ${col}`);
     const [colWin, winningTiles] = checkCol(col, state, targetWord);
     if (colWin) {
-      console.log(`✅ Found winning column at ${col}:`, winningTiles);
       return [true, winningTiles];
     }
   }
-
-  console.log(`❌ No winning row or column found.`);
   return [false, null];
 }
 
@@ -86,10 +118,8 @@ function checkRow(row: number, state: State, targetWord: string): [boolean, stri
 
   for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
     const currTileId = state.board[row][col];
-    console.log(`Row ${row}, Col ${col} — Tile ID:`, currTileId);
 
     if (isNil(currTileId)) {
-      console.log(`🚫 Empty cell at (${row}, ${col}) — cannot form word.`);
       return [false, null];
     }
 
@@ -98,9 +128,7 @@ function checkRow(row: number, state: State, targetWord: string): [boolean, stri
     winningTiles.push(currTileId);
   }
 
-  console.log(`Row ${row} formed word: ${currentWord}`);
   if (currentWord === targetWord) {
-    console.log(`🎯 Row ${row} matches target word!`);
     return [true, winningTiles];
   }
 
@@ -114,10 +142,8 @@ function checkCol(col: number, state: State, targetWord: string): [boolean, stri
 
   for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
     const currTileId = state.board[row][col];
-    console.log(`Col ${col}, Row ${row} — Tile ID:`, currTileId);
 
     if (isNil(currTileId)) {
-      console.log(`🚫 Empty cell at (${row}, ${col}) — cannot form word.`);
       return [false, null];
     }
 
@@ -126,9 +152,7 @@ function checkCol(col: number, state: State, targetWord: string): [boolean, stri
     winningTiles.push(currTileId);
   }
 
-  console.log(`Column ${col} formed word: ${currentWord}`);
   if (currentWord === targetWord) {
-    console.log(`🎯 Column ${col} matches target word!`);
     return [true, winningTiles];
   }
 
@@ -151,6 +175,7 @@ export const initialState: State = {
   tiles: {},
   tilesByIds: [],
   score: 0,
+  pops: 3,
   status: "ONGOING",
 };
 
@@ -164,6 +189,20 @@ export const initialState: State = {
  */
 function gameReducer(state: State = initialState, action: Action): State {
   switch (action.type) {
+
+    case "POP_TILE": {
+      if (state.pops > 0){
+         return {
+        ...state,
+        pops: state.pops - 1
+      }
+      }
+
+      return {
+        ...state
+      }
+
+    }
     // Reset to a fresh game state
     case "RESET_GAME": {
       return {
@@ -171,6 +210,7 @@ function gameReducer(state: State = initialState, action: Action): State {
         tiles: {},
         tilesByIds: [],
         score: 0,
+        pops: 3,
         status: "ONGOING",
       };
     }
@@ -185,53 +225,56 @@ function gameReducer(state: State = initialState, action: Action): State {
 
     // Add new tile to grid
    case "CREATE_TILE": {
-    const findRandomPosition = (): [number, number] | null => {
-      const emptyCells: [number, number][] = [];
+    if (state.status === "ONGOING"){
+      const findRandomPosition = (): [number, number] | null => {
+        const emptyCells: [number, number][] = [];
 
-      for (let y = 0; y < game.TILE_COUNT_PER_DIMENSION; y++) {
-        for (let x = 0; x < game.TILE_COUNT_PER_DIMENSION; x++) {
-          if (isNil(state.board[y][x])) {
-            emptyCells.push([x, y]);
+        for (let y = 0; y < game.TILE_COUNT_PER_DIMENSION; y++) {
+          for (let x = 0; x < game.TILE_COUNT_PER_DIMENSION; x++) {
+            if (isNil(state.board[y][x])) {
+              emptyCells.push([x, y]);
+            }
           }
         }
+
+        if (emptyCells.length === 0) return null;
+
+        const index = Math.floor(Math.random() * emptyCells.length);
+        return emptyCells[index];
+      };
+
+      let [x, y] = action.tile.position ?? [];
+
+      // If not given a position, find a random one
+      if (isNil(x) || isNil(y) || !isNil(state.board[y][x])) {
+        const newPosition = findRandomPosition();
+        if (!newPosition) {
+          // TODO: Flag that the game is over
+          return state;
+        }
+        [x, y] = newPosition;
       }
 
-      if (emptyCells.length === 0) return null;
+      const tileId = uid();
+      const newBoard = JSON.parse(JSON.stringify(state.board));
+      newBoard[y][x] = tileId;
+    
 
-      const index = Math.floor(Math.random() * emptyCells.length);
-      return emptyCells[index];
-    };
-
-    let [x, y] = action.tile.position ?? [];
-
-    // If not given a position, find a random one
-    if (isNil(x) || isNil(y) || !isNil(state.board[y][x])) {
-      const newPosition = findRandomPosition();
-      if (!newPosition) {
-        console.warn("Board is full — no tile created."); // TODO: Flag that the game is over
-        return state;
-      }
-      [x, y] = newPosition;
-    }
-
-    const tileId = uid();
-    const newBoard = JSON.parse(JSON.stringify(state.board));
-    newBoard[y][x] = tileId;
-
-    return {
-      ...state,
-      board: newBoard,
-      tiles: {
-        ...state.tiles,
-        [tileId]: {
-          id: tileId,
-          position: [x, y],
-          value: action.tile.value,
-          justCreated: true,
+      return {
+        ...state,
+        board: newBoard,
+        tiles: {
+          ...state.tiles,
+          [tileId]: {
+            id: tileId,
+            position: [x, y],
+            value: action.tile.value,
+            justCreated: true,
+          },
         },
-      },
-      tilesByIds: [...state.tilesByIds, tileId],
-    };
+        tilesByIds: [...state.tilesByIds, tileId],
+      };
+    }
   }
 
     // Clean up old or removed tiles
