@@ -4,9 +4,7 @@ import layouts from "@/constants/layouts";
 import { TextStyle, ViewStyle } from "react-native";
 
 const headers = {
-  // ============================
-  // Home Screen Header
-  // ============================
+  // ======================= Home Screen Header =======================
   home: {
     container: {
       top: layouts.HOME_HEADER_TOP,
@@ -34,9 +32,7 @@ const headers = {
     } as TextStyle,
   },
 
-  // ============================
-  // Word Pack Header
-  // ============================
+  // ======================= Word Pack Header =======================
   wordPack: {
     container: {
       alignItems: "center",
@@ -63,13 +59,11 @@ const headers = {
     } as TextStyle,
   },
 
-  // ============================
-  // Game Lab Header
-  // ============================
+  // ======================= Game Lab Header =======================
   gameLab: {
     title: {
       alignItems: "center",
-      top: layouts.GAME_LAB_HEADER_TOP, 
+      top: layouts.GAME_LAB_HEADER_TOP,
     } as ViewStyle,
 
     subtitle: {
@@ -80,10 +74,6 @@ const headers = {
       maxWidth: layouts.GAME_LAB_SUBTITLE_WIDTH,
     } as TextStyle,
   },
-
-
 };
-
-
 
 export default headers;

@@ -16,17 +16,16 @@ const gameBoard = {
     boxShadow: fonts.shadow.gameBoard,
   } as ViewStyle,
 
-  // Score label text
+  // Score/Pop label
   title: {
     fontSize: fonts.size.scoreLabel,
     fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
     fontFamily: fonts.family.regular,
     color: colors.GAME_BOARD_TITLE,
     textAlign: "center",
-  
   } as TextStyle,
 
-  // Score number text
+  // Score/Pop number
   count: {
     fontSize: fonts.size.scoreValue,
     fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
@@ -37,14 +36,14 @@ const gameBoard = {
     paddingHorizontal: layouts.GAME_BOARD_PADDING_HORIZONTAL,
   } as TextStyle,
 
-  // Wrapper for layout positioning
+  // Outer container
   container: {
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
   } as ViewStyle,
 
-  // Wrapper for aligning the count inside the board
+  // Score/Pop wrapper
   countWrapper: {
     height: layouts.GAME_BOARD_COUNT_HEIGHT,
     width: "100%",

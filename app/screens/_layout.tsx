@@ -1,13 +1,8 @@
-// Providers
 import { WordProvider } from "@/context/WordContext";
 import { SoundProvider } from "@/context/SoundContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
-// Font loader
-import { useFonts } from "expo-font";
-
-// Navigation stack
 import { GameProvider } from "@/context/GameContext";
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 
 /**
@@ -33,7 +28,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <WordProvider defaultTheme="Default">
         <GameProvider>
-          {/* <SoundProvider> */}
+          <SoundProvider>
           <Stack screenOptions={{ headerShown: false }}>
             {/* Home screen — no animation */}
             <Stack.Screen name="HomeScreen" options={{ animation: "none" }} />
@@ -80,7 +75,7 @@ export default function RootLayout() {
               }}
             />
           </Stack>
-          {/* </SoundProvider> */}
+          </SoundProvider>
         </GameProvider>
       </WordProvider>
     </SafeAreaProvider>

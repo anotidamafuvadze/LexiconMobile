@@ -1,28 +1,21 @@
-// React and React Native
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Context Hooks
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-
-// Constants
 import images from "@/constants/images";
 import layouts from "@/constants/layouts";
-
-// Components
 import GameButton from "@/components/buttons/GameButton";
 import SoundButton from "@/components/buttons/SoundButton";
-
-// Styles
 import buttons from "@/styles/buttons";
 
 /**
  * Main menu screen
- * - Allows users to resume play, access Word Packs, Game Lab, instructions, and rate the app.
+ * - Allows users resume, choose Word Packs, enter Game Lab  
+ * view instructions, or rate the app.
  */
+
 function MenuScreen() {
   const router = useRouter();
   const { playClickSound } = useSound();
@@ -139,7 +132,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   buttonGroup: {
-    top: layouts.MENU_BUTTON_TOP, // Vertical offset
+    top: layouts.MENU_BUTTON_TOP,
     alignItems: "center",
   },
 });

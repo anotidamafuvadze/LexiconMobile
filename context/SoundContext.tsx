@@ -1,7 +1,3 @@
-// Core audio functionality from Expo
-import { useAudioPlayer } from "expo-audio";
-
-// Core React hooks
 import React, {
   createContext,
   useCallback,
@@ -10,16 +6,22 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useAudioPlayer } from "expo-audio";
 
-// Sound assets
+/**
+ * SoundProvider
+ * - Manages global sound state and audio playback
+ * - Plays background music and sound effects
+ * - Allows toggling, stopping, and resuming music
+ */
+
+// ===== Sound files =====
 const backgroundMusic = require("../app/assets/sounds/background-music.mp3");
 const buttonClick = require("../app/assets/sounds/button-click-sound.mp3");
 const buttonPop = require("../app/assets/sounds/button-pop-sound.mp3");
 const screenWhoosh = require("../app/assets/sounds/screen-whoosh-sound.mp3");
 const winSound = require("../app/assets/sounds/win-sound.mp3");
 
-
-// Type definition for the Sound Context API
 type SoundContextType = {
   soundOn: boolean;
   setSoundOn: (val: boolean) => void;
@@ -27,11 +29,10 @@ type SoundContextType = {
   playPopSound: (forcePlay?: boolean) => void;
   playWhooshSound: (forcePlay?: boolean) => void;
   playWinSound: (forcePlay?: boolean) => void;
-  playBackgroundMusic: (play?: boolean) => void;
+  playBackgroundMusic: () => void;
   stopBackgroundMusic: () => void;
 };
 
-// Default context instance 
 const SoundContext = createContext<SoundContextType>({
   soundOn: true,
   setSoundOn: () => {},
@@ -43,31 +44,22 @@ const SoundContext = createContext<SoundContextType>({
   stopBackgroundMusic: () => {},
 });
 
-/**
- * SoundProvider Component
- * Manages global sound state and audio playback
- */
 export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
-
-  // State management for sound toggle
   const [soundOn, setSoundOn] = useState(true);
-  
-  // Audio player instances for different sound effects
+  const hasStarted = useRef(false);
+
+  // ===== Audio players =====
   const backgroundMusicPlayer = useAudioPlayer(backgroundMusic);
   const buttonClickPlayer = useAudioPlayer(buttonClick);
   const buttonPopPlayer = useAudioPlayer(buttonPop);
   const winSoundPlayer = useAudioPlayer(winSound);
   const screenWhooshPlayer = useAudioPlayer(screenWhoosh);
-  
-  // Flag to prevent duplicate initialization
-  const hasStarted = useRef(false);
 
-  // Initialize background music on first mount
+  // ===== Start background music on mount =====
   useEffect(() => {
     if (hasStarted.current) return;
     hasStarted.current = true;
 
-    // Sets music to loop continuously
     try {
       backgroundMusicPlayer.loop = true;
       if (soundOn) {
@@ -78,12 +70,12 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  // Plays button click sound effect
+  // ===== Play click sound =====
   const playClickSound = useCallback(
     (forcePlay = false) => {
       if (!soundOn && !forcePlay) return;
       try {
-        buttonClickPlayer.seekTo(0); // Rewind to start
+        buttonClickPlayer.seekTo(0);
         buttonClickPlayer.play();
       } catch (error) {
         console.error("Click sound error:", error);
@@ -92,12 +84,12 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     [soundOn, buttonClickPlayer]
   );
 
-  // Plays button pop sound effect
+  // ===== Play pop sound =====
   const playPopSound = useCallback(
     (forcePlay = false) => {
       if (!soundOn && !forcePlay) return;
       try {
-        buttonPopPlayer.seekTo(0.5); // Rewind to start
+        buttonPopPlayer.seekTo(0.5);
         buttonPopPlayer.play();
       } catch (error) {
         console.error("Pop sound error:", error);
@@ -106,12 +98,12 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     [soundOn, buttonPopPlayer]
   );
 
-  // Plays screen transition whoosh effect
+  // ===== Play whoosh sound =====
   const playWhooshSound = useCallback(
     (forcePlay = false) => {
       if (!soundOn && !forcePlay) return;
       try {
-        screenWhooshPlayer.seekTo(0); // Rewind to start
+        screenWhooshPlayer.seekTo(0);
         screenWhooshPlayer.play();
       } catch (error) {
         console.error("Whoosh sound error:", error);
@@ -120,25 +112,25 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     [soundOn, screenWhooshPlayer]
   );
 
+  // ===== Play win sound & pause/resume music =====
   const playWinSound = useCallback(
     (forcePlay = false) => {
       if (!soundOn && !forcePlay) return;
       try {
         stopBackgroundMusic();
-        winSoundPlayer.seekTo(0); // Rewind to start
+        winSoundPlayer.seekTo(0);
         winSoundPlayer.play();
         setTimeout(() => {
-          playBackgroundMusic()
-        }, 8000)
+          playBackgroundMusic();
+        }, 8000);
       } catch (error) {
         console.error("Win sound error:", error);
       }
     },
     [soundOn, winSoundPlayer]
+  );
 
-  )
-
-  // Start or resume background music playback
+  // ===== Play/resume background music =====
   const playBackgroundMusic = useCallback(() => {
     try {
       backgroundMusicPlayer.play();
@@ -147,7 +139,7 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [backgroundMusicPlayer]);
 
-  // Pause background music playback
+  // ===== Pause background music =====
   const stopBackgroundMusic = useCallback(() => {
     try {
       backgroundMusicPlayer.pause();
@@ -156,30 +148,23 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [backgroundMusicPlayer]);
 
-  // Context value containing all sound methods and state
-  const contextValue = {
-    soundOn,
-    setSoundOn,
-    playClickSound,
-    playPopSound,
-    playWhooshSound,
-    playWinSound,
-    playBackgroundMusic,
-    stopBackgroundMusic,
-  };
-
   return (
-    <SoundContext.Provider value={contextValue}>
+    <SoundContext.Provider
+      value={{
+        soundOn,
+        setSoundOn,
+        playClickSound,
+        playPopSound,
+        playWhooshSound,
+        playWinSound,
+        playBackgroundMusic,
+        stopBackgroundMusic,
+      }}
+    >
       {children}
     </SoundContext.Provider>
   );
 };
 
-// Custom hook
-export const useSound = () => {
-  const context = useContext(SoundContext);
-  if (!context) {
-    throw new Error("useSound must be used within a SoundProvider");
-  }
-  return context;
-};
+// ===== Custom hook: useSound =====
+export const useSound = () => useContext(SoundContext);

@@ -1,11 +1,11 @@
-import { getScreenPath, ScreenName } from "@/util/navigation";
-import { useRouter } from "expo-router";
 import React from "react";
 import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import { useRouter } from "expo-router";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
 } from "react-native-reanimated";
+import { getScreenPath, ScreenName } from "@/util/navigation";
 import BaseButton from "./BaseButton";
 
 /**

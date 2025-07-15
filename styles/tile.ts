@@ -21,7 +21,7 @@ const tile = {
     alignItems: "center",
   } as ViewStyle,
 
-  // Letter inside each tile
+  // Letter inside tile
   letter: {
     fontSize: fonts.size.tileLetter,
     fontWeight: fonts.weight.bold as TextStyle["fontWeight"],

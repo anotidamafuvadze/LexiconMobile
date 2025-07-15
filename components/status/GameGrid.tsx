@@ -1,32 +1,25 @@
-// React and React Native
 import React from "react";
 import { StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
-
-// Context Hooks
 import { useGame } from "@/context/GameContext";
-
-// Constants
 import game from "@/constants/game";
-
-// Models
 import { Tile as TileModel } from "@/models/tile";
-
-// Components
 import Tile from "@/components/status/Tile";
-import Splash from "./Splash";
+import LosingSplash from "./LosingSplash";
+import WinningSplash from "./WinningSplash";
 
 /**
  * GameGrid
- * - Static 4x4 grid layout displaying letter tiles
- * - Supports custom styling for grid and tiles
- * - Handles swipe gestures to move tiles and update game state
+ * Static 4x4 grid layout displaying letter tiles.
+ * Supports custom styling for grid and tiles.
+ * Handles swipe gestures to move tiles and update game state.
  */
 function GameGrid({
   gridStyle,
   tileStyle,
+  tileColor,
+  targetTileColor,
   gridStyleAdjust,
-  tileStyleAdjust,
 }: {
   gridStyle: {
     grid: ViewStyle;
@@ -41,38 +34,34 @@ function GameGrid({
     grid: ViewStyle;
     cell: ViewStyle;
   };
-  tileStyleAdjust?: {
-    tile: ViewStyle;
-    letter: TextStyle;
-  };
+  tileColor: string;
+  targetTileColor: string;
 }): React.JSX.Element {
   const { getTiles, moveTiles, dispatch, status } = useGame();
 
-  // Render 16 empty cells
+  // Render empty cells
   const renderCells = () => {
     return Array.from({ length: 16 }, (_, index) => (
       <View key={index} style={[gridStyle.cell, gridStyleAdjust?.cell]} />
     ));
   };
 
-  // Render active tiles on top of the grid
+  // Render active tiles
   const renderTiles = () => {
-    return getTiles().map((tile: TileModel) => {
-      return (
-        <Tile
-          tileStyle={tileStyle.tile}
-          letterStyle={tileStyle.letter}
-          key={tile.id}
-          tileID={tile.id}
-          {...tile}
-        />
-      );
-    });
+    return getTiles().map((tile: TileModel) => (
+      <Tile
+        key={tile.id}
+        tileID={tile.id}
+        tileStyle={tileStyle.tile}
+        tileColor={tileColor}
+        letterStyle={tileStyle.letter}
+        targetTileColor={targetTileColor}
+        {...tile}
+      />
+    ));
   };
 
-
-
-  // Handle swipe gestures to move tiles and update state
+  // Handle swipe gestures
   const handleSwiping = (swipeType: string) => {
     switch (swipeType) {
       case "up":
@@ -89,16 +78,11 @@ function GameGrid({
         break;
     }
 
-    // Wait for move animation to finish before cleaning and adding tiles
     setTimeout(() => {
       dispatch({ type: "CLEAN_UP" });
-
       setTimeout(() => {
-        dispatch({
-          type: "CREATE_TILE",
-          tile: { value: "A", justCreated: true },
-        });
-      }, 20); // small delay to let CLEAN_UP finish
+        dispatch({ type: "CREATE_TILE", tile: { value: "A", justCreated: true } });
+      }, 20);
     }, game.MOVE_ANIMATION_DURATION);
   };
 
@@ -110,7 +94,8 @@ function GameGrid({
       onSwipeLeft={() => handleSwiping("left")}
       onSwipeRight={() => handleSwiping("right")}
     >
-      {status === "WON" && <Splash />}
+      {status === "LOST" && <LosingSplash />}
+      {status === "WON" && <WinningSplash />}
       <View style={[gridStyle.grid, gridStyleAdjust?.grid]}>
         <View style={styles.tileContainer}>{renderTiles()}</View>
         <View style={styles.gridContainer}>{renderCells()}</View>
@@ -130,7 +115,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-
   tileContainer: {
     position: "absolute",
     zIndex: 2,

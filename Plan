@@ -1,10 +1,8 @@
 
 // -------- CORE GAME FEATURES --------
-
 // TODO: FIX - Have theme reset to default after reloading
-// TODO: GAME OVER — Implement game loss logic
 // TODO: POPPING — Implement tile pop functionality (long press and hold) board changes dynamically (pop with react native animatable pulse)
-// TODO: UI — Add tile locking via double-tap
+// TODO: UI - Add tile locking with double click (tile doesnt move or merge)
 // TODO: ORIENTATION — Lock app to portrait mode (disable landscape)
 // TODO: GAME MODE — Add special tiles: Edit, Jump, Eraser
 // TODO: LOGIC — Reset pop count in useEffect on app launch (index.tsx)
@@ -25,6 +23,12 @@ Instructions explain tile merging and swiping + tile locking + popping + game la
 
 // TODO: INTEGRATION — Link “Rate Us” button to App Store
 // TODO: UX — Save first-time user state using AsyncStorage
+
+// -------- DOMAIN SETUP --------
+
+// TODO: Set lexicongame.app as the primary domain in Porkbun
+// TODO: Set up a 301 redirect on thelexicongame.app → lexicongame.app
+// TODO: Configure Universal Links (iOS) and App Links (Android) so visiting .app opens the app if installed
 
 
 // -------- FINAL TOUCHES --------

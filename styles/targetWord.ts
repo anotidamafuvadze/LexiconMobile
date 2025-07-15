@@ -4,7 +4,6 @@ import layouts from "@/constants/layouts";
 import { TextStyle, ViewStyle } from "react-native";
 
 const targetWord = {
-
   container: {
     alignItems: "center",
     top: layouts.TARGET_WORD_TOP,
@@ -18,8 +17,6 @@ const targetWord = {
     color: colors.HOME_TARGET_WORD,
     letterSpacing: layouts.LETTER_SPACING_SMALL,
   } as TextStyle,
-
-  // Target word text
   word: {
     fontSize: fonts.size.targetWord,
     fontWeight: fonts.weight.lightBold as TextStyle["fontWeight"],

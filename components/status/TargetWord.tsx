@@ -1,13 +1,10 @@
-// Core React and React Native
 import React from "react";
 import { Text, TextStyle, View, ViewStyle } from "react-native";
-
-// Context
 import { useWord } from "@/context/WordContext";
 
 /**
  * TargetWord
- * - Displays the current target word from context
+ * - Displays the current target word
  * - Supports optional style overrides for label and word text
  */
 function TargetWord({
@@ -19,6 +16,7 @@ function TargetWord({
     title: TextStyle;
     word: TextStyle;
   };
+  // Style override for themed packs
   styleAdjust?: {
     title: TextStyle;
     word: TextStyle;

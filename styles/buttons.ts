@@ -4,9 +4,7 @@ import layouts from "@/constants/layouts";
 import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 const buttons = {
-  // ============================
-  // Home Screen Button
-  // ============================
+  // ======================= Home Screen Button =======================
   home: {
     button: {
       paddingVertical: layouts.HOME_BUTTON_PADDING_VERTICAL,
@@ -28,9 +26,7 @@ const buttons = {
     } as TextStyle,
   },
 
-  // ============================
-  // Menu Screen Button
-  // ============================
+  // ======================= Menu Screen Button =======================
   menuScreen: {
     button: {
       paddingVertical: layouts.MENU_BUTTON_PADDING_VERTICAL,
@@ -65,9 +61,7 @@ const buttons = {
     } as TextStyle,
   },
 
-  // ============================
-  // Word Pack Screen Button
-  // ============================
+  // ======================= Word Pack Screen Button =======================
   wordPack: {
     button: {
       backgroundColor: colors.WORD_PACK_BUTTON_BG,
@@ -112,9 +106,7 @@ const buttons = {
     } as TextStyle,
   },
 
-  // ============================
-  // Game Lab Screen Button
-  // ============================
+  // ======================= Game Lab Screen Button =======================
   gameLab: {
     button: {
       backgroundColor: colors.GAME_LAB_BUTTON_BG,
@@ -159,9 +151,7 @@ const buttons = {
     } as TextStyle,
   },
 
-  // ============================
-  // Difficulty Button
-  // ============================
+  // ======================= Difficulty Button =======================
   difficulty: {
     button: {
       alignItems: "center",

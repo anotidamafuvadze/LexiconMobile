@@ -17,9 +17,10 @@ const packThemes = {
         color: colors.NATURE_PACK_BOARD_TEXT,
       } as TextStyle,
     },
-
-    // 4x4 game grid
+    // Game grid
     gameGrid: {
+      tileColor: colors.NATURE_PACK_GRID_TILE,
+      targetTileColor: colors.NATURE_PACK_GRID_TARGET_TILE,
       grid: {
         backgroundColor: colors.NATURE_PACK_GRID_BG,
       } as ViewStyle,
@@ -28,13 +29,9 @@ const packThemes = {
         borderWidth: 3,
         borderColor: colors.BLACK,
       } as ViewStyle,
-      text: {
-        fontFamily: fonts.family.regular,
-        color: colors.WORD_PACK_TITLE,
-      } as TextStyle,
     },
 
-    // Target word label and word
+    // Target word
     targetWord: {
       title: {
         color: colors.NATURE_PACK_TARGET_WORD,
@@ -71,8 +68,10 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // 4x4 game grid
+    // Game grid
     gameGrid: {
+      tileColor: colors.FOOD_PACK_GRID_TILE,
+      targetTileColor: colors.FOOD_PACK_GRID_TARGET_TILE,
       grid: {
         backgroundColor: colors.FOOD_PACK_GRID_BG,
       } as ViewStyle,
@@ -87,7 +86,7 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // Target word label and word
+    // Target word
     targetWord: {
       title: {
         color: colors.FOOD_PACK_TARGET_WORD,
@@ -124,8 +123,10 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // 4x4 game grid
+    // Game grid
     gameGrid: {
+      tileColor: colors.ANIMALS_PACK_GRID_TILE,
+      targetTileColor: colors.ANIMALS_PACK_GRID_TARGET_TILE,
       grid: {
         backgroundColor: colors.ANIMALS_PACK_GRID_BG,
       } as ViewStyle,
@@ -140,7 +141,7 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // Target word label and word
+    // Target word
     targetWord: {
       title: {
         color: colors.WHITE,
@@ -177,8 +178,10 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // 4x4 game grid
+    // Game grid
     gameGrid: {
+      tileColor: colors.STORY_PACK_GRID_TILE,
+      targetTileColor: colors.STORY_PACK_GRID_TARGET_TILE,
       grid: {
         backgroundColor: colors.STORY_PACK_GRID_BG,
       } as ViewStyle,
@@ -193,12 +196,12 @@ const packThemes = {
       } as TextStyle,
     },
 
-    // Target word label and word
+    // Target word
     targetWord: {
       title: {
         color: colors.STORY_PACK_TARGET_WORD,
         textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.foodLabel,
+        textShadowOffset: fonts.shadow.offset.storyLabel,
         textShadowRadius: 0,
         top: layouts.STORY_PACK_TITLE_TOP,
       } as TextStyle,

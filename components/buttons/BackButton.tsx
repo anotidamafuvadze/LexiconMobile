@@ -1,14 +1,9 @@
-// React and React Native
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
-
-// Constants
 import colors from "@/constants/colors";
 import images from "@/constants/images";
 import metrics from "@/constants/layouts";
-
-// Context
 import { useSound } from "@/context/SoundContext";
 import { getScreenPath, ScreenName } from "@/util/navigation";
 

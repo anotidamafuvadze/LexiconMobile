@@ -1,15 +1,21 @@
+// ======================= TILE TYPES =======================
+
+// Single tile
 export type Tile = {
   id?: string;
   position: [number, number];
   value: string;
   justCreated: boolean;
-}
+};
 
-// For dispatching CREATE_TILE
+// Input for CREATE_TILE
 export type PartialTileInput = {
   position?: [number, number];
   value: string;
   justCreated: boolean;
 };
 
-export type TileMap = {[id: string]: Tile}
+// Map of tile IDs to Tile objects
+export type TileMap = {
+  [id: string]: Tile;
+};

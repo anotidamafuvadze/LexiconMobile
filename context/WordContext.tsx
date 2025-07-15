@@ -9,11 +9,10 @@ import React, {
 import wordBanks from "../constants/wordBanks";
 
 /**
- * WordContext manages the current target word and theme state.
- * It:
- * - Loads a previously saved word from AsyncStorage on app launch
- * - Generates a new word when requested
- * - Lets the theme be changed dynamically
+ * WordProvider
+ * - Manages the current target word and theme state
+ * - Loads a saved word from AsyncStorage on app launch
+ * - Generates new words and updates theme dynamically
  */
 
 type WordContextType = {
@@ -23,7 +22,6 @@ type WordContextType = {
   setCurrentTheme: (theme: string) => void;
 };
 
-// Create context with default placeholder values
 const WordContext = createContext<WordContextType>({
   targetWord: "",
   currentTheme: "",
@@ -41,36 +39,30 @@ export const WordProvider = ({
   const [targetWord, setTargetWord] = useState("");
   const [currentTheme, setCurrentTheme] = useState(defaultTheme);
 
-  /**
-   * Generates a new word using the current or provided theme.
-   * Saves it to AsyncStorage and updates context state.
-   */
+  // ===== Generate a word from the current or given theme =====
   const generateNewWord = useCallback(
     async (theme?: string) => {
       const activeTheme = theme || currentTheme;
       const bank = wordBanks.find((b) => b.name === activeTheme);
-      if (bank && bank.words.length > 0) {
-        let newWord = targetWord;
-        let attempts = 0;
-        const maxAttempts = 10;
 
-        while (newWord === targetWord && attempts < maxAttempts) {
-          newWord = bank.words[Math.floor(Math.random() * bank.words.length)];
-          attempts++;
-        }
+      if (!bank || bank.words.length === 0) return;
 
-        setTargetWord(newWord);
-        await AsyncStorage.setItem("targetWord", newWord);
+      let newWord = targetWord;
+      let attempts = 0;
+      const maxAttempts = 10;
+
+      while (newWord === targetWord && attempts < maxAttempts) {
+        newWord = bank.words[Math.floor(Math.random() * bank.words.length)];
+        attempts++;
       }
+
+      setTargetWord(newWord);
+      await AsyncStorage.setItem("targetWord", newWord);
     },
     [currentTheme, targetWord]
   );
- 
-  /**
-   * Loads the previously saved word if it exists.
-   * If not, generates a word using the default theme.
-   * This runs only once on initial mount.
-   */
+
+  // ===== Load saved word or generate one on mount =====
   const loadOrGenerate = useCallback(async () => {
     const stored = await AsyncStorage.getItem("targetWord");
     if (stored) {
@@ -80,9 +72,11 @@ export const WordProvider = ({
     }
   }, [defaultTheme, generateNewWord]);
 
+  // ===== Run loadOrGenerate when component mounts =====
   useEffect(() => {
     loadOrGenerate();
   }, [loadOrGenerate]);
+
   return (
     <WordContext.Provider
       value={{
@@ -97,5 +91,5 @@ export const WordProvider = ({
   );
 };
 
-// Custom hook to access the WordContext from any component
+// ===== Custom hook: useWord =====
 export const useWord = () => useContext(WordContext);

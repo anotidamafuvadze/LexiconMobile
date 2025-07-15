@@ -13,6 +13,10 @@ const layouts = {
   GAME_GRID_TOP: 249,
   GAME_GRID_SIZE: 380,
   GAME_GRID_BORDER_RADIUS: 13,
+  GAME_GRID_PADDING: 7,
+  GAME_GRID_CELL_DIVISOR: 4.6,
+  GAME_GRID_CELL_MARGIN: 4,
+  GAME_GRID_CELL_BORDER_WIDTH: 3,
   TILE_SIZE: 380 / 4.6,
   TILE_MARGIN_TOP: 4,
   TILE_MARGIN_BOTTOM: 4,
@@ -83,7 +87,7 @@ const layouts = {
   DIFFICULTY_MARGIN_LEFT: -3,
   DIFFICULTY_ICON_SCALE: 0.94,
   EDIT_TILE_MARGIN_TOP: 2,
-  EDIT_TILE_ICON_SCALE: .90,
+  EDIT_TILE_ICON_SCALE: 0.9,
   JUMP_TILE_ICON_SCALE: 1.08,
   JUMP_TILE_ICON_MARGIN_TOP: 4,
   ERASER_TILE_ICON_SCALE: 0.85,
@@ -112,7 +116,6 @@ const layouts = {
   LETTER_SPACING_LARGE: 2.5,
 
   // ======================= PACKS =======================
-
   // Nature Pack
   NATURE_PACK_TITLE_TOP: -3,
   NATURE_PACK_WORD_TOP: -8,
@@ -136,10 +139,6 @@ const layouts = {
   STORY_PACK_WORD_TOP: 10,
   STORY_PACK_WORD_MARGIN_BOTTOM: 14,
   STORY_PACK_LETTER_SPACING: -1,
-
-  
-  // ======================= GAME RESULTS =======================
-  YOU_WIN_HEADER_TOP: 20,
 };
 
 export default layouts;

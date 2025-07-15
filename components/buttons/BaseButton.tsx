@@ -1,4 +1,3 @@
-import { asEntry } from "@/util/animations";
 import React from "react";
 import {
   Image,
@@ -11,11 +10,12 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import Animated from "react-native-reanimated";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
 } from "react-native-reanimated";
-import Animated from "react-native-reanimated";
+import { asEntry } from "@/util/animations";
 
 /**
  * BaseButton

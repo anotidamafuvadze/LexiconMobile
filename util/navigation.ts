@@ -1,4 +1,4 @@
-// List of valid screen paths
+// Valid screen paths
 export type ScreenPath =
   | "/screens/HomeScreen"
   | "/screens/InstructionScreen"
@@ -8,7 +8,7 @@ export type ScreenPath =
   | "/screens/WordPackScreen"
   | "/screens/PackHomeScreen";
 
-// Valid screen names (without the full path prefix)
+// Valid screen names
 export type ScreenName =
   | "HomeScreen"
   | "InstructionScreen"
@@ -18,7 +18,6 @@ export type ScreenName =
   | "WordPackScreen"
   | "PackHomeScreen";
 
-// Utility to safely construct a screen path
 export function getScreenPath(screen: ScreenName): ScreenPath {
   return `/screens/${screen}` as ScreenPath;
 }

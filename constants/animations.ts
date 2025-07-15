@@ -2,14 +2,11 @@ import {
   BounceIn,
   Easing,
   Keyframe,
-  LightSpeedInRight
+  LightSpeedInRight,
 } from "react-native-reanimated";
 
-/**
- * Animation presets for UI transitions
- */
 const animations = {
-  // Fast falling animation
+  // ====================== FALL FAST ======================
   FALL_FAST: new Keyframe({
     0: {
       opacity: 0,
@@ -34,7 +31,7 @@ const animations = {
     },
   }).duration(1000),
 
-  // Slow falling animation
+  // ====================== FALL SLOW ======================
   FALL_SLOW: new Keyframe({
     0: {
       opacity: 0,
@@ -59,7 +56,7 @@ const animations = {
     },
   }).duration(1800),
 
-  // Slide-in animation for selection buttons
+  // ====================== SLIDE IN ======================
   SLIDE_IN: () =>
     LightSpeedInRight.duration(600)
       .easing(Easing.out(Easing.exp))
@@ -67,9 +64,8 @@ const animations = {
         transform: [{ translateX: 100 }, { skewX: "-5deg" }],
       }),
 
-  // Bounce-in animation for difficulty buttons
+  // ====================== BOUNCE IN ======================
   BOUNCE_IN: BounceIn.duration(600),
-
 };
 
 export default animations;

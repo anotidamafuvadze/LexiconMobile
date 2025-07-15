@@ -1,13 +1,8 @@
-// React and React Native
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, TextStyle } from "react-native";
-
-// Constants
 import colors from "@/constants/colors";
 import fonts from "@/constants/fonts";
 import metrics from "@/constants/layouts";
-
-// Context
 import images from "@/constants/images";
 import { useSound } from "@/context/SoundContext";
 
@@ -59,7 +54,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 8,
   },
-  // Sound label
   title: {
     fontSize: fonts.size.soundButton,
     fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
@@ -68,7 +62,6 @@ const styles = StyleSheet.create({
     letterSpacing: metrics.LETTER_SPACING_SMALL,
     textAlign: "center",
   },
-  // Sound icon
   icon: {
     width: metrics.SOUND_ICON_SIZE,
     height: metrics.SOUND_ICON_SIZE,

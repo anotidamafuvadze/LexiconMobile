@@ -1,25 +1,16 @@
-// React and React Native
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Context Hooks
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-
-// Constants
 import colors from "@/constants/colors";
 import images from "@/constants/images";
 import layouts from "@/constants/layouts";
-
-// Components
 import GameButton from "@/components/buttons/GameButton";
 import NavigationButton from "@/components/buttons/NagivationButton";
 import BaseHeader from "@/components/headers/BaseHeader";
 import GameBoard from "@/components/status/GameBoard";
 import TargetWord from "@/components/status/TargetWord";
-
-// Styles
 import GameGrid from "@/components/status/GameGrid";
 import { useGame } from "@/context/GameContext";
 import buttons from "@/styles/buttons";
@@ -74,7 +65,12 @@ function HomeScreen() {
         </View>
 
         {/* Grid */}
-        <GameGrid gridStyle={gameGrid} tileStyle={tile} />
+        <GameGrid
+          gridStyle={gameGrid}
+          tileStyle={tile}
+          targetTileColor={colors.HOME_GRID_TARGET_TILE}
+          tileColor={colors.HOME_GRID_TILE}
+        />
 
         {/* Target Word */}
         <TargetWord style={targetWord} />
@@ -119,14 +115,14 @@ const styles = StyleSheet.create({
   boardGroup: {
     flexDirection: "row",
     justifyContent: "center",
-    top: layouts.GAME_BOARD_TOP, // Vertical offset
-    columnGap: layouts.GAME_BOARD_GAP, // Space between
+    top: layouts.GAME_BOARD_TOP,
+    columnGap: layouts.GAME_BOARD_GAP,
   },
   buttonGroup: {
     flexDirection: "row",
     justifyContent: "center",
-    top: layouts.HOME_BUTTON_TOP, // Vertical offset
-    columnGap: layouts.HOME_BUTTON_GAP, // Space between
+    top: layouts.HOME_BUTTON_TOP,
+    columnGap: layouts.HOME_BUTTON_GAP,
   },
 });
 

@@ -1,25 +1,16 @@
-// React and React Native
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Context Hooks
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
 import { useRouter } from "expo-router";
-
-// Constants
 import animations from "@/constants/animations";
 import images from "@/constants/images";
 import layouts from "@/constants/layouts";
 import { asEntry } from "@/util/animations";
-
-// Components
 import BackButton from "@/components/buttons/BackButton";
 import GameButton from "@/components/buttons/GameButton";
 import BaseHeader from "@/components/headers/BaseHeader";
-
-// Styles
 import { useGame } from "@/context/GameContext";
 import buttons from "@/styles/buttons";
 import headers from "@/styles/headers";
@@ -139,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonGroup: {
-    top: layouts.WORD_PACK_BUTTON_TOP, // Vertical offset
+    top: layouts.WORD_PACK_BUTTON_TOP,
     alignItems: "center",
   },
 });

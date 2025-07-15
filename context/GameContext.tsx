@@ -1,4 +1,3 @@
-// React and React Native
 import React, {
   createContext,
   Dispatch,
@@ -8,28 +7,19 @@ import React, {
   useReducer,
   useRef,
 } from "react";
-
-// Constants
+import { useWord } from "./WordContext";
 import game from "@/constants/game";
-
-// Models
+import { isNil, throttle } from "lodash";
 import { Tile } from "@/models/tile";
-
-// Reducer logic
 import gameReducer, {
   Action,
-  checkForLoss,
-  checkforWin,
   GameStatus,
   initialState,
+  printBoard,
   State,
 } from "@/reducers/gameReducer";
 
-// Utils
-import { throttle } from "lodash";
-import { useWord } from "./WordContext";
-
-// -------------------- Types --------------------
+// ======================= TYPES =======================
 
 // Valid move directions
 type MoveDirection = "MOVE_UP" | "MOVE_DOWN" | "MOVE_LEFT" | "MOVE_RIGHT";
@@ -39,26 +29,26 @@ type GameContextType = {
   status: GameStatus;
   gameState: State;
   startNewGame: () => void;
-  checkGameStatus: () => void;
+  moveTiles: (type: MoveDirection) => void;
   popTile: () => void;
+  checkGameStatus: () => void;
   getTiles: () => Tile[];
   gameWinningTiles: string[] | null;
   dispatch: Dispatch<Action>;
-  moveTiles: (type: MoveDirection) => void;
   score: number;
   pops: number;
 };
 
-// Default context instance
+// Default context
 const GameContext = createContext<GameContextType>({
   status: "ONGOING",
   gameState: initialState,
   startNewGame: () => {},
+  moveTiles: () => {},
+  popTile: () => {},
   checkGameStatus: () => {},
   getTiles: () => [],
-  popTile: () => {},
   gameWinningTiles: [],
-  moveTiles: () => {},
   dispatch: () => {},
   score: 0,
   pops: 3,
@@ -66,8 +56,8 @@ const GameContext = createContext<GameContextType>({
 
 /**
  * GameProvider
- * - Provides global game state and reducer actions to children
- * - Initializes the game with two starting tiles
+ * - Provides game state and reducer actions to children
+ * - Initializes the board with two starting tiles
  */
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [gameState, dispatch] = useReducer(gameReducer, initialState);
@@ -75,7 +65,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const hasStarted = useRef(false);
   const { targetWord } = useWord();
 
-  // On first mount, start a new game
+  // ===== Start new game on first mount =====
   useEffect(() => {
     if (hasStarted.current) return;
     hasStarted.current = true;
@@ -87,7 +77,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  // Reset board and spawn two tiles
+  // ===== Reset board and spawn two tiles =====
   const startNewGame = () => {
     dispatch({ type: "RESET_GAME" });
 
@@ -95,86 +85,128 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch({ type: "UPDATE_STATUS", status: "ONGOING" });
       dispatch({ type: "CREATE_TILE", tile: { value: "A", justCreated: true } });
       dispatch({ type: "CREATE_TILE", tile: { value: "A", justCreated: true } });
-    }, 50); // small delay to prevent animation race condition
+    }, 50);
   };
 
+  // ===== Move tiles in a direction (throttled) =====
+  const moveTiles = useCallback(
+    throttle(
+      (type: MoveDirection) => {
+        if (gameState.status === "ONGOING") {
+          dispatch({ type });
+        }
+      },
+      game.MERGE_ANIMATION_DURATION * 1.05,
+      { trailing: false }
+    ),
+    [dispatch, gameState.status]
+  );
+
+  // ===== Remove a tile =====
   const popTile = () => {
     dispatch({ type: "POP_TILE" });
   };
 
-  // ---------------- TESTING VERSION ----------------
-//   const startNewGame = () => {
-//     dispatch({ type: "RESET_GAME" });
+  // ===== Check win/loss conditions =====
+  const checkGameStatus = useCallback(() => {
+    if (checkForLoss(gameState)) {
+      printBoard(gameState.board, gameState.tiles);
+      dispatch({ type: "UPDATE_STATUS", status: "LOST" });
+    }
 
-//     setTimeout(() => {
-//       dispatch({ type: "UPDATE_STATUS", status: "ONGOING" });
+    const [won, winningTiles] = checkforWin(gameState, targetWord);
+    if (won) {
+      dispatch({ type: "UPDATE_STATUS", status: "WON" });
+    }
 
-//       // Fill the board with a pattern that allows exactly one move (e.g., down),
-//       // after which it becomes unsolvable due to no matching adjacent tiles.
-//       const initialTiles = [
-//         // Row 0
-//         { row: 0, col: 0, value: "A", justCreated: true },
-//         { row: 0, col: 1, value: "B", justCreated: true },
-//         { row: 0, col: 2, value: "C", justCreated: true },
-//         { row: 0, col: 3, value: "D", justCreated: true },
-//         // Row 1
-//         { row: 1, col: 0, value: "E", justCreated: true },
-//         { row: 1, col: 1, value: "F", justCreated: true },
-//         { row: 1, col: 2, value: "G", justCreated: true },
-//         { row: 1, col: 3, value: "H", justCreated: true },
-//         // Row 2
-//         { row: 2, col: 0, value: "I", justCreated: true },
-//         { row: 2, col: 1, value: "J", justCreated: true },
-//         { row: 2, col: 2, value: "K", justCreated: true },
-//         { row: 2, col: 3, value: "L", justCreated: true },
-//         // Row 3 — Leave (3, 3) empty
-//         { row: 3, col: 0, value: "M", justCreated: true },
-//         { row: 3, col: 1, value: "N", justCreated: true },
-//         { row: 3, col: 2, value: "O", justCreated: true },
-//         // (3, 3) is intentionally left empty
-//       ];
+    setGameWinningTiles(winningTiles);
+  }, [gameState.tilesByIds, gameState.tiles, targetWord]);
 
-//       for (const tile of initialTiles) {
-//         dispatch({ type: "CREATE_TILE", tile });
-//       }
-//     }, 50);
-//   };
-
-  // Return all existing tiles
+  // ===== Get all active tiles =====
   const getTiles = () =>
     gameState.tilesByIds
       .map((tileId) => gameState.tiles[tileId])
       .filter((tile): tile is Tile => tile !== undefined);
 
-  // Check if target word is formed in any row/column
-  const checkGameStatus = useCallback(() => {
-    if (checkForLoss(gameState)){
-      dispatch({ type: "UPDATE_STATUS", status: "LOST" });
-
-
-    }
-    const [won, winningTiles] = checkforWin(gameState, targetWord);
-    if (won) {
-      dispatch({ type: "UPDATE_STATUS", status: "WON" });
-    }
-    setGameWinningTiles(winningTiles);
-  }, [gameState.tilesByIds, gameState.tiles, targetWord]);
-
-  // Trigger movement in given direction with throttle
-  const moveTiles = useCallback(
-    throttle(
-      (type: MoveDirection) => dispatch({ type }),
-      game.MERGE_ANIMATION_DURATION * 1.05,
-      { trailing: false }
-    ),
-    [dispatch]
-  );
-
+  // ===== Check status when game state or target word changes =====
   useEffect(() => {
     if (gameState.status === "ONGOING" && targetWord) {
       checkGameStatus();
     }
   }, [gameState.status, targetWord, checkGameStatus]);
+
+  // ===== Check if no moves or pops remain =====
+  function checkForLoss(state: State): boolean {
+    const size = game.TILE_COUNT_PER_DIMENSION;
+
+    for (let x = 0; x < size; x++) {
+      for (let y = 0; y < size; y++) {
+        if (isNil(state.board[x][y])) return false;
+      }
+    }
+
+    for (let x = 0; x < size; x++) {
+      for (let y = 0; y < size; y++) {
+        const currId = state.board[x][y];
+        const currTile = state.tiles[currId];
+        if (!currTile) continue;
+
+        if (
+          (x < size - 1 && currTile.value === state.tiles[state.board[x + 1][y]]?.value) ||
+          (y < size - 1 && currTile.value === state.tiles[state.board[x][y + 1]]?.value)
+        ) {
+          return false;
+        }
+      }
+    }
+
+    return state.pops <= 0;
+  }
+
+  // ===== Check if target word appears in any row or column =====
+  function checkforWin(state: State, targetWord: string): [boolean, string[] | null] {
+    for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+      const [win, tiles] = checkRow(row, state, targetWord);
+      if (win) return [true, tiles];
+    }
+
+    for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+      const [win, tiles] = checkCol(col, state, targetWord);
+      if (win) return [true, tiles];
+    }
+
+    return [false, null];
+  }
+
+  // ===== Check a single row =====
+  function checkRow(row: number, state: State, targetWord: string): [boolean, string[] | null] {
+    let word = "";
+    const tiles: string[] = [];
+
+    for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+      const id = state.board[row][col];
+      if (isNil(id)) return [false, null];
+      word += state.tiles[id].value;
+      tiles.push(id);
+    }
+
+    return word === targetWord ? [true, tiles] : [false, null];
+  }
+
+  // ===== Check a single column =====
+  function checkCol(col: number, state: State, targetWord: string): [boolean, string[] | null] {
+    let word = "";
+    const tiles: string[] = [];
+
+    for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+      const id = state.board[row][col];
+      if (isNil(id)) return [false, null];
+      word += state.tiles[id].value;
+      tiles.push(id);
+    }
+
+    return word === targetWord ? [true, tiles] : [false, null];
+  }
 
   return (
     <GameContext.Provider
@@ -197,5 +229,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Custom hook
-export const useGame = () => useContext(GameContext);
+// ===== Custom hook: useGame =====
+export const useGame = () => {
+  const context = useContext(GameContext);
+  if (!context) {
+    throw new Error("useGame must be used within a GameProvider");
+  }
+  return context;
+};

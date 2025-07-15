@@ -1,13 +1,14 @@
 const images = {
+  // ======================= BACKGROUNDS =======================
   backgrounds: {
-    // General screen backgrounds
+    // General screens
     defaultScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),
     difficultySelectionScreen: require("@/app/assets/images/backgrounds/difficulty-screen-background.png"),
     gameLabScreen: require("@/app/assets/images/backgrounds/lab-screen-background.png"),
     menuScreen: require("@/app/assets/images/backgrounds/menu-screen-background.png"),
     wordPackSelectionScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),
 
-    // Word pack backgrounds
+    // Word pack screens
     packs: {
       animals: require("@/app/assets/images/backgrounds/wordPacks/animals-screen-background.png"),
       food: require("@/app/assets/images/backgrounds/wordPacks/food-screen-background.png"),
@@ -16,14 +17,16 @@ const images = {
     },
   },
 
+  // ======================= LABELS =======================
   labels: {
     easy: require("@/app/assets/images/labels/easy-label.png"),
     normal: require("@/app/assets/images/labels/normal-label.png"),
     hard: require("@/app/assets/images/labels/hard-label.png"),
-
   },
 
+  // ======================= ICONS =======================
   icons: {
+    // Navigation icons
     backButton: require("@/app/assets/images/icons/back-button-icon.png"),
     resumeButton: require("@/app/assets/images/icons/resume-button-icon.png"),
     soundOn: require("@/app/assets/images/icons/sound-on-icon.png"),
@@ -44,8 +47,7 @@ const images = {
     eraserTile: require("@/app/assets/images/icons/gameLab/eraser-tile-icon.png"),
   },
 
-
-  // App branding images (logos, splash)
+  // ======================= BRANDING =======================
   branding: {
     appLogo: require("@/app/assets/images/branding/app-logo.png"),
     adaptiveLogo: require("@/app/assets/images/branding/adaptive-logo.png"),

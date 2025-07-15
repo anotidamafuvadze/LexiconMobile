@@ -1,22 +1,14 @@
-// React and React Native
+
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Animation
 import animations from "@/constants/animations";
 import { asEntry } from "@/util/animations";
-
-// Context Hooks
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-
-// Constants
 import colors from "@/constants/colors";
 import images from "@/constants/images";
-
-// Components
 import BackButton from "@/components/buttons/BackButton";
 import GameButton from "@/components/buttons/GameButton";
 import buttons from "@/styles/buttons";

@@ -46,21 +46,26 @@ const colors = {
   HOME_GRID_BG: "rgb(66, 56, 48)",
   HOME_GRID_CELL:"rgb(132, 114, 100)",
   HOME_GRID_TILE: "rgb(89, 83, 74)",
+  HOME_GRID_TARGET_TILE: "rgb(115, 121, 105)",
   HOME_GRID_LETTER: "rgb(255, 255, 255)",
-  TARGET_GRID_TILE: "rgb(115, 121, 105)",
+  
 
   // ======================= NATURE PACK =======================
   NATURE_PACK_BOARD: "rgb(240, 242, 228)",
   NATURE_PACK_BOARD_TEXT: "rgb(43, 40, 33)",
   NATURE_PACK_GRID_BG: "rgb(34, 32, 29)",
   NATURE_PACK_GRID_CELL: "rgb(110, 111, 93)",
+  NATURE_PACK_GRID_TILE: "rgb(60, 56, 50)",
+  NATURE_PACK_GRID_TARGET_TILE: "rgb(79, 84, 70))",
   NATURE_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
   // ======================= FOOD PACK =======================
-  FOOD_PACK_BOARD: "rgb(228, 205, 183)",
+  FOOD_PACK_BOARD: "rgb(233, 219, 206)",
   FOOD_PACK_BOARD_TEXT: "rgb(35, 32, 32)",
   FOOD_PACK_GRID_BG: "rgb(61, 43, 29)",
   FOOD_PACK_GRID_CELL: "rgb(164, 136, 109)",
+  FOOD_PACK_GRID_TILE: "rgb(129, 107, 74)",
+  FOOD_PACK_GRID_TARGET_TILE: "rgb(134, 135, 109))",
   FOOD_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
   // ======================= ANIMALS PACK =======================
@@ -68,17 +73,19 @@ const colors = {
   ANIMALS_PACK_BOARD_TEXT: "rgb(37, 35, 32)",
   ANIMALS_PACK_GRID_BG: "rgb(47, 43, 39)",
   ANIMALS_PACK_GRID_CELL: "rgb(134, 126, 115)",
+  ANIMALS_PACK_GRID_TILE: "rgb(59, 57, 54)",
+  ANIMALS_PACK_GRID_TARGET_TILE: "rgb(82, 85, 77))",
   ANIMALS_PACK_TARGET_WORD: "rgba(117, 110, 100, 1)",
 
   // ======================= STORY PACK =======================
-  STORY_PACK_BOARD: "rgb(87, 72, 65)",
+  STORY_PACK_BOARD: "rgb(56, 47, 43)",
   STORY_PACK_BOARD_TEXT: "rgb(255, 255, 255)",
   STORY_PACK_GRID_BG: "rgb(44, 36, 33)",
   STORY_PACK_GRID_CELL: "rgb(135, 117, 105)",
+  STORY_PACK_GRID_TILE: "rgb(46, 39, 36)",
+  STORY_PACK_GRID_TARGET_TILE: "rgb(93, 93, 83))",
   STORY_PACK_TARGET_WORD: "rgb(255, 255, 255)",
 
-  // ======================= GAME RESULTS =======================
-  YOU_WIN: "rgb(255, 255, 255)",
 };
 
 export default colors;

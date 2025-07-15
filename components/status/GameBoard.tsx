@@ -1,8 +1,5 @@
-// React and React Native
 import React from "react";
 import { StyleProp, Text, TextStyle, View, ViewStyle } from "react-native";
-
-// Animation
 import { asEntry } from "@/util/animations";
 import type {
   EntryExitAnimationFunction,
@@ -12,7 +9,7 @@ import Animated from "react-native-reanimated";
 
 /**
  * GameBoard
- * - Animated UI block that displays a title and a count value (e.g., remaining pops or score)
+ * - Animated UI block that displays a scrore and pops
  * - Supports custom styling and entry animation
  */
 function GameBoard({
@@ -34,8 +31,8 @@ function GameBoard({
     title?: TextStyle;
     count?: TextStyle;
   };
+  // Style override for themed packs
   styleAdjust?: {
-    // Style override for themed packs
     board: ViewStyle;
     text: TextStyle;
   };
