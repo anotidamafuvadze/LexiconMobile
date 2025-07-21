@@ -28,10 +28,10 @@ function MenuScreen() {
     switch (buttonPressed) {
       // Resume play
       case "Resume":
-        if (["Default", "Easy", "Normal", "Hard"].includes(currentTheme)) {
-          router.replace("/screens/HomeScreen"); // Go to Home Screen for default difficulty
+        if (["default", "easy", "normal", "hard"].includes(currentTheme)) {
+          router.push("/screens/HomeScreen"); // Go to Home Screen for default difficulty
         } else {
-          router.replace({
+          router.push({
             pathname: "/screens/PackHomeScreen", // Go to Pack screen for custom theme
             params: { packName: currentTheme },
           });
@@ -40,9 +40,9 @@ function MenuScreen() {
 
       // Navigate buttons
       case "WordPack":
-      case "GameLab":
+      case "Difficulty":
       case "Instruction":
-        router.replace(`/screens/${buttonPressed}Screen`);
+        router.push(`/screens/${buttonPressed}Screen`);
         break;
 
       // App Rating
@@ -90,8 +90,8 @@ function MenuScreen() {
 
           {/* Game Lab */}
           <GameButton
-            title="Game Lab"
-            onPress={handleButtonPress("GameLab")}
+            title="Difficulty"
+            onPress={handleButtonPress("Difficulty")}
             style={buttons.menuScreen}
           />
 
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: layouts.SOUND_BUTTON_TOP,
     alignSelf: "center",
-    zIndex: 10,
   },
   buttonGroup: {
     top: layouts.MENU_BUTTON_TOP,

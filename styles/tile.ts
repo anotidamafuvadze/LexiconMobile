@@ -6,16 +6,11 @@ import { TextStyle, ViewStyle } from "react-native";
 const tile = {
   // Tile container
   tile: {
-    position: "absolute",
-    width: layouts.TILE_SIZE,
-    height: layouts.TILE_SIZE,
     marginTop: layouts.TILE_MARGIN_TOP,
     marginBottom: layouts.TILE_MARGIN_BOTTOM,
     marginLeft: layouts.TILE_MARGIN_LEFT,
     marginRight: layouts.TILE_MARGIN_RIGHT,
     backgroundColor: colors.HOME_GRID_TILE,
-    borderWidth: layouts.TILE_BORDER_WIDTH,
-    borderColor: colors.BLACK,
     borderRadius: layouts.GAME_GRID_BORDER_RADIUS,
     justifyContent: "center",
     alignItems: "center",

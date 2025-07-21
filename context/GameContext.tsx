@@ -1,15 +1,4 @@
-import React, {
-  createContext,
-  Dispatch,
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-  useRef,
-} from "react";
-import { useWord } from "./WordContext";
 import game from "@/constants/game";
-import { isNil, throttle } from "lodash";
 import { Tile } from "@/models/tile";
 import gameReducer, {
   Action,
@@ -18,6 +7,20 @@ import gameReducer, {
   printBoard,
   State,
 } from "@/reducers/gameReducer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { isNil, throttle } from "lodash";
+import React, {
+  createContext,
+  Dispatch,
+  RefObject,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
+import { useWord } from "./WordContext";
 
 // ======================= TYPES =======================
 
@@ -30,7 +33,11 @@ type GameContextType = {
   gameState: State;
   startNewGame: () => void;
   moveTiles: (type: MoveDirection) => void;
-  popTile: () => void;
+  lockTile: (tileId: string) => void;
+  unlockTile: () => void;
+  lockedTile: RefObject<string>;
+  isAbleToLock: RefObject<boolean>;
+  popTile: (tileId: string) => void;
   checkGameStatus: () => void;
   getTiles: () => Tile[];
   gameWinningTiles: string[] | null;
@@ -46,12 +53,16 @@ const GameContext = createContext<GameContextType>({
   startNewGame: () => {},
   moveTiles: () => {},
   popTile: () => {},
+  lockTile: () => {},
+  unlockTile: () => {},
+  lockedTile: { current: "" },
+  isAbleToLock: { current: true },
   checkGameStatus: () => {},
   getTiles: () => [],
   gameWinningTiles: [],
   dispatch: () => {},
-  score: 0,
-  pops: 3,
+  score: initialState.score,
+  pops: initialState.pops,
 });
 
 /**
@@ -61,24 +72,50 @@ const GameContext = createContext<GameContextType>({
  */
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [gameState, dispatch] = useReducer(gameReducer, initialState);
-  const [gameWinningTiles, setGameWinningTiles] = React.useState<string[] | null>([]);
+  const [gameWinningTiles, setGameWinningTiles] = useState<string[] | null>([]);
   const hasStarted = useRef(false);
   const { targetWord } = useWord();
+  const lockedTile = useRef<string>("");
+  const isAbleToLock = useRef<boolean>(true);
 
   // ===== Start new game on first mount =====
+
   useEffect(() => {
     if (hasStarted.current) return;
     hasStarted.current = true;
 
-    try {
-      startNewGame();
-    } catch (error) {
-      console.error("Starting game failed:", error);
-    }
+    const load = async () => {
+      const stored = await AsyncStorage.getItem("gameState");
+      if (stored) {
+        dispatch({ type: "UPDATE_STATE", state: JSON.parse(stored) });
+      } else {
+        // TODO: Show instructions
+        startNewGame();
+        await AsyncStorage.setItem("gameState", JSON.stringify(initialState));
+      }
+    };
+
+    load();
   }, []);
+
+  useEffect(() => {
+    AsyncStorage.setItem("gameState", JSON.stringify(gameState)).catch((err) =>
+      console.error("Failed to save", err)
+    );
+  }, [gameState.board]);
+
+  useEffect(() => {
+    if (lockedTile.current !== "") {
+      isAbleToLock.current = false;
+    } else {
+      isAbleToLock.current = true;
+    }
+  }, [lockedTile]);
 
   // ===== Reset board and spawn two tiles =====
   const startNewGame = () => {
+    lockedTile.current = "";
+    isAbleToLock.current = true;
     dispatch({ type: "RESET_GAME" });
 
     setTimeout(() => {
@@ -90,10 +127,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   // ===== Move tiles in a direction (throttled) =====
   const moveTiles = useCallback(
+    // TODO: Pass in locked tile into dispatch as parameter and have conditional that says dont move this tile
     throttle(
       (type: MoveDirection) => {
         if (gameState.status === "ONGOING") {
-          dispatch({ type });
+          dispatch({ type, lockedTile: lockedTile.current });
         }
       },
       game.MERGE_ANIMATION_DURATION * 1.05,
@@ -103,8 +141,23 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   // ===== Remove a tile =====
-  const popTile = () => {
-    dispatch({ type: "POP_TILE" });
+  const popTile = (tileId: string) => {
+    dispatch({ type: "POP_TILE", tileId });
+    dispatch({ type: "CLEAN_UP" });
+  };
+
+  // ===== Lock tile =====
+  const lockTile = (tileId: string) => {
+    if (lockedTile.current !== "") {
+      return;
+    }
+    lockedTile.current = tileId;
+    isAbleToLock.current = false;
+  };
+
+  const unlockTile = () => {
+    lockedTile.current = "";
+    isAbleToLock.current = true;
   };
 
   // ===== Check win/loss conditions =====
@@ -139,27 +192,45 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   function checkForLoss(state: State): boolean {
     const size = game.TILE_COUNT_PER_DIMENSION;
 
+    // check for any empty cell
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
         if (isNil(state.board[x][y])) return false;
       }
     }
 
+    // check for any possible merge horizontally or vertically
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
         const currId = state.board[x][y];
+        if (!currId) continue;
         const currTile = state.tiles[currId];
-        if (!currTile) continue;
 
-        if (
-          (x < size - 1 && currTile.value === state.tiles[state.board[x + 1][y]]?.value) ||
-          (y < size - 1 && currTile.value === state.tiles[state.board[x][y + 1]]?.value)
-        ) {
-          return false;
+        // check right neighbor
+        if (x < size - 1) {
+          const rightId = state.board[x + 1][y];
+          if (!isNil(rightId)) {
+            const rightTile = state.tiles[rightId];
+            if (rightTile && rightTile.value === currTile.value) {
+              return false;
+            }
+          }
+        }
+
+        // check bottom neighbor
+        if (y < size - 1) {
+          const downId = state.board[x][y + 1];
+          if (!isNil(downId)) {
+            const downTile = state.tiles[downId];
+            if (downTile && downTile.value === currTile.value) {
+              return false;
+            }
+          }
         }
       }
     }
 
+    // no empty cells and no possible merges
     return state.pops <= 0;
   }
 
@@ -179,7 +250,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   // ===== Check a single row =====
-  function checkRow(row: number, state: State, targetWord: string): [boolean, string[] | null] {
+  function checkRow(
+    row: number,
+    state: State,
+    targetWord: string
+  ): [boolean, string[] | null] {
     let word = "";
     const tiles: string[] = [];
 
@@ -194,7 +269,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   // ===== Check a single column =====
-  function checkCol(col: number, state: State, targetWord: string): [boolean, string[] | null] {
+  function checkCol(
+    col: number,
+    state: State,
+    targetWord: string
+  ): [boolean, string[] | null] {
     let word = "";
     const tiles: string[] = [];
 
@@ -216,6 +295,10 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         startNewGame,
         checkGameStatus,
         popTile,
+        lockTile,
+        unlockTile,
+        lockedTile,
+        isAbleToLock,
         gameWinningTiles,
         getTiles,
         moveTiles,

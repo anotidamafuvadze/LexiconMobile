@@ -12,6 +12,7 @@ import images from "@/constants/images";
 import BackButton from "@/components/buttons/BackButton";
 import GameButton from "@/components/buttons/GameButton";
 import buttons from "@/styles/buttons";
+import { useGame } from "@/context/GameContext";
 
 /**
  * Difficulty selection screen
@@ -19,15 +20,17 @@ import buttons from "@/styles/buttons";
  */
 function DifficultySelection() {
   const router = useRouter();
-  const { generateNewWord, setCurrentTheme } = useWord();
+  const { generateNewWord, setTheme } = useWord();
+  const { startNewGame } = useGame();
   const { playPopSound } = useSound();
 
   // Handles difficulty selection
   const handleButtonPress = (mode: string) => {
     playPopSound();
-    setCurrentTheme(mode);
+    setTheme(mode);
     generateNewWord(mode); // Update theme and word
-    router.replace("/screens/HomeScreen"); // Go to home screen
+    startNewGame();
+    router.push("/screens/HomeScreen"); // Go to home screen
   };
 
   return (
@@ -38,13 +41,13 @@ function DifficultySelection() {
         resizeMode="cover"
       >
         {/* Back Button */}
-        <BackButton toScreen="GameLabScreen" from="DifficultyScreen" />
+        <BackButton toScreen="MenuScreen" from="DifficultyScreen" />
 
         <View style={styles.buttonGroup}>
           {/* Easy */}
           <GameButton
             icon={images.labels.easy}
-            onPress={() => handleButtonPress("Easy")}
+            onPress={() => handleButtonPress("easy")}
             style={buttons.difficulty}
             entering={asEntry(animations.BOUNCE_IN)}
             styleAdjust={{ backgroundColor: colors.EASY_BUTTON }}
@@ -58,7 +61,7 @@ function DifficultySelection() {
           {/* Normal */}
           <GameButton
             icon={images.labels.normal}
-            onPress={() => handleButtonPress("Normal")}
+            onPress={() => handleButtonPress("normal")}
             style={buttons.difficulty}
             entering={asEntry(animations.BOUNCE_IN)}
             styleAdjust={{ backgroundColor: colors.NORMAL_BUTTON }}
@@ -72,7 +75,7 @@ function DifficultySelection() {
           {/* Hard */}
           <GameButton
             icon={images.labels.hard}
-            onPress={() => handleButtonPress("Hard")}
+            onPress={() => handleButtonPress("hard")}
             style={buttons.difficulty}
             entering={asEntry(animations.BOUNCE_IN)}
             styleAdjust={{ backgroundColor: colors.HARD_BUTTON }}

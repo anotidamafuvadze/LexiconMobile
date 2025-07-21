@@ -3,7 +3,7 @@ const images = {
   backgrounds: {
     // General screens
     defaultScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),
-    difficultySelectionScreen: require("@/app/assets/images/backgrounds/difficulty-screen-background.png"),
+    difficultySelectionScreen: require("@/app/assets/images/backgrounds/menu-screen-background.png"),
     gameLabScreen: require("@/app/assets/images/backgrounds/lab-screen-background.png"),
     menuScreen: require("@/app/assets/images/backgrounds/menu-screen-background.png"),
     wordPackSelectionScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),

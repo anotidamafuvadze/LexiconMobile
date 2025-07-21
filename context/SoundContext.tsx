@@ -1,3 +1,4 @@
+import { useAudioPlayer } from "expo-audio";
 import React, {
   createContext,
   useCallback,
@@ -6,7 +7,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useAudioPlayer } from "expo-audio";
 
 /**
  * SoundProvider
@@ -17,31 +17,42 @@ import { useAudioPlayer } from "expo-audio";
 
 // ===== Sound files =====
 const backgroundMusic = require("../app/assets/sounds/background-music.mp3");
-const buttonClick = require("../app/assets/sounds/button-click-sound.mp3");
-const buttonPop = require("../app/assets/sounds/button-pop-sound.mp3");
-const screenWhoosh = require("../app/assets/sounds/screen-whoosh-sound.mp3");
+const clickSound = require("../app/assets/sounds/button-click-sound.mp3");
+const whooshSound = require("../app/assets/sounds/screen-whoosh-sound.mp3");
+const popSound = require("../app/assets/sounds/button-pop-sound.mp3");
 const winSound = require("../app/assets/sounds/win-sound.mp3");
+const tileGrow = require("../app/assets/sounds/tile-grow-sound.mp3");
+const tileLock = require("../app/assets/sounds/tile-lock-sound.mp3");
+const tileUnlock = require("../app/assets/sounds/tile-unlock-sound.mp3");
 
 type SoundContextType = {
   soundOn: boolean;
   setSoundOn: (val: boolean) => void;
-  playClickSound: (forcePlay?: boolean) => void;
-  playPopSound: (forcePlay?: boolean) => void;
-  playWhooshSound: (forcePlay?: boolean) => void;
-  playWinSound: (forcePlay?: boolean) => void;
   playBackgroundMusic: () => void;
   stopBackgroundMusic: () => void;
+  playClickSound: (forcePlay?: boolean) => void;
+  playWhooshSound: (forcePlay?: boolean) => void;
+  playPopSound: (forcePlay?: boolean) => void;
+  playWinSound: (forcePlay?: boolean) => void;
+  playGrowSound: (forcePlay?: boolean) => void;
+  stopGrowSound: () => void;
+  playLockSound: (forcePlay?: boolean) => void;
+  playUnlockSound: (forcePlay?: boolean) => void;
 };
 
 const SoundContext = createContext<SoundContextType>({
   soundOn: true,
   setSoundOn: () => {},
-  playClickSound: () => {},
-  playPopSound: () => {},
-  playWhooshSound: () => {},
-  playWinSound: () => {},
   playBackgroundMusic: () => {},
   stopBackgroundMusic: () => {},
+  playClickSound: () => {},
+  playWhooshSound: () => {},
+  playPopSound: () => {},
+  playWinSound: () => {},
+  playGrowSound: () => {},
+  stopGrowSound: () => {},
+  playLockSound: () => {},
+  playUnlockSound: () => {},
 });
 
 export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
@@ -50,10 +61,13 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
 
   // ===== Audio players =====
   const backgroundMusicPlayer = useAudioPlayer(backgroundMusic);
-  const buttonClickPlayer = useAudioPlayer(buttonClick);
-  const buttonPopPlayer = useAudioPlayer(buttonPop);
-  const winSoundPlayer = useAudioPlayer(winSound);
-  const screenWhooshPlayer = useAudioPlayer(screenWhoosh);
+  const clickPlayer = useAudioPlayer(clickSound);
+  const whooshPlayer = useAudioPlayer(whooshSound);
+  const popPlayer = useAudioPlayer(popSound);
+  const winPlayer = useAudioPlayer(winSound);
+  const tileGrowPlayer = useAudioPlayer(tileGrow);
+  const tileLockPlayer = useAudioPlayer(tileLock);
+  const tileUnlockPlayer = useAudioPlayer(tileUnlock);
 
   // ===== Start background music on mount =====
   useEffect(() => {
@@ -69,66 +83,6 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
       console.error("Background music initialization failed:", error);
     }
   }, []);
-
-  // ===== Play click sound =====
-  const playClickSound = useCallback(
-    (forcePlay = false) => {
-      if (!soundOn && !forcePlay) return;
-      try {
-        buttonClickPlayer.seekTo(0);
-        buttonClickPlayer.play();
-      } catch (error) {
-        console.error("Click sound error:", error);
-      }
-    },
-    [soundOn, buttonClickPlayer]
-  );
-
-  // ===== Play pop sound =====
-  const playPopSound = useCallback(
-    (forcePlay = false) => {
-      if (!soundOn && !forcePlay) return;
-      try {
-        buttonPopPlayer.seekTo(0.5);
-        buttonPopPlayer.play();
-      } catch (error) {
-        console.error("Pop sound error:", error);
-      }
-    },
-    [soundOn, buttonPopPlayer]
-  );
-
-  // ===== Play whoosh sound =====
-  const playWhooshSound = useCallback(
-    (forcePlay = false) => {
-      if (!soundOn && !forcePlay) return;
-      try {
-        screenWhooshPlayer.seekTo(0);
-        screenWhooshPlayer.play();
-      } catch (error) {
-        console.error("Whoosh sound error:", error);
-      }
-    },
-    [soundOn, screenWhooshPlayer]
-  );
-
-  // ===== Play win sound & pause/resume music =====
-  const playWinSound = useCallback(
-    (forcePlay = false) => {
-      if (!soundOn && !forcePlay) return;
-      try {
-        stopBackgroundMusic();
-        winSoundPlayer.seekTo(0);
-        winSoundPlayer.play();
-        setTimeout(() => {
-          playBackgroundMusic();
-        }, 8000);
-      } catch (error) {
-        console.error("Win sound error:", error);
-      }
-    },
-    [soundOn, winSoundPlayer]
-  );
 
   // ===== Play/resume background music =====
   const playBackgroundMusic = useCallback(() => {
@@ -148,17 +102,125 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [backgroundMusicPlayer]);
 
+  // ===== Play click sound =====
+  const playClickSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        clickPlayer.seekTo(0);
+        clickPlayer.play();
+      } catch (error) {
+        console.error("Click sound error:", error);
+      }
+    },
+    [soundOn, clickPlayer]
+  );
+
+  // ===== Play whoosh sound =====
+  const playWhooshSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        whooshPlayer.seekTo(0);
+        whooshPlayer.play();
+      } catch (error) {
+        console.error("Whoosh sound error:", error);
+      }
+    },
+    [soundOn, whooshPlayer]
+  );
+
+  // ===== Play pop sound =====
+  const playPopSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        popPlayer.seekTo(0.5);
+        popPlayer.play();
+      } catch (error) {
+        console.error("Pop sound error:", error);
+      }
+    },
+    [soundOn, popPlayer]
+  );
+
+  // ===== Play win sound & pause/resume music =====
+  const playWinSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        stopBackgroundMusic();
+        winPlayer.seekTo(0);
+        winPlayer.play();
+        setTimeout(() => {
+          playBackgroundMusic();
+        }, 8000);
+      } catch (error) {
+        console.error("Win sound error:", error);
+      }
+    },
+    [soundOn, winPlayer]
+  );
+
+  // ===== Play/resume tile growing sound effect =====
+  const playGrowSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        tileGrowPlayer.seekTo(0);
+        tileGrowPlayer.play();
+      } catch (error) {
+        console.error("Grow sound error:", error);
+      }
+    },
+    [soundOn, tileGrowPlayer]
+  );
+
+  const stopGrowSound = useCallback(() => {
+    tileGrowPlayer.pause();
+  }, [soundOn, tileGrowPlayer]);
+
+  const playLockSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        tileLockPlayer.seekTo(0.05);
+        tileLockPlayer.play();
+      } catch (error) {
+        console.error("Grow sound error:", error);
+      }
+    },
+    [soundOn, tileLockPlayer]
+  );
+
+    const playUnlockSound = useCallback(
+    (forcePlay = false) => {
+      if (!soundOn && !forcePlay) return;
+      try {
+        tileUnlockPlayer.seekTo(0);
+        tileUnlockPlayer.play();
+      } catch (error) {
+        console.error("Grow sound error:", error);
+      }
+    },
+    [soundOn, tileUnlockPlayer]
+  );
+
   return (
     <SoundContext.Provider
       value={{
         soundOn,
         setSoundOn,
-        playClickSound,
-        playPopSound,
-        playWhooshSound,
-        playWinSound,
         playBackgroundMusic,
         stopBackgroundMusic,
+        playWhooshSound,
+        playClickSound,
+        playPopSound,
+        playWinSound,
+        playGrowSound,
+        stopGrowSound,
+        playLockSound,
+        playUnlockSound,
       }}
     >
       {children}

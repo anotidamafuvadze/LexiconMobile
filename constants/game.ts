@@ -24,7 +24,7 @@ const game = {
   // Animation durations (ms)
   MOVE_ANIMATION_DURATION: 130,
   MERGE_ANIMATION_DURATION: 150,
-  POP_ANIMATION_DURATION: 1000,
+  POP_ANIMATION_DURATION: 1150,
 
   // Splash screen
   SPLASH_TIMEOUT: 1250,
@@ -41,7 +41,7 @@ const game = {
   POINTS_FROM_MERGE,
 
   // Pops
-  STARTING_POPS: 4,
+  STARTING_POPS: 3,
 
 };
 

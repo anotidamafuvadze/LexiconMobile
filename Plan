@@ -1,12 +1,8 @@
 
 // -------- CORE GAME FEATURES --------
-// TODO: FIX - Have theme reset to default after reloading
-// TODO: POPPING — Implement tile pop functionality (long press and hold) board changes dynamically (pop with react native animatable pulse)
-// TODO: UI - Add tile locking with double click (tile doesnt move or merge)
 // TODO: ORIENTATION — Lock app to portrait mode (disable landscape)
 // TODO: GAME MODE — Add special tiles: Edit, Jump, Eraser
-// TODO: LOGIC — Reset pop count in useEffect on app launch (index.tsx)
-// TODO: WIN - Lower opacity of win splash and have winning tiles turn gold
+// TODO: ADD - Add tile restriction if game is too easy with tile locking
 
 
 // -------- HOW TO PLAY --------

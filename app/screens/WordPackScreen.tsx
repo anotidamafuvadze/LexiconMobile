@@ -22,21 +22,22 @@ import headers from "@/styles/headers";
 function WordPacks() {
   const router = useRouter();
   const { playClickSound, playWhooshSound } = useSound();
-  const { setCurrentTheme, generateNewWord } = useWord();
+  const { setTheme, generateNewWord } = useWord();
   const { startNewGame } = useGame();
 
   // Handle word pack selection
   const handleButtonPress = (pack: string) => {
-    setCurrentTheme(pack);
+    console.log("PACK: " + pack)
+    setTheme(pack);
     generateNewWord(pack); // Update word bank and theme
     startNewGame();
 
-    if (pack === "Default") {
+    if (pack === "default") {
       playClickSound();
-      router.replace("/screens/HomeScreen"); // Go to Home Screen
+      router.push("/screens/HomeScreen"); // Go to Home Screen
     } else {
       playWhooshSound();
-      router.replace({
+      router.push({
         pathname: "/screens/PackHomeScreen", // Go to selected Pack screen
         params: { packName: pack },
       });
@@ -111,7 +112,7 @@ function WordPacks() {
             title="CLASSIC"
             subtitle="CHAT, DEEP, BOLD"
             icon={images.icons.classicPack}
-            onPress={() => handleButtonPress("Default")}
+            onPress={() => handleButtonPress("default")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
           />

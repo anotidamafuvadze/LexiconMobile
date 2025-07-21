@@ -1,3 +1,4 @@
+import { Theme, themeToScreenPath } from "@/util/navigation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {
   createContext,
@@ -19,19 +20,19 @@ type WordContextType = {
   targetWord: string;
   currentTheme: string;
   generateNewWord: (theme?: string) => void;
-  setCurrentTheme: (theme: string) => void;
+  setTheme: (theme: string) => void;
 };
 
 const WordContext = createContext<WordContextType>({
   targetWord: "",
   currentTheme: "",
   generateNewWord: () => {},
-  setCurrentTheme: () => {},
+  setTheme: () => {},
 });
 
 export const WordProvider = ({
   children,
-  defaultTheme = "Default",
+  defaultTheme = "default",
 }: {
   children: React.ReactNode;
   defaultTheme?: string;
@@ -62,8 +63,14 @@ export const WordProvider = ({
     [currentTheme, targetWord]
   );
 
+  // ===== Set the current theme =====
+  const setTheme = (theme: string) => {
+    setCurrentTheme(theme);
+    AsyncStorage.setItem("currentTheme", theme);
+  };
+
   // ===== Load saved word or generate one on mount =====
-  const loadOrGenerate = useCallback(async () => {
+  const loadOrGenerateWord = useCallback(async () => {
     const stored = await AsyncStorage.getItem("targetWord");
     if (stored) {
       setTargetWord(stored);
@@ -72,10 +79,27 @@ export const WordProvider = ({
     }
   }, [defaultTheme, generateNewWord]);
 
+  // ===== Load saved theme or generate one on mount =====
+  const loadOrGenerateTheme = useCallback(async () => {
+    const stored = await AsyncStorage.getItem("currentTheme");
+    if (stored) {
+      setCurrentTheme(stored);
+    } else {
+      await setCurrentTheme(defaultTheme);
+    }
+
+    if ((currentTheme as Theme) in themeToScreenPath) {
+      themeToScreenPath[currentTheme as Theme](currentTheme);
+    } else {
+      console.warn(`No screen path defined for theme: ${currentTheme}`);
+    }
+  }, [defaultTheme, generateNewWord]);
+
   // ===== Run loadOrGenerate when component mounts =====
   useEffect(() => {
-    loadOrGenerate();
-  }, [loadOrGenerate]);
+    loadOrGenerateWord();
+    loadOrGenerateTheme();
+  }, [loadOrGenerateWord]);
 
   return (
     <WordContext.Provider
@@ -83,7 +107,7 @@ export const WordProvider = ({
         currentTheme,
         targetWord,
         generateNewWord,
-        setCurrentTheme,
+        setTheme,
       }}
     >
       {children}

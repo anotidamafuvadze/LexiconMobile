@@ -26,7 +26,7 @@ function GameLab() {
     playClickSound();
     switch (buttonPressed) {
       case "Difficulty":
-        router.replace("/screens/DifficultyScreen"); // Go to difficulty selection screen
+        router.push("/screens/DifficultyScreen"); // Go to difficulty selection screen
         break;
       case "EditTile":
         // TODO: Handle Edit Tile action

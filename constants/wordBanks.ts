@@ -2,7 +2,7 @@
 const wordBank = [
   // ======================= DEFAULT =======================
   {
-    name: "Default",
+    name: "default",
     words: [
       "ABLE", "BACK", "BALL", "BARK", "BARN", "BEND", "BEST", "BITE", "BLUE", "BOLD",
       "CALM", "CARD", "CART", "CHAT", "CLAP", "CLIP", "COAL", "COOK", "COOL", "CUBE",
@@ -13,7 +13,7 @@ const wordBank = [
 
   // ======================= EASY =======================
   {
-    name: "Easy",
+    name: "easy",
     words: [
       "ABLE", "ACED", "BEEF", "BEAD", "BEEF", "BIDE", "CAFE", "DEED", "DEAF", "EDGE",
       "FADE", "FACE", "FEED", "FLEA",
@@ -22,7 +22,7 @@ const wordBank = [
 
   // ======================= NORMAL =======================
   {
-    name: "Normal",
+    name: "normal",
     words: [
       "GEEK", "HALL", "HILL", "HIVE", "HOLD", "HOLE", "HOOD", "JOGS", "JOKE", "JAIL",
       "KING", "KITE", "KEEN", "LOOK", "LOCK", "LEND", "LION", "LONG", "GLOW", "GONE",
@@ -32,7 +32,7 @@ const wordBank = [
 
   // ======================= HARD =======================
   {
-    name: "Hard",
+    name: "hard",
     words: [
       "MOOD", "MOON", "MIND", "MASK", "MAIN", "MARK", "NORM", "NOON", "NEST", "NEON",
       "NECK", "OPEN", "OMEN", "OPAL", "PINE", "PINK", "PLAN", "PACK", "POUR", "QUAD",

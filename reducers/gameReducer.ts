@@ -14,7 +14,7 @@ export type GameStatus = "ONGOING" | "WON" | "LOST";
 
 // Game state
 export type State = {
-  board: string[][];
+  board: (string | undefined)[][];
   tiles: TileMap;
   tilesByIds: string[];
   score: number;
@@ -26,13 +26,14 @@ export type State = {
 export type Action =
 | { type: "RESET_GAME" }
 | { type: "UPDATE_STATUS"; status: GameStatus }
+| { type: "UPDATE_STATE"; state: State }
 | { type: "CREATE_TILE"; tile: PartialTileInput }
 | { type: "CLEAN_UP" }
-| { type: "MOVE_UP" }
-| { type: "MOVE_DOWN" }
-| { type: "MOVE_LEFT" }
-| { type: "MOVE_RIGHT" }
-| { type: "POP_TILE" };
+| { type: "MOVE_UP"; lockedTile: string }
+| { type: "MOVE_DOWN"; lockedTile: string }
+| { type: "MOVE_LEFT"; lockedTile: string}
+| { type: "MOVE_RIGHT"; lockedTile: string }
+| { type: "POP_TILE"; tileId: string };
 
 
 // ======================= HELPERS =======================
@@ -50,7 +51,7 @@ function nextLetter(letter: string): string {
 }
 
 // Debug: prints board state
-export function printBoard(board: string[][], tiles: TileMap) {
+export function printBoard(board: (string | undefined)[][], tiles: TileMap) {
   const rendered = board
     .map((row) => row.map((id) => (id ? tiles[id]?.value ?? "?" : "·")).join(" "))
     .map((r) => `| ${r} |`);
@@ -64,7 +65,7 @@ export const initialState: State = {
   tiles: {},
   tilesByIds: [],
   score: 0,
-  pops: 5, // TODO Fix this
+  pops: game.STARTING_POPS,
   status: "ONGOING",
 };
 
@@ -84,7 +85,7 @@ function gameReducer(state: State = initialState, action: Action): State {
         tiles: {},
         tilesByIds: [],
         score: 0,
-        pops: 3,
+        pops: game.STARTING_POPS,
         status: "ONGOING",
       };
     }
@@ -95,6 +96,12 @@ function gameReducer(state: State = initialState, action: Action): State {
         ...state,
         status: action.status,
       };
+    }
+
+    case "UPDATE_STATE": {
+      return {
+        ...action.state
+      }
     }
 
     // ===== Add new tile to the grid =====
@@ -171,31 +178,53 @@ function gameReducer(state: State = initialState, action: Action): State {
 
         for (let y = 0; y < game.TILE_COUNT_PER_DIMENSION; y++) {
           const tileId = state.board[y][x];
+          if (isNil(tileId)) {
+            continue;
+          }
+
           const currentTile = state.tiles[tileId];
 
-          if (!isNil(tileId)) {
-            // Merge with previous tile if values match
-            if (previousTile?.value === currentTile.value) {
-              const newLetter = nextLetter(previousTile.value);
-              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
-              newTiles[previousTile.id as string] = {
-                ...previousTile,
-                value: newLetter
-              };
-              previousTile = undefined;
-              continue;
-            }
-
-            // Move tile into new position
-            newBoard[newY][x] = tileId;
+          // Skip the locked tile completely: it stays in place
+          if (tileId === action.lockedTile) {
+            newBoard[y][x] = tileId;
             newTiles[tileId] = {
               ...currentTile,
-              position: [x, newY],
+              position: [x, y],
               justCreated: false,
             };
-            previousTile = newTiles[tileId];
-            newY++;
+
+            newY = y + 1;
+            previousTile = undefined;
+            continue;
           }
+
+          // Prevent merge with lockedTile
+          if (previousTile?.id === action.lockedTile) {
+            previousTile = undefined;
+            continue;
+          }
+
+          // Merge with previous tile if values match
+          if (previousTile?.value === currentTile.value) {
+            const newLetter = nextLetter(previousTile.value);
+            newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
+            newTiles[previousTile.id as string] = {
+              ...previousTile,
+              value: newLetter
+            };
+            previousTile = undefined;
+            continue;
+          }
+
+          // Move tile into new position
+          newBoard[newY][x] = tileId;
+          newTiles[tileId] = {
+            ...currentTile,
+            position: [x, newY],
+            justCreated: false,
+          };
+          previousTile = newTiles[tileId];
+          newY++;
         }
       }
 
@@ -219,31 +248,50 @@ function gameReducer(state: State = initialState, action: Action): State {
 
         for (let y = game.TILE_COUNT_PER_DIMENSION - 1; y >= 0; y--) {
           const tileId = state.board[y][x];
+          if (isNil(tileId)) {
+            continue;
+          }
+
           const currentTile = state.tiles[tileId];
 
-          if (!isNil(tileId)) {
-            // Merge with previous tile if values match
-            if (previousTile?.value === currentTile.value) {
-              const newLetter = nextLetter(previousTile.value);
-              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
-              newTiles[previousTile.id as string] = {
-                ...previousTile,
-                value: newLetter,
-              };
-              previousTile = undefined;
-              continue;
-            }
-
-            // Move tile into new position
-            newBoard[newY][x] = tileId;
+          // Skip the locked tile completely: it stays in place
+          if (tileId === action.lockedTile) {
+            newBoard[y][x] = tileId;
             newTiles[tileId] = {
               ...currentTile,
-              position: [x, newY],
+              position: [x, y],
               justCreated: false,
             };
-            previousTile = newTiles[tileId];
-            newY--;
+            newY = y - 1;
+            previousTile = undefined;
+            continue;
           }
+
+          // Prevent merge with lockedTile
+          if (previousTile?.id === action.lockedTile) {
+            previousTile = undefined;
+            continue;
+          }
+
+          // Merge with previous tile if values match
+          if (previousTile?.value === currentTile.value) {
+            const newLetter = nextLetter(previousTile.value);
+            newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
+            newTiles[previousTile.id as string] = {
+              ...previousTile,
+              value: newLetter,
+            };
+          }
+
+          // Move tile into new position
+          newBoard[newY][x] = tileId;
+          newTiles[tileId] = {
+            ...currentTile,
+            position: [x, newY],
+            justCreated: false,
+          };
+          previousTile = newTiles[tileId];
+          newY--;
         }
       }
 
@@ -267,31 +315,54 @@ function gameReducer(state: State = initialState, action: Action): State {
 
         for (let x = 0; x < game.TILE_COUNT_PER_DIMENSION; x++) {
           const tileId = state.board[y][x];
+          if (isNil(tileId)) {
+            continue;
+          }
+
           const currentTile = state.tiles[tileId];
 
-          if (!isNil(tileId)) {
-            // Merge with previous tile if values match
-            if (previousTile?.value === currentTile.value) {
-              const newLetter = nextLetter(previousTile.value);
-              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
-              newTiles[previousTile.id as string] = {
-                ...previousTile,
-                value: newLetter,
-              };
-              previousTile = undefined;
-              continue;
-            }
-
-            // Move tile into new position
-            newBoard[y][newX] = tileId;
+          // Skip the locked tile completely: it stays in place
+          if (tileId === action.lockedTile) {
+            newBoard[y][x] = tileId;
             newTiles[tileId] = {
               ...currentTile,
-              position: [newX, y],
+              position: [x, y],
               justCreated: false,
             };
-            previousTile = newTiles[tileId];
-            newX++;
+
+            newX = x + 1;
+            previousTile = undefined;
+            continue;
           }
+
+          // Prevent merge with lockedTile
+          if (previousTile?.id === action.lockedTile) {
+            previousTile = undefined;
+            continue;
+          }
+
+          // Merge with previous tile if values match
+          if (previousTile?.value === currentTile.value) {
+            const newLetter = nextLetter(previousTile.value);
+            newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
+            newTiles[previousTile.id as string] = {
+              ...previousTile,
+              value: newLetter,
+            };
+            previousTile = undefined;
+            continue;
+          }
+
+          // Move tile into new position
+          newBoard[y][newX] = tileId;
+          newTiles[tileId] = {
+            ...currentTile,
+            position: [newX, y],
+            justCreated: false,
+          };
+          previousTile = newTiles[tileId];
+          newX++;
+
         }
       }
 
@@ -316,31 +387,52 @@ function gameReducer(state: State = initialState, action: Action): State {
 
         for (let x = game.TILE_COUNT_PER_DIMENSION - 1; x >= 0; x--) {
           const tileId = state.board[y][x];
+          if (isNil(tileId)) {
+            continue;
+          }
+
           const currentTile = state.tiles[tileId];
 
-          if (!isNil(tileId)) {
-            // Merge with previous tile if values match
-            if (previousTile?.value === currentTile.value) {
-              const newLetter = nextLetter(previousTile.value);
-              newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
-              newTiles[previousTile.id as string] = {
-                ...previousTile,
-                value: newLetter
-              };
-              previousTile = undefined;
-              continue;
-            }
-
-            // Move tile into new position
-            newBoard[y][newX] = tileId;
+          // Skip the locked tile completely: it stays in place
+          if (tileId === action.lockedTile) {
+            newBoard[y][x] = tileId;
             newTiles[tileId] = {
               ...currentTile,
-              position: [newX, y],
+              position: [x, y],
               justCreated: false,
             };
-            previousTile = newTiles[tileId];
-            newX--;
+            newX = x - 1;
+            previousTile = undefined;
+            continue;
           }
+
+          // Prevent merge with lockedTile
+          if (previousTile?.id === action.lockedTile) {
+            previousTile = undefined;
+            continue;
+          }
+
+          // Merge with previous tile if values match
+          if (previousTile?.value === currentTile.value) {
+            const newLetter = nextLetter(previousTile.value);
+            newScore = state.score + game.POINTS_FROM_MERGE[newLetter];
+            newTiles[previousTile.id as string] = {
+              ...previousTile,
+              value: newLetter
+            };
+            previousTile = undefined;
+            continue;
+          }
+
+          // Move tile into new position
+          newBoard[y][newX] = tileId;
+          newTiles[tileId] = {
+            ...currentTile,
+            position: [newX, y],
+            justCreated: false,
+          };
+          previousTile = newTiles[tileId];
+          newX--;
         }
       }
 
@@ -353,19 +445,34 @@ function gameReducer(state: State = initialState, action: Action): State {
     }
 
     // ===== Remove (pop) a tile if pops remain =====
-    case "POP_TILE": {
-      if (state.pops > 0){
-         return {
-        ...state,
-        pops: state.pops - 1
-      }
+  case "POP_TILE": {
+    if (state.pops > 0) {
+      const newBoard = [...state.board.map(row => [...row])];
+      const newTiles: TileMap = { ...state.tiles };
+      const newTilesByIds = state.tilesByIds.filter(id => id !== action.tileId);
+
+      for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
+        for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+          const tileId = state.board[row][col];
+          if (tileId === action.tileId) {
+            newBoard[row][col] = undefined;
+            delete newTiles[tileId];
+            break;
+          }
+        }
       }
 
       return {
-        ...state
-      }
-
+        ...state,
+        pops: state.pops - 1,
+        board: newBoard,
+        tiles: newTiles,
+        tilesByIds: newTilesByIds,
+      };
     }
+
+    return { ...state };
+}
 
     default:
       return state;

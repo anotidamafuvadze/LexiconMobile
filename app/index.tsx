@@ -15,7 +15,7 @@ export default function Index() {
   // Redirect to HomeScreen on mount
   useEffect(() => {
     requestAnimationFrame(() => {
-      router.replace("/screens/HomeScreen");
+      router.push("/screens/HomeScreen");
     });
   }, [router]);
 
