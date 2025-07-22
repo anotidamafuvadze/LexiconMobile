@@ -1,11 +1,12 @@
-import React from "react";
-import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import { getScreenPath, ScreenName } from "@/util/navigation";
 import { useRouter } from "expo-router";
+import React from "react";
+import type { AccessibilityRole } from "react-native";
+import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
 } from "react-native-reanimated";
-import { getScreenPath, ScreenName } from "@/util/navigation";
 import BaseButton from "./BaseButton";
 
 /**
@@ -21,6 +22,8 @@ function NavigationButton({
   fromScreen,
   style: styleSet,
   styleAdjust,
+  accessibilityRole,
+  accessibilityLabel,
 }: {
   title?: string;
   soundEffect: () => void;
@@ -35,6 +38,8 @@ function NavigationButton({
     textColumn?: ViewStyle;
   };
   styleAdjust?: ViewStyle;
+  accessibilityRole: AccessibilityRole;
+  accessibilityLabel: string;
 }): React.JSX.Element {
   const router = useRouter();
 
@@ -56,6 +61,8 @@ function NavigationButton({
       titleStyle={styleSet.title}
       textRowStyle={styleSet.textRow}
       textColumnStyle={styleSet.textColumn}
+      accessibilityRole={accessibilityRole}
+      accessibilityLabel={accessibilityLabel}
     />
   );
 }

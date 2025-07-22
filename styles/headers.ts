@@ -35,6 +35,7 @@ const headers = {
   // ======================= Word Pack Header =======================
   wordPack: {
     container: {
+      top: layouts.WORD_PACK_TITLE_TOP,
       alignItems: "center",
     } as ViewStyle,
 
@@ -59,21 +60,6 @@ const headers = {
     } as TextStyle,
   },
 
-  // ======================= Game Lab Header =======================
-  gameLab: {
-    title: {
-      alignItems: "center",
-      top: layouts.GAME_LAB_HEADER_TOP,
-    } as ViewStyle,
-
-    subtitle: {
-      fontSize: fonts.size.gameLabSubtitle,
-      fontFamily: fonts.family.regular,
-      color: colors.BLACK,
-      textAlign: "center",
-      maxWidth: layouts.GAME_LAB_SUBTITLE_WIDTH,
-    } as TextStyle,
-  },
 };
 
 export default headers;

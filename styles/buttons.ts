@@ -106,51 +106,6 @@ const buttons = {
     } as TextStyle,
   },
 
-  // ======================= Game Lab Screen Button =======================
-  gameLab: {
-    button: {
-      backgroundColor: colors.GAME_LAB_BUTTON_BG,
-      borderColor: colors.GAME_LAB_BUTTON_BORDER,
-      borderWidth: layouts.GAME_LAB_BUTTON_BORDER_WIDTH,
-      borderRadius: layouts.GAME_LAB_BUTTON_BORDER_RADIUS,
-      height: layouts.GAME_LAB_BUTTON_HEIGHT,
-      width: layouts.GAME_LAB_BUTTON_WIDTH,
-      marginTop: layouts.GAME_LAB_BUTTON_MARGIN_TOP,
-      boxShadow: fonts.shadow.gameLabButton,
-    } as ViewStyle,
-
-    textRow: {
-      flexDirection: "row",
-      alignItems: "center",
-    } as ViewStyle,
-
-    textColumn: {
-      marginTop: layouts.GAME_LAB_TEXT_MARGIN_TOP,
-      marginLeft: layouts.GAME_LAB_TEXT_MARGIN_LEFT,
-    } as ViewStyle,
-
-    icon: {
-      width: layouts.GAME_LAB_ICON_SIZE,
-      height: layouts.GAME_LAB_ICON_SIZE,
-      marginLeft: layouts.GAME_LAB_ICON_MARGIN_LEFT,
-    } as ImageStyle,
-
-    title: {
-      fontSize: fonts.size.gameLabButtonTitle,
-      fontFamily: fonts.family.regular,
-      fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
-      color: colors.GAME_LAB_BUTTON_TITLE,
-      letterSpacing: layouts.LETTER_SPACING_SMALL,
-    } as TextStyle,
-
-    subtitle: {
-      fontSize: fonts.size.gameLabButtonSubtitle,
-      fontFamily: fonts.family.regular,
-      fontWeight: fonts.weight.regular as TextStyle["fontWeight"],
-      marginTop: layouts.GAME_LAB_SUBTITLE_MARGIN_TOP,
-    } as TextStyle,
-  },
-
   // ======================= Difficulty Button =======================
   difficulty: {
     button: {
@@ -181,6 +136,32 @@ const buttons = {
       textShadowOffset: fonts.shadow.offset.difficultyLabel,
     } as TextStyle,
   },
+
+  // ======================= First Instruction Button =======================
+  firstInstruction:{
+    button: {
+      alignSelf: "center",
+      top: layouts.HOME_BUTTON_TOP + 250,
+      width: 250,
+      paddingVertical: layouts.HOME_BUTTON_PADDING_VERTICAL,
+      paddingHorizontal: layouts.HOME_BUTTON_PADDING_HORIZONTAL,
+      borderRadius: layouts.HOME_BUTTON_BORDER_RADIUS,
+      borderColor: colors.HOME_BUTTON_BORDER_COLOR,
+      borderWidth: layouts.HOME_BUTTON_BORDER_WIDTH,
+      backgroundColor: colors.MENU_BUTTON_BG,
+      boxShadow: fonts.shadow.homeButton,
+    } as ViewStyle,
+
+    title: {
+      fontSize: fonts.size.homeButton,
+      fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
+      fontFamily: fonts.family.regular,
+      color: colors.WORD_PACK_TITLE,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
+      textAlign: "center",
+    } as TextStyle,
+
+  }
 };
 
 export default buttons;

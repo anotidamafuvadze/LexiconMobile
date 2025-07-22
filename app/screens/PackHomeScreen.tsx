@@ -1,28 +1,28 @@
-import { useLocalSearchParams } from "expo-router";
-import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import animations from "@/constants/animations";
-import { asEntry } from "@/util/animations";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import colors from "@/constants/colors";
-import images from "@/constants/images";
-import layouts from "@/constants/layouts";
-import packThemes from "@/styles/themes";
 import GameButton from "@/components/buttons/GameButton";
 import NavigationButton from "@/components/buttons/NagivationButton";
 import BaseHeader from "@/components/headers/BaseHeader";
 import GameBoard from "@/components/status/GameBoard";
-import TargetWord from "@/components/status/TargetWord";
 import GameGrid from "@/components/status/GameGrid";
+import TargetWord from "@/components/status/TargetWord";
+import animations from "@/constants/animations";
+import colors from "@/constants/colors";
+import images from "@/constants/images";
+import layouts from "@/constants/layouts";
 import { useGame } from "@/context/GameContext";
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
 import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
 import targetWord from "@/styles/targetWord";
+import packThemes from "@/styles/themes";
 import tile from "@/styles/tile";
+import { asEntry } from "@/util/animations";
+import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { Dimensions, ImageBackground, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 /**
  * Pack screen
@@ -39,13 +39,15 @@ function PackHomeScreen() {
     images.backgrounds.packs[packName as keyof typeof images.backgrounds.packs];
   const tileColor = theme.gameGrid.tileColor;
   const targetTileColor = theme.gameGrid.targetTileColor;
+  const { width, height } = Dimensions.get("window");
+  const isTablet = Math.min(width, height) >= 768;
 
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
         style={styles.background}
         source={backgroundImage}
-        resizeMode="cover"
+        resizeMode={isTablet ? "contain" : "cover"}
       >
         {/* Empty Header for alignment */}
         <BaseHeader
@@ -100,6 +102,8 @@ function PackHomeScreen() {
               startNewGame();
             }}
             styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Start a new game"}
           />
 
           <NavigationButton
@@ -108,6 +112,8 @@ function PackHomeScreen() {
             soundEffect={playClickSound}
             toScreen="MenuScreen"
             fromScreen="HomeScreen"
+            accessibilityRole={"button"}
+            accessibilityLabel="Open menu"
           />
         </View>
       </ImageBackground>
@@ -119,11 +125,10 @@ function PackHomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.WHITE,
   },
   background: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
   },
   boardGroup: {
     flexDirection: "row",

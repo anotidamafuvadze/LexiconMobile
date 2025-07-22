@@ -1,9 +1,9 @@
+import game from "@/constants/game";
+import splash from "@/styles/splash";
 import React, { useEffect, useRef, useState } from "react";
 import { Text } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import Animated, { FadeIn } from "react-native-reanimated";
-import game from "@/constants/game";
-import splash from "@/styles/splash";
 
 /**
  * WinningSplash
@@ -24,6 +24,10 @@ function WinningSplash({ heading = "You Won!" }: { heading?: string }) {
   return (
     <Animated.View
       style={splash.win}
+      accessible={true}
+      accessibilityRole="alert"
+      accessibilityLiveRegion="polite"
+      accessibilityLabel={heading}
       entering={FadeIn.duration(game.SPLASH_DURATION)}
     >
       <ConfettiCannon

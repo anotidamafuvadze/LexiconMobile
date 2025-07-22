@@ -22,6 +22,10 @@ function LosingSplash({ heading = "You Lost" }: { heading?: string }) {
   return (
     <Animated.View
       style={splash.lost}
+      accessible={true}
+      accessibilityRole="alert"
+      accessibilityLiveRegion="polite"
+      accessibilityLabel={heading}
       entering={FadeIn.duration(game.SPLASH_DURATION)}
     >
       <Text style={splash.text}>{heading}</Text>

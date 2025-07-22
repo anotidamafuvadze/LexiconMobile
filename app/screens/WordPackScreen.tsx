@@ -1,19 +1,19 @@
-import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import { useRouter } from "expo-router";
-import animations from "@/constants/animations";
-import images from "@/constants/images";
-import layouts from "@/constants/layouts";
-import { asEntry } from "@/util/animations";
 import BackButton from "@/components/buttons/BackButton";
 import GameButton from "@/components/buttons/GameButton";
 import BaseHeader from "@/components/headers/BaseHeader";
+import animations from "@/constants/animations";
+import images from "@/constants/images";
+import layouts from "@/constants/layouts";
 import { useGame } from "@/context/GameContext";
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
 import buttons from "@/styles/buttons";
 import headers from "@/styles/headers";
+import { asEntry } from "@/util/animations";
+import { useRouter } from "expo-router";
+import React from "react";
+import { ImageBackground, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 /**
  * Word Pack selection screen
@@ -27,7 +27,7 @@ function WordPacks() {
 
   // Handle word pack selection
   const handleButtonPress = (pack: string) => {
-    console.log("PACK: " + pack)
+    console.log("PACK: " + pack);
     setTheme(pack);
     generateNewWord(pack); // Update word bank and theme
     startNewGame();
@@ -73,6 +73,8 @@ function WordPacks() {
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
             iconAdjust={{ top: layouts.NATURE_ICON_TOP }} // Move up slightly
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select nature pack"}
           />
 
           {/* Food Pack */}
@@ -84,6 +86,8 @@ function WordPacks() {
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
             iconAdjust={{ top: layouts.FOOD_ICON_TOP }} // Move up slightly
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select food pack"}
           />
 
           {/* Animals Pack */}
@@ -95,6 +99,8 @@ function WordPacks() {
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
             iconAdjust={{ transform: [{ scale: layouts.ANIMALS_ICON_SCALE }] }}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select animals pack"}
           />
 
           {/* Story Pack */}
@@ -105,6 +111,8 @@ function WordPacks() {
             onPress={() => handleButtonPress("story")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select story pack"}
           />
 
           {/* Classic Pack */}
@@ -115,6 +123,8 @@ function WordPacks() {
             onPress={() => handleButtonPress("default")}
             entering={asEntry(animations.SLIDE_IN())}
             style={buttons.wordPack}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select default pack"}
           />
         </View>
       </ImageBackground>

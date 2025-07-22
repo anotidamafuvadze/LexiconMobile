@@ -1,6 +1,6 @@
+import { asEntry } from "@/util/animations";
 import React from "react";
 import { StyleProp, Text, TextStyle, View, ViewStyle } from "react-native";
-import { asEntry } from "@/util/animations";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
@@ -12,6 +12,7 @@ import Animated from "react-native-reanimated";
  * - Animated UI block that displays a scrore and pops
  * - Supports custom styling and entry animation
  */
+
 function GameBoard({
   title,
   count,
@@ -42,6 +43,9 @@ function GameBoard({
     <Animated.View
       style={[style.board, styleAdjust?.board, width]}
       entering={asEntry(entering)}
+      accessible={true}
+      accessibilityRole="text"
+      accessibilityLabel={`${title}: ${count}`}
     >
       <View style={style.container}>
         {/* Title label */}

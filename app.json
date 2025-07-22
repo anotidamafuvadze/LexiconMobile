@@ -3,12 +3,13 @@
     "name": "Lexicon",
     "slug": "lexicon",
     "version": "1.0.0",
-    "orientation": "default",
-    "icon": "./app/assets/images/app-logo.png",
+    "orientation": "portrait",
+    "icon": "./app/assets/images/branding/app-logo.png",
     "scheme": "lexicon",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "icon": "./app/assets/images/branding/app-logo.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.anotidamafuvadze.lexicon",
       "infoPlist": {
@@ -19,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/images/adaptive-logo.png",
+        "foregroundImage": "./app/assets/images/branding/adaptive-logo.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -38,17 +39,9 @@
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./app/assets/images/splash-screen.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],
       "expo-font",
-      "expo-audio"
+      "expo-audio",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

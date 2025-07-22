@@ -1,18 +1,18 @@
+import GameButton from "@/components/buttons/GameButton";
+import SoundButton from "@/components/buttons/SoundButton";
+import images from "@/constants/images";
+import layouts from "@/constants/layouts";
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
+import buttons from "@/styles/buttons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import images from "@/constants/images";
-import layouts from "@/constants/layouts";
-import GameButton from "@/components/buttons/GameButton";
-import SoundButton from "@/components/buttons/SoundButton";
-import buttons from "@/styles/buttons";
 
 /**
  * Main menu screen
- * - Allows users resume, choose Word Packs, enter Game Lab  
+ * - Allows users resume, choose Word Packs, change difficulty,
  * view instructions, or rate the app.
  */
 
@@ -41,7 +41,7 @@ function MenuScreen() {
       // Navigate buttons
       case "WordPack":
       case "Difficulty":
-      case "Instruction":
+      case "FirstInstruction":
         router.push(`/screens/${buttonPressed}Screen`);
         break;
 
@@ -79,6 +79,8 @@ function MenuScreen() {
               transform: [{ scale: layouts.RESUME_BUTTON_SCALE }],
               marginBottom: layouts.RESUME_BUTTON_MARGIN_BOTTOM,
             }}
+            accessibilityRole={"button"}
+            accessibilityLabel="Resume your game"
           />
 
           {/* Word Packs */}
@@ -86,20 +88,26 @@ function MenuScreen() {
             title="Word Packs"
             onPress={handleButtonPress("WordPack")}
             style={buttons.menuScreen}
+            accessibilityRole={"button"}
+            accessibilityLabel="Choose a word pack"
           />
 
-          {/* Game Lab */}
+          {/* Difficulty */}
           <GameButton
             title="Difficulty"
             onPress={handleButtonPress("Difficulty")}
             style={buttons.menuScreen}
+            accessibilityRole={"button"}
+            accessibilityLabel="Change the difficulty"
           />
 
           {/* Instructions */}
           <GameButton
             title="How To Play"
-            onPress={handleButtonPress("Instruction")}
+            onPress={handleButtonPress("FirstInstruction")}
             style={buttons.menuScreen}
+            accessibilityRole={"button"}
+            accessibilityLabel="Learn how to play the game"
           />
 
           {/* App Rating */}
@@ -110,6 +118,8 @@ function MenuScreen() {
             styleAdjust={{
               transform: [{ scale: layouts.RATE_BUTTON_SCALE }],
             }}
+            accessibilityRole={"button"}
+            accessibilityLabel="Rate this app"
           />
         </View>
       </ImageBackground>

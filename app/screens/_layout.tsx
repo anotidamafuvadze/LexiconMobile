@@ -31,8 +31,11 @@ export default function RootLayout() {
         <WordProvider>
           <GameProvider>
             <SoundProvider>
-              <Stack screenOptions={{ headerShown: false }}>
+              <Stack
+                screenOptions={{ headerShown: false }}
+              >
                 {/* Home screen — no animation */}
+
                 <Stack.Screen name="HomeScreen" options={{ animation: "none" }} />
                 {/* Menu screen
                   - Fades in by default
@@ -62,20 +65,10 @@ export default function RootLayout() {
                 <Stack.Screen name="PackHomeScreen" options={{ animation: "none" }} />
                 {/* Difficulty selection — fade animation */}
                 <Stack.Screen name="DifficultyScreen" options={{ animation: "fade" }} />
-                {/* Game Lab
-                  - Slides in by default
-                  - No animation when returning from Difficulty screen
-              */}
+                <Stack.Screen name="InstructionScreen" options={{ animation: "none" }} />
                 <Stack.Screen
-                  name="GameLabScreen"
-                  options={({ route }) => {
-                    const params = route.params as { from?: string };
-                    const from = params?.from;
-                    return {
-                      animation:
-                        from === "DifficultyScreen" ? "none" : "slide_from_right",
-                    };
-                  }}
+                  name="FirstInstructionScreen"
+                  options={{ animation: "none" }}
                 />
               </Stack>
             </SoundProvider>

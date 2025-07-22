@@ -4,8 +4,8 @@ import { router } from "expo-router";
 export type ScreenPath =
   | "/screens/HomeScreen"
   | "/screens/InstructionScreen"
+  | "/screens/FirstInstructionScreen"
   | "/screens/MenuScreen"
-  | "/screens/GameLabScreen"
   | "/screens/DifficultyScreen"
   | "/screens/WordPackScreen"
   | "/screens/PackHomeScreen";
@@ -13,9 +13,9 @@ export type ScreenPath =
 // Valid screen names
 export type ScreenName =
   | "HomeScreen"
+  | "FirstInstructionScreen"
   | "InstructionScreen"
   | "MenuScreen"
-  | "GameLabScreen"
   | "DifficultyScreen"
   | "WordPackScreen"
   | "PackHomeScreen";

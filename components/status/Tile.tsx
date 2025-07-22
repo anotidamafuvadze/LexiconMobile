@@ -46,7 +46,7 @@ function Tile({
   letterStyle,
 }: TileComponentProps): React.JSX.Element {
   const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-  const TILE_DIMENSION = game.CONTAINER_WIDTH / game.TILE_COUNT_PER_DIMENSION;
+  const TILE_DIMENSION = layouts.GAME_GRID_WIDTH / game.TILE_COUNT_PER_DIMENSION;
 
   const previousValue = usePreviousProps(value);
   const hasChanged = previousValue !== value && previousValue != null;
@@ -116,7 +116,6 @@ function Tile({
       playLockSound();
       lockTile(tileId);
       setIsLocked(true);
-    
     }
   };
 
@@ -248,6 +247,14 @@ function Tile({
           { backgroundColor: tileColor },
           tileInTarget && { backgroundColor: targetColor },
         ]}
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel={`Tile with letter ${value}${isLocked ? ", locked" : ""}`}
+        accessibilityHint={
+          isLocked
+            ? "Double tap to unlock this tile,  long press to pop this tile"
+            : "Double tap to lock this tile, long press to pop this tile"
+        }
         onLongPress={handleLongPress}
         onPressOut={handlePressOut}
       >

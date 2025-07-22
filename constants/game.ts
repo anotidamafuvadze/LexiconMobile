@@ -18,9 +18,6 @@ const game = {
   NUMBER_OF_ROWS: 4,
   NUMBER_OF_COLS: 4,
 
-  // Board container
-  CONTAINER_WIDTH: 366,
-
   // Animation durations (ms)
   MOVE_ANIMATION_DURATION: 130,
   MERGE_ANIMATION_DURATION: 150,

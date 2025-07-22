@@ -1,10 +1,10 @@
-import React from "react";
-import { Image, Pressable, StyleSheet, Text, TextStyle } from "react-native";
 import colors from "@/constants/colors";
 import fonts from "@/constants/fonts";
-import metrics from "@/constants/layouts";
 import images from "@/constants/images";
+import metrics from "@/constants/layouts";
 import { useSound } from "@/context/SoundContext";
+import React from "react";
+import { Image, Pressable, StyleSheet, Text, TextStyle } from "react-native";
 
 /**
  * SoundButton
@@ -34,7 +34,13 @@ function SoundButton() {
   };
 
   return (
-    <Pressable onPress={handlePress} style={styles.button}>
+    <Pressable
+      onPress={handlePress}
+      style={styles.button}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={soundOn ? "Turn sound off" : "Turn sound on"}
+    >
       {/* Sound icon */}
       <Image
         source={soundOn ? images.icons.soundOn : images.icons.soundOff}

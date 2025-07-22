@@ -1,27 +1,11 @@
 
 // -------- CORE GAME FEATURES --------
-// TODO: ORIENTATION — Lock app to portrait mode (disable landscape)
-// TODO: GAME MODE — Add special tiles: Edit, Jump, Eraser
-// TODO: ADD - Add tile restriction if game is too easy with tile locking
-
-
-// -------- HOW TO PLAY --------
-
-// TODO: DESIGN — Create Canva template and have Yulie design splash screen and instruction page
-Instructions explain tile merging and swiping + tile locking + popping + game lab + word packs
-// TODO: LOGO — Crop splash screen to generate app icon
-// TODO: UI — Connect “How to Play” button to Instructions screen
-// TODO: UI — Build Instructions screen with forward/back buttons and page indicators
 // TODO: UX — Auto-show “How to Play” on first app launch using AsyncStorage
-
-
-// -------- APP STORE INTEGRATION --------
-
 // TODO: INTEGRATION — Link “Rate Us” button to App Store
-// TODO: UX — Save first-time user state using AsyncStorage
+// TODO: SHARE - Have a sharable screen that pops up when a user wins so they can share their win on social media
+// TODO: Add accessibility labels
 
 // -------- DOMAIN SETUP --------
-
 // TODO: Set lexicongame.app as the primary domain in Porkbun
 // TODO: Set up a 301 redirect on thelexicongame.app → lexicongame.app
 // TODO: Configure Universal Links (iOS) and App Links (Android) so visiting .app opens the app if installed
@@ -29,15 +13,13 @@ Instructions explain tile merging and swiping + tile locking + popping + game la
 
 // -------- FINAL TOUCHES --------
 
-// TODO: FIX - Fix weird shadow that appears when you reload (need outside helpe)
+// TODO: FIX - Fix weird shadow that appears when you reload 
 // TODO: FIX - Disable button clicking while you win animation is playing
 // TODO: ANDROID — Test and polish Android version
-// TODO: WEB — Make a web version using React Native for Web
-// TODO: ADS & SHOP — Add AdScreen and ShopScreen (for buying word packs/tiles)
+// TODO: WEB — Test and polish web version using React Native for Web
+// TODO: ADS & SHOP — Add AdScreen and ShopScreen (for buying word packs)
 // TODO: UTILS — Create AdManager and ShopManager (research logic via videos/open-source)
-// TODO: GITHUB — Publish final project repo to GitHub
-
-
+// TODO: GITHUB — Publish final project repo to GitHub (make private) add to linkedin (projects)
 
 // -------- LEARNING --------
 

@@ -1,25 +1,40 @@
-// React and React Native
-import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
+import { useEffect, useRef } from "react";
 import { ActivityIndicator, View } from "react-native";
 
-// Navigation
-import { useRouter } from "expo-router";
-
-/**
- * App entry point
- * - Displays a loading spinner while redirecting to HomeScreen
- */
+// In index.tsx
 export default function Index() {
   const router = useRouter();
+  const navigationLock = useRef(false); // Add a navigation lock
 
-  // Redirect to HomeScreen on mount
   useEffect(() => {
-    requestAnimationFrame(() => {
-      router.push("/screens/HomeScreen");
-    });
+    const checkFirstLaunch = async () => {
+      if (navigationLock.current) return;
+      navigationLock.current = true;
+
+      try {
+        const hasSeen = await AsyncStorage.getItem("hasSeenInstructions");
+        
+        if (hasSeen !== "true") {
+          console.log("First launch - showing instructions");
+          await AsyncStorage.setItem("hasSeenInstructions", "true");
+          router.replace("/screens/FirstInstructionScreen");
+        } else {
+          console.log("Returning user - going to home");
+          router.replace("/screens/HomeScreen");
+        }
+      } catch (error) {
+        console.error("Error checking first launch:", error);
+        router.replace("/screens/HomeScreen");
+      } finally {
+        navigationLock.current = false;
+      }
+    };
+
+    checkFirstLaunch();
   }, [router]);
 
-  // Centered loading spinner
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ActivityIndicator size="large" />

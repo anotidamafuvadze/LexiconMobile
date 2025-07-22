@@ -1,4 +1,5 @@
 import React from "react";
+import type { AccessibilityRole } from "react-native";
 import { ImageSourcePropType, ImageStyle, TextStyle, ViewStyle } from "react-native";
 import type {
   EntryExitAnimationFunction,
@@ -21,6 +22,8 @@ function GameButton({
   style,
   iconAdjust,
   styleAdjust,
+  accessibilityRole,
+  accessibilityLabel,
 }: {
   title?: string;
   subtitle?: string;
@@ -37,6 +40,8 @@ function GameButton({
   };
   iconAdjust?: ImageStyle;
   styleAdjust?: ViewStyle;
+  accessibilityRole: AccessibilityRole;
+  accessibilityLabel: string;
 }): React.JSX.Element {
   return (
     <BaseButton
@@ -51,6 +56,8 @@ function GameButton({
       subtitleStyle={style.subtitle}
       textRowStyle={style.textRow}
       textColumnStyle={style.textColumn}
+      accessibilityRole={accessibilityRole}
+      accessibilityLabel={accessibilityLabel}
     />
   );
 }

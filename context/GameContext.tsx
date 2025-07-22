@@ -8,6 +8,7 @@ import gameReducer, {
   State,
 } from "@/reducers/gameReducer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
 import { isNil, throttle } from "lodash";
 import React, {
   createContext,
@@ -71,6 +72,7 @@ const GameContext = createContext<GameContextType>({
  * - Initializes the board with two starting tiles
  */
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
   const [gameState, dispatch] = useReducer(gameReducer, initialState);
   const [gameWinningTiles, setGameWinningTiles] = useState<string[] | null>([]);
   const hasStarted = useRef(false);
@@ -89,8 +91,6 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       if (stored) {
         dispatch({ type: "UPDATE_STATE", state: JSON.parse(stored) });
       } else {
-        // TODO: Show instructions
-        startNewGame();
         await AsyncStorage.setItem("gameState", JSON.stringify(initialState));
       }
     };

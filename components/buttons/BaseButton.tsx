@@ -1,4 +1,6 @@
+import { asEntry } from "@/util/animations";
 import React from "react";
+import type { AccessibilityRole } from "react-native";
 import {
   Image,
   ImageSourcePropType,
@@ -10,12 +12,11 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import Animated from "react-native-reanimated";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
 } from "react-native-reanimated";
-import { asEntry } from "@/util/animations";
+import Animated from "react-native-reanimated";
 
 /**
  * BaseButton
@@ -36,6 +37,8 @@ function BaseButton({
   textRowStyle,
   textColumnStyle,
   entering,
+  accessibilityRole,
+  accessibilityLabel,
 }: {
   title?: string;
   subtitle?: string;
@@ -48,12 +51,17 @@ function BaseButton({
   textRowStyle?: ViewStyle;
   textColumnStyle?: ViewStyle;
   entering?: EntryExitAnimationFunction | LayoutAnimation;
+  accessibilityRole: AccessibilityRole;
+  accessibilityLabel: string;
 }): React.JSX.Element {
   return (
     <Animated.View entering={asEntry(entering)}>
       <Pressable
         onPress={onPress}
         style={({ pressed }) => [buttonStyle, { opacity: pressed ? 0.7 : 1 }]}
+        accessible={true}
+        accessibilityRole={accessibilityRole}
+        accessibilityLabel={accessibilityLabel}
       >
         <View style={textRowStyle}>
           {icon && <Image source={icon} style={iconStyle} resizeMode="contain" />}

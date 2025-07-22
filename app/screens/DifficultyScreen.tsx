@@ -1,18 +1,17 @@
-
+import BackButton from "@/components/buttons/BackButton";
+import GameButton from "@/components/buttons/GameButton";
+import animations from "@/constants/animations";
+import colors from "@/constants/colors";
+import images from "@/constants/images";
+import { useGame } from "@/context/GameContext";
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
+import buttons from "@/styles/buttons";
+import { asEntry } from "@/util/animations";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import animations from "@/constants/animations";
-import { asEntry } from "@/util/animations";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import colors from "@/constants/colors";
-import images from "@/constants/images";
-import BackButton from "@/components/buttons/BackButton";
-import GameButton from "@/components/buttons/GameButton";
-import buttons from "@/styles/buttons";
-import { useGame } from "@/context/GameContext";
 
 /**
  * Difficulty selection screen
@@ -56,6 +55,8 @@ function DifficultySelection() {
               alignContent: "center",
               position: "absolute",
             }}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select easy"}
           />
 
           {/* Normal */}
@@ -70,6 +71,8 @@ function DifficultySelection() {
               alignContent: "center",
               position: "absolute",
             }}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select normal"}
           />
 
           {/* Hard */}
@@ -84,6 +87,8 @@ function DifficultySelection() {
               alignContent: "center",
               position: "absolute",
             }}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Select hard"}
           />
         </View>
       </ImageBackground>

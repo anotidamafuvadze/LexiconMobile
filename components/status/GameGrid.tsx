@@ -1,10 +1,10 @@
+import Tile from "@/components/status/Tile";
+import game from "@/constants/game";
+import { useGame } from "@/context/GameContext";
+import { Tile as TileModel } from "@/models/tile";
 import React from "react";
 import { StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
-import { useGame } from "@/context/GameContext";
-import game from "@/constants/game";
-import { Tile as TileModel } from "@/models/tile";
-import Tile from "@/components/status/Tile";
 import LosingSplash from "./LosingSplash";
 import WinningSplash from "./WinningSplash";
 
@@ -14,6 +14,7 @@ import WinningSplash from "./WinningSplash";
  * Supports custom styling for grid and tiles.
  * Handles swipe gestures to move tiles and update game state.
  */
+
 function GameGrid({
   gridStyle,
   tileStyle,
@@ -89,6 +90,10 @@ function GameGrid({
   return (
     <GestureRecognizer
       style={{ position: "absolute", alignSelf: "center" }}
+      accessible={true}
+      accessibilityRole="adjustable"
+      accessibilityLabel="Game grid"
+      accessibilityHint="Swipe up, down, left, or right to move tiles"
       onSwipeUp={() => handleSwiping("up")}
       onSwipeDown={() => handleSwiping("down")}
       onSwipeLeft={() => handleSwiping("left")}
@@ -96,7 +101,7 @@ function GameGrid({
     >
       {status === "LOST" && <LosingSplash />}
       {status === "WON" && <WinningSplash />}
-      <View style={[gridStyle.grid, gridStyleAdjust?.grid]}>
+      <View style={[gridStyle.grid, gridStyleAdjust?.grid]} accessible={false}>
         <View style={styles.tileContainer}>{renderTiles()}</View>
         <View style={styles.gridContainer}>{renderCells()}</View>
       </View>

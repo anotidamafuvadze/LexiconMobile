@@ -2,7 +2,7 @@
 
 // Single tile
 export type Tile = {
-  id?: string;
+  id: string;
   position: [number, number];
   value: string;
   justCreated: boolean;

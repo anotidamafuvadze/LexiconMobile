@@ -27,7 +27,7 @@ const colors = {
   GAME_LAB_BUTTON_BG: "rgb(241, 237, 229)",
 
   EASY_BUTTON: "rgba(137, 166, 137, 1)",
-  NORMAL_BUTTON: "rgba(243, 235, 211, 1)",
+  NORMAL_BUTTON: "rgba(230, 208, 139, 1)",
   HARD_BUTTON: "rgba(157, 85, 78, 1)",
 
   // ======================= BUTTON BORDERS =======================

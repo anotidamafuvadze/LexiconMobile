@@ -1,3 +1,15 @@
+import { Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
+const BASE_WIDTH = 428; // base design reference
+
+// calculate raw scale
+const rawFontScale = width / BASE_WIDTH;
+
+// clamp scale to avoid huge fonts on iPads
+const fontScale = Math.min(rawFontScale, 1.0); // cap at 1.0
+const isTablet = width >= 768;
+
 const fonts = {
   // ======================= FONT FAMILIES =======================
   family: {
@@ -17,45 +29,40 @@ const fonts = {
   // ======================= FONT SIZES =======================
   size: {
     // Home screen
-    homeTitle: 70,
-    homeSubtitle: 21,
-    homeButton: 30,
-    tileLetter: 40,
+    homeTitle: (70 * fontScale) + (isTablet ? 5 : 0),
+
+    homeSubtitle: 21 * fontScale,
+    homeButton: 30 * fontScale,
+    tileLetter: 40 * fontScale,
 
     // Menu screen
-    menuButton: 40,
-    soundButton: 50,
-    difficultyButton: 40,
+    menuButton: 40 * fontScale,
+    soundButton: 50 * fontScale,
+    difficultyButton: 40 * fontScale,
 
     // Word pack
-    wordPackTitle: 53,
-    wordPackSubtitle: 20,
-    wordPackButtonTitle: 30,
-    wordPackButtonSubtitle: 17,
-
-    // Game lab
-    gameLabHeaderTitle: 50,
-    gameLabSubtitle: 21,
-    gameLabButtonTitle: 28,
-    gameLabButtonSubtitle: 18,
+    wordPackTitle: 53 * fontScale,
+    wordPackSubtitle: 20 * fontScale,
+    wordPackButtonTitle: 30 * fontScale,
+    wordPackButtonSubtitle: 17 * fontScale,
 
     // Target section
-    targetTitle: 30,
-    targetWord: 60,
+    targetTitle: 30 * fontScale,
+    targetWord: 60 * fontScale,
 
     // Score section
-    scoreLabel: 23,
-    scoreValue: 32,
+    scoreLabel: 23 * fontScale,
+    scoreValue: 32 * fontScale,
 
     // Game results
-    splash: 48,
+    splash: 48 * fontScale,
 
     // Target word sizes by theme
     targetWordSize: {
-      nature: 75,
-      food: 75,
-      animals: 90,
-      story: 48,
+      nature: 75 * fontScale,
+      food: 75 * fontScale,
+      animals: 90 * fontScale,
+      story: 48 * fontScale,
     },
   },
 

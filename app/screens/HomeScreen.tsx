@@ -1,24 +1,24 @@
-import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import colors from "@/constants/colors";
-import images from "@/constants/images";
-import layouts from "@/constants/layouts";
 import GameButton from "@/components/buttons/GameButton";
 import NavigationButton from "@/components/buttons/NagivationButton";
 import BaseHeader from "@/components/headers/BaseHeader";
 import GameBoard from "@/components/status/GameBoard";
-import TargetWord from "@/components/status/TargetWord";
 import GameGrid from "@/components/status/GameGrid";
+import TargetWord from "@/components/status/TargetWord";
+import colors from "@/constants/colors";
+import images from "@/constants/images";
+import layouts from "@/constants/layouts";
 import { useGame } from "@/context/GameContext";
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
 import buttons from "@/styles/buttons";
 import gameBoard from "@/styles/gameBoard";
 import gameGrid from "@/styles/gameGrid";
 import headers from "@/styles/headers";
 import targetWord from "@/styles/targetWord";
 import tile from "@/styles/tile";
+import React from "react";
+import { ImageBackground, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 /**
  * Home screen
@@ -86,6 +86,8 @@ function HomeScreen() {
               startNewGame();
             }}
             styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
+            accessibilityRole={"button"}
+            accessibilityLabel={"Start a new game"}
           />
 
           {/* Menu */}
@@ -95,6 +97,8 @@ function HomeScreen() {
             soundEffect={playClickSound}
             toScreen="MenuScreen"
             fromScreen="HomeScreen"
+            accessibilityRole={"button"}
+            accessibilityLabel="Open menu"
           />
         </View>
       </ImageBackground>
@@ -106,11 +110,11 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.WHITE,
   },
   background: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    alignContent: "center",
   },
   boardGroup: {
     flexDirection: "row",
