@@ -52,11 +52,6 @@ export default function useFonts() {
     // ======================= SHADOWS =======================
     shadow: {
       gameBoard: {
-        color: "rgba(64, 59, 53, 0.8)",
-        opacity: 0.8,
-        radius: 0,
-      },
-      packGameBoard: {
         color: "rgba(0, 0, 0, 0.7)",
         opacity: 0.7,
         radius: 0,

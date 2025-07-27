@@ -26,10 +26,6 @@ export default function useGameBoardStyles() {
       backgroundColor: colors.DEFAULT_BOARD_BG,
       justifyContent: "flex-start",
       alignItems: "center",
-      shadowColor: fonts.shadow.gameBoard.color,
-      shadowOpacity: fonts.shadow.gameBoard.opacity,
-      shadowRadius: fonts.shadow.gameBoard.radius,
-      shadowOffset: fonts.shadow.offset.gameBoard,
     } as ViewStyle,
 
     // ======================= Score/Pop Wrapper =======================

@@ -35,6 +35,7 @@ const colors = {
 
   // ======================= DEFAULT SCREEN =======================
   DEFAULT_BOARD_BG: "rgb(247, 241, 237)",
+  DEFAULT_BOARD_SHADOW: "rgba(63, 46, 26, 1)",
   DEFAULT_BOARD_TEXT: "rgb(51, 50, 46)",
   DEFAULT_GRID_BG: "rgb(66, 56, 48)",
   DEFAULT_GRID_CELL: "rgb(132, 114, 100)",
@@ -47,7 +48,7 @@ const colors = {
   NATURE_PACK_BOARD_BG: "rgb(240, 242, 228)",
   NATURE_PACK_BOARD_TEXT: "rgb(43, 40, 33)",
   NATURE_PACK_GRID_BG: "rgba(30, 26, 18, 1)",
-  NATURE_PACK_GRID_CELL: "rgba(85, 85, 67, 1)",
+  NATURE_PACK_GRID_CELL: "rgba(92, 92, 73, 1)",
   NATURE_PACK_GRID_TILE: "rgba(64, 54, 42, 1)",
   NATURE_PACK_GRID_TARGET_TILE: "rgba(92, 98, 82, 1))",
   NATURE_PACK_TARGET_WORD: "rgba(255, 255, 255, 1)",
@@ -68,7 +69,7 @@ const colors = {
   ANIMALS_PACK_GRID_CELL: "rgba(112, 105, 96, 1)",
   ANIMALS_PACK_GRID_TILE: "rgba(77, 71, 63, 1)",
   ANIMALS_PACK_GRID_TARGET_TILE: "rgba(94, 98, 87, 1))",
-  ANIMALS_PACK_TARGET_WORD: "rgba(117, 110, 100, 1)",
+  ANIMALS_PACK_TARGET_WORD: "rgba(255, 255, 255, 1)",
 
   // ======================= STORY PACK =======================
   STORY_PACK_BOARD_BG: "rgba(250, 240, 230, 1)",

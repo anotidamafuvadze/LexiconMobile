@@ -10,6 +10,7 @@ export default function usePackThemes() {
 
   const buildPackTheme = (options: {
     boardBg: string;
+    boardShadow?: string
     boardText: string;
     gridBg: string;
     gridCell: string;
@@ -30,9 +31,9 @@ export default function usePackThemes() {
         board: {
           backgroundColor: options.boardBg,
           borderColor: colors.BLACK,
-          shadowColor: fonts.shadow.packGameBoard.color,
-          shadowOpacity: fonts.shadow.packGameBoard.opacity,
-          shadowRadius: fonts.shadow.packGameBoard.radius,
+          shadowColor: options?.boardShadow || fonts.shadow.gameBoard.color,
+          shadowOpacity: fonts.shadow.gameBoard.opacity,
+          shadowRadius: fonts.shadow.gameBoard.radius,
           shadowOffset: fonts.shadow.offset.packGameBoard,
         } as ViewStyle,
         text: {
@@ -88,6 +89,7 @@ export default function usePackThemes() {
   const themes = useMemo(() => ({
     default: buildPackTheme({
       boardBg: colors.DEFAULT_BOARD_BG,
+      boardShadow: colors.DEFAULT_BOARD_SHADOW,
       boardText: colors.DEFAULT_BOARD_TEXT,
       gridBg: colors.DEFAULT_GRID_BG,
       gridCell: colors.DEFAULT_GRID_CELL,

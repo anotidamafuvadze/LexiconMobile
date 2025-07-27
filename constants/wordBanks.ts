@@ -3,33 +3,30 @@ const wordBank = [
  {
   name: "default",
   words: [
-    "ABLE", "ACID", "AGED", "AIDE", "ALOE", "AMID", "AREA", "BACK", "BAKE", "TILE",
-    "BALD", "BALL", "BAND", "BANK", "BARE", "BARK", "BASE", "BATH", "BEAM", "BEAN", 
-    "BEAR", "BEAT", "BEDS", "BELL", "BELT", "BEND", "BIKE", "BILL", "BIRD", "BITE", 
-    "BOLD", "BOLT", "BOND", "BONE", "BOOK", "BOOM", "BOOT", "BOTH", "BOWL", "CAFE", 
-    "CAGE", "CAKE", "CALM", "CAME", "CAMP", "CARD", "CARE", "CARP", "CART", "CASE", 
-    "CASH", "CELL", "CHEF", "CHEW", "CHIN", "CHIP", "CHOP", "CLAM", "CLAP", "CHAT", 
-    "CLIP", "COAL", "COAT", "CODE", "COIL", "COIN", "COLD", "COMB", "COME", "COOK", 
-    "COOL", "COPE", "CORD", "CORE", "CORK", "CRAB", "CROP", "DARE", "DART", "MILD",
-    "DASH", "DATE", "DEAL", "DEAR", "DECK", "DEED", "DEEP", "DEER", "DESK", "DIAL",
-    "DICE", "DILL", "DIME", "DIRT", "DOLL", "DOOR", "DISH", "EACH", "EARL", "EARN", 
-    "ECHO", "EDGE", "EGGS", "ELSE", "FACE", "FADE", "FAIL", "FAIR", "FAKE", "FALL", 
-    "FAME", "FARE", "FARM", "FEAR", "FEED", "FEEL", "FEET", "FELL", "FELT", "FILE", 
-    "FILL", "FILM", "FIND", "FINE", "FIRE", "FIRM", "FISH", "FLAG", "FLAP", "FLAT", 
-    "FLEA", "FLED", "FLIP", "GALA", "GALE", "GALL", "GAME", "GASH", "GATE", "GEAR",
-    "GIFT", "GILL", "GILT", "GLAD", "GLEE", "GOAL", "GOAT", "GOLD", "GOLF", "GONE",
-    "GOOD", "GRAB", "HAIL", "HAIR", "HALE", "HALF", "HALL", "HALT", "HAND", "TAPE",
-    "HARD", "HARE", "HARK", "HARM", "HARP", "HATE", "HEAD", "HEAL", "HEAP", "HEAR",
-    "HEAT", "HEED", "HEEL", "HELD", "HELM", "HELP", "HERB", "HERD", "HERE", "HERO",
-    "IDEA", "IDLE", "INCH", "INFO", "INTO", "IRON", "JAIL", "JEEP", "JERK", "JEST",
-    "JIBE", "JILT", "JOIN", "JOKE", "JOLT", "KEEN", "KEEP", "KELP", "KEPT", "GERM",
-    "KICK", "KIND", "KING", "KISS", "KITE", "KNEE", "KNOB", "LACE", "LACK", "SAFE",
-    "LAID", "LAIR", "LAKE", "LAMB", "LAME", "LAMP", "LAND", "LANE", "MALT", "MAMA",
-    "LASH", "LATE", "LEAD", "LEAF", "LEAK", "LEAN", "LEAP", "LEEK", "LIDS", "LOCK", 
-    "MAID", "MAIL", "MAIN", "MAKE", "MALE", "MALL", "MANE", "MARE", "MASH", "MATE", 
-    "MATH", "MEAD", "MEAL", "MEAN", "MEAT", "MEEK", "MEET", "MELT", "MEMO", "PANS",
-    "MERE", "MESH", 
-  ],
+    "ABLE", "ACID", "AGED", "AIDE", "ALOE", "AREA", "BACK", "BAKE",
+    "BALD", "BALL", "BAND", "BANK", "BARE", "BARK", "BASE", "BATH",
+    "BEAM", "BEAN", "BEAR", "BEAT", "BEDS", "BELL", "BELT", "BEND",
+    "BEAM", "BIKE", "BITE", "CAFE", "CAGE", "CAKE", "CALM", "CAME",
+    "CARD", "CARE", "CARP", "CART", "CASE", "CASH", "CELL", "CHEF",
+    "CLAM", "CLAP", "CHAT", "COAL", "COAT", "CODE", "COIL",
+    "COIN", "COME", "COPE", "CORE", "DARE", "DART", "DASH", "DATE",
+    "DEAL", "DEAR", "DECK", "DEED", "DEEP", "DEER", "DESK", "DIAL",
+    "DICE", "DIME", "EACH", "EARL", "EARN", "ECHO", "EDGE", "EGGS",
+    "ELSE", "FACE", "FADE", "FAIL", "FAIR", "FAKE", "FALL", "FAME",
+    "FARE", "FARM", "FEAR", "FEED", "FEEL", "FEET", "FELL", "FELT",
+    "FILE", "FILL", "FILM", "FIND", "FINE", "FIRE", "FLEA", "FLED",
+    "GALA", "GALE", "GALL", "GAME", "GASH", "GATE", "GEAR", "GONE",
+    "HEAD", "HEAL", "HEAP", "HEAR", "HEAT", "HEED", "HEEL", "HELD",
+    "HELP", "HERB", "HERD", "HERE", "HAIL", "HAIR", "HALE",
+    "HALF", "HALL", "HALT", "HARE", "HARK", "HARM", "HARP", "HATE",
+    "IDEA", "JAIL", "JEEP", "JERK", "JEST", "JIBE", "JOKE", "KEEN",
+    "KEEP", "KELP", "KITE", "KNEE", "LACE", "LAID", "LAIR",
+    "LAKE", "LAME", "LAND", "LANE", "LASH", "LATE", "LEAD", "LEAF",
+    "LEAK", "LEAN", "LEAP", "LEEK", "MAKE", "MAID", "MAIL", "MAIN",
+    "MALE", "MALL", "MANE", "MARE", "MASH", "MATE", "MATH", "MEAD",
+    "MEAL", "MEAN", "MEAT", "MEEK", "MEET", "MELT", "MERE", "MESH",
+    "SAFE", "TAPE"
+  ]
 },
 
 
@@ -52,7 +49,7 @@ const wordBank = [
     words: [
       "GEEK", "HALL", "HILL", "HIVE", "HOLD", "HOLE", "HOOD", "JOGS", "JOKE", "JAIL",
       "KING", "KITE", "KEEN", "LOOK", "LOCK", "LEND", "LION", "LONG", "GLOW", "GONE",
-      "HANG", "HOOK", "LOGS", "JAZZ", "JURY", "JUTS", "JINX", "JOLT", "KILN", "KNOB",
+      "HANG", "HOOK", "LOGS", "JAZZ", "JURY", "JOLT", "KILN", "KNOB",
       "LAMB", "LUSH", "LULL", "MILD", "MELT", "MINT", "NODE", "NOVA", "OATH", "OBEY",
       "PEAK", "PEAR", "PEEL", "POND", "PUFF", "QUIZ", "RAFT", "REED", "ROAM", "RUST",
       "SASH", "TINT", "TURF", "VAIN", "VIBE", "WADE", "YANK", "ZEST"
@@ -93,7 +90,7 @@ const wordBank = [
       "ACAI", "BARS", "BASS", "BEEF", "BEAN", "BITE", "BOAR", "BREW", "BUNS", "CAKE",
       "CARP", "CHIP", "CHOP", "CHUB", "CLAM", "COKE", "COLA", "COOK", "CORN", "CRAB",
       "CURY", "DACE", "DATE", "DEER", "DILL", "DISH", "DOLE", "DRUM", "DUCK", "EGGS",
-      "FISH", "FOOD", "FORK", "GOAT", "GOBY", "GRUB", "HARE", "HENS", "HOPS", "IBEX",
+      "FISH", "FOOD", "FORK", "GOAT", "GRUB",
       "JELL", "JUNK", "KALE", "KIWI", "LAMB", "LARD", "LEAF", "LIME", "LION", "LOAF",
       "MACK", "MEAL", "MEAT", "MILK", "MINT", "MISO", "MUFF", "ZEST", "NUTS", "OATS",
       "OKRA", "OLIO", "PEAR", "PEAS", "PIES", "PIKE", "PITA", "PLUM", "YAMS", "POKE",
@@ -128,13 +125,6 @@ const wordBank = [
     ],
   },
 
-  // ======================= HOME =======================
-  {
-    name: "Home",
-    words: [
-      
-    ],
-  },
 ];
 
 export default wordBank;
