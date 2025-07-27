@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import GameButton from "@/components/buttons/GameButton";
@@ -46,7 +46,7 @@ function MenuScreen() {
         break;
 
       case "Rate":
-        // TODO: Open app store for rating
+        Alert.alert("Coming Soon", "You'll be able to rate the app once it's live!");
         break;
 
       default:

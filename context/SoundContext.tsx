@@ -14,7 +14,6 @@ import React, {
  * - Plays, toggles, and resumes background music and effects
  */
 
-// TODO: put all numbers (win sound) into constants
 
 // ===== Sound files =====
 const backgroundMusic = require("../app/assets/sounds/background-music.mp3");

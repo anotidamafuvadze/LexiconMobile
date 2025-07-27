@@ -1,46 +1,49 @@
+import React, { useEffect, useState } from "react";
+import { View, ActivityIndicator, Dimensions } from "react-native";
+import { Redirect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
-import React, { useEffect } from "react";
-import { ActivityIndicator, Dimensions, View } from "react-native";
-
-/**
- * Index
- * - Entry point of the app
- * - Checks if user has played before and navigates accordingly
- */
 
 export default function Index() {
-  const router = useRouter();
+  const [initialRoute, setInitialRoute] = useState<"/screens/HomeScreen" | "/screens/InstructionScreen" | null>(null);
+
   const { width, height } = Dimensions.get("window");
   const isTablet = Math.min(width, height) >= 768;
 
+  // Lock orientation on phones
   useEffect(() => {
     const lockOrientation = async () => {
       if (!isTablet) {
-        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
       }
     };
-
     lockOrientation();
-  }, []);
+  }, [isTablet]);
 
+  // Determine initial route based on whether the user has played before
   useEffect(() => {
     const checkIfPlayed = async () => {
-      const stored = await AsyncStorage.getItem("gameState");
-      if (stored) {
-        router.push("/screens/HomeScreen");
-      } else {
-        router.push("/screens/InstructionScreen");
+      try {
+        const stored = await AsyncStorage.getItem("gameState");
+        setInitialRoute(stored ? "/screens/HomeScreen" : "/screens/InstructionScreen");
+      } catch (error) {
+        console.error("Failed to load game state:", error);
+        setInitialRoute("/screens/InstructionScreen");
       }
     };
 
     checkIfPlayed();
-  }, [router]);
+  }, []);
 
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+  // Show loading indicator while deciding where to go
+  if (!initialRoute) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  // Redirect to the appropriate screen
+  return <Redirect href={initialRoute} />;
 }
