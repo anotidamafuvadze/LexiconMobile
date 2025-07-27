@@ -1,223 +1,184 @@
 import colors from "@/constants/colors";
-import fonts from "@/constants/fonts";
-import layouts from "@/constants/layouts";
+import useFonts from "@/constants/fonts";
+import useLayouts from "@/constants/layouts";
+import { useMemo } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 
-const packThemes = {
-  // ======================= NATURE PACK =======================
-  nature: {
-    // Score + Pops board
-    gameBoard: {
-      board: {
-        backgroundColor: colors.NATURE_PACK_BOARD,
-        borderColor: colors.BLACK,
-        boxShadow: fonts.shadow.packGameBoard,
-      } as ViewStyle,
-      text: {
-        color: colors.NATURE_PACK_BOARD_TEXT,
-      } as TextStyle,
-    },
-    // Game grid
-    gameGrid: {
-      tileColor: colors.NATURE_PACK_GRID_TILE,
-      targetTileColor: colors.NATURE_PACK_GRID_TARGET_TILE,
-      grid: {
-        backgroundColor: colors.NATURE_PACK_GRID_BG,
-      } as ViewStyle,
-      cell: {
-        backgroundColor: colors.NATURE_PACK_GRID_CELL,
-        borderWidth: 3,
-        borderColor: colors.BLACK,
-      } as ViewStyle,
-    },
+export default function usePackThemes() {
+  const layouts = useLayouts();
+  const fonts = useFonts();
 
-    // Target word
-    targetWord: {
-      title: {
-        color: colors.NATURE_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.natureLabel,
-        textShadowRadius: 0,
-        top: layouts.NATURE_PACK_TITLE_TOP,
-      } as TextStyle,
-      word: {
-        fontFamily: "Nature",
-        fontSize: fonts.size.targetWordSize.nature,
-        color: colors.NATURE_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.natureWord,
-        textShadowRadius: 0,
-        letterSpacing:layouts.NATURE_PACK_LETTER_SPACING,
-        top: layouts.NATURE_PACK_WORD_TOP,
-        marginBottom: layouts.NATURE_PACK_WORD_MARGIN_BOTTOM,
-      } as TextStyle,
-    },
-  },
+  const buildPackTheme = (options: {
+    boardBg: string;
+    boardText: string;
+    gridBg: string;
+    gridCell: string;
+    gridTile: string;
+    gridTargetTile: string;
+    targetLabelColor: string;
+    targetWordColor: string;
+    top?: number;
+    marginTop?: number;
+    fontFamily?: string;
+    fontSize?: number;
+    labelOffset?: { label: { width: number; height: number; }; word: { width: number; height: number; } };
+    letterSpacing?: number;
+    wordMarginBottom?: number;
+  }) => {
+    return {
+      gameBoard: {
+        board: {
+          backgroundColor: options.boardBg,
+          borderColor: colors.BLACK,
+          shadowColor: fonts.shadow.packGameBoard.color,
+          shadowOpacity: fonts.shadow.packGameBoard.opacity,
+          shadowRadius: fonts.shadow.packGameBoard.radius,
+          shadowOffset: fonts.shadow.offset.packGameBoard,
+        } as ViewStyle,
+        text: {
+          color: options.boardText,
+        } as TextStyle,
+      },
+      gameGrid: {
+        tileColor: options.gridTile,
+        targetTileColor: options.gridTargetTile,
+        grid: {
+          backgroundColor: options.gridBg,
+        } as ViewStyle,
+        cell: {
+          backgroundColor: options.gridCell,
+          borderWidth: 3,
+          borderColor: colors.BLACK,
+        } as ViewStyle,
+        text: {
+          fontFamily: fonts.family.primary,
+          color: colors.WORD_PACK_BUTTON_TITLE,
+        } as TextStyle,
+      },
+      targetWord: {
+        title: {
+          fontSize: fonts.size.targetTitle,
+          fontWeight: fonts.weight.semiBold as TextStyle["fontWeight"],
+          fontFamily: fonts.family.primary,
+          color: options.targetLabelColor,
+          textShadowColor: colors.BLACK,
+          textShadowOffset: options.labelOffset?.label,
+          textShadowRadius: 0,
+          top: options.top,
+          textAlign: "center"
+        } as TextStyle,
+        word: {
+          fontSize: options.fontSize ?? fonts.size.targetWord.default,
+          fontWeight: fonts.weight.semiBold as TextStyle["fontWeight"],
+          fontFamily: options.fontFamily ?? fonts.family.primary,
+          color: options.targetWordColor,
+          letterSpacing: options.letterSpacing ?? layouts.LETTER_SPACING_SMALL,
+          textShadowColor: colors.BLACK,
+          textShadowOffset: options.labelOffset?.word,
+          textShadowRadius: 0,
+          top: options.top,
+          marginTop: options.marginTop,
+          marginBottom: options.wordMarginBottom,
+          textAlign: "center"
+        } as TextStyle,
+      },
+    };
+  };
 
-  // ======================= FOOD PACK =======================
-  food: {
-    // Score + Pops board
-    gameBoard: {
-      board: {
-        backgroundColor: colors.FOOD_PACK_BOARD,
-        borderColor: colors.BLACK,
-        boxShadow: fonts.shadow.packGameBoard,
-      } as ViewStyle,
-      text: {
-        color: colors.FOOD_PACK_BOARD_TEXT,
-      } as TextStyle,
-    },
+  const themes = useMemo(() => ({
+    default: buildPackTheme({
+      boardBg: colors.DEFAULT_BOARD_BG,
+      boardText: colors.DEFAULT_BOARD_TEXT,
+      gridBg: colors.DEFAULT_GRID_BG,
+      gridCell: colors.DEFAULT_GRID_CELL,
+      gridTile: colors.DEFAULT_GRID_TILE,
+      gridTargetTile: colors.DEFAULT_GRID_TARGET_TILE,
+      targetLabelColor: colors.DEFAULT_TARGET_WORD,
+      targetWordColor: colors.DEFAULT_TARGET_WORD,
+      top: layouts.DEFAULT_TARGET_WORD_TOP,
+      wordMarginBottom: layouts.DEFAULT_TARGET_WORD_MARGIN_BOTTOM,
+    }),
+    nature: buildPackTheme({
+      boardBg: colors.NATURE_PACK_BOARD_BG,
+      boardText: colors.NATURE_PACK_BOARD_TEXT,
+      gridBg: colors.NATURE_PACK_GRID_BG,
+      gridCell: colors.NATURE_PACK_GRID_CELL,
+      gridTile: colors.NATURE_PACK_GRID_TILE,
+      gridTargetTile: colors.NATURE_PACK_GRID_TARGET_TILE,
+      targetLabelColor: colors.NATURE_PACK_TARGET_WORD,
+      targetWordColor: colors.NATURE_PACK_TARGET_WORD,
+      fontFamily: "nature",
+      top: layouts.NATURE_PACK_TARGET_WORD_TOP,
+      marginTop: layouts.NATURE_PACK_TARGET_WORD_MARGIN_TOP,
+      fontSize: fonts.size.targetWord.nature,
+      labelOffset: {
+        label: fonts.shadow.offset.natureLabel,
+        word: fonts.shadow.offset.natureWord,
+      },
+      letterSpacing: layouts.NATURE_PACK_LETTER_SPACING,
+      wordMarginBottom: layouts.NATURE_PACK_TARGET_WORD_MARGIN_BOTTOM,
+    }),
+    food: buildPackTheme({
+      boardBg: colors.FOOD_PACK_BOARD_BG,
+      boardText: colors.FOOD_PACK_BOARD_TEXT,
+      gridBg: colors.FOOD_PACK_GRID_BG,
+      gridCell: colors.FOOD_PACK_GRID_CELL,
+      gridTile: colors.FOOD_PACK_GRID_TILE,
+      gridTargetTile: colors.FOOD_PACK_GRID_TARGET_TILE,
+      targetLabelColor: colors.FOOD_PACK_TARGET_WORD,
+      targetWordColor: colors.FOOD_PACK_TARGET_WORD,
+      fontFamily: "food",
+      fontSize: fonts.size.targetWord.food,
+      top: layouts.FOOD_PACK_TARGER_WORD_TOP,
+      marginTop: layouts.FOOD_PACK_TARGER_WORD_MARGIN_TOP,
+      labelOffset: {
+        label: fonts.shadow.offset.foodLabel,
+        word: fonts.shadow.offset.foodWord,
+      },
+      letterSpacing: layouts.FOOD_PACK_LETTER_SPACING,
+      wordMarginBottom: layouts.FOOD_PACK_TARGET_WORD_MARGIN_BOTTOM,
+    }),
+    animals: buildPackTheme({
+      boardBg: colors.ANIMALS_PACK_BOARD_BG,
+      boardText: colors.ANIMALS_PACK_BOARD_TEXT,
+      gridBg: colors.ANIMALS_PACK_GRID_BG,
+      gridCell: colors.ANIMALS_PACK_GRID_CELL,
+      gridTile: colors.ANIMALS_PACK_GRID_TILE,
+      gridTargetTile: colors.ANIMALS_PACK_GRID_TARGET_TILE,
+      targetLabelColor: colors.WHITE,
+      targetWordColor: colors.ANIMALS_PACK_TARGET_WORD,
+      fontFamily: "animals",
+      fontSize: fonts.size.targetWord.animals,
+      top: layouts.ANIMALS_PACK_TARGET_WORD_TOP,
+      marginTop: layouts.ANIMALS_PACK_TARGET_WORD_MARGIN_TOP,
+      labelOffset: {
+        label: fonts.shadow.offset.animalsLabel,
+        word: fonts.shadow.offset.animalsWord,
+      },
+      letterSpacing: layouts.ANIMALS_PACK_LETTER_SPACING,
+      wordMarginBottom: layouts.ANIMALS_PACK_TARGET_WORD_MARGIN_BOTTOM,
+    }),
+    story: buildPackTheme({
+      boardBg: colors.STORY_PACK_BOARD_BG,
+      boardText: colors.STORY_PACK_BOARD_TEXT,
+      gridBg: colors.STORY_PACK_GRID_BG,
+      gridCell: colors.STORY_PACK_GRID_CELL,
+      gridTile: colors.STORY_PACK_GRID_TILE,
+      gridTargetTile: colors.STORY_PACK_GRID_TARGET_TILE,
+      targetLabelColor: colors.STORY_PACK_TARGET_WORD,
+      targetWordColor: colors.STORY_PACK_TARGET_WORD,
+      fontFamily: "story",
+      fontSize: fonts.size.targetWord.story,
+      top: layouts.STORY_PACK_TARGET_WORD_TOP,
+      marginTop: layouts.STORY_PACK_TARGET_WORD_MARGIN_TOP,
+       labelOffset: {
+        label: fonts.shadow.offset.storyLabel,
+        word: fonts.shadow.offset.storyWord,
+      },
+      letterSpacing: layouts.STORY_PACK_LETTER_SPACING,
+      wordMarginBottom: layouts.STORY_PACK_TARGET_WORD_MARGIN_BOTTOM,
+    }),
+  }), [layouts]);
 
-    // Game grid
-    gameGrid: {
-      tileColor: colors.FOOD_PACK_GRID_TILE,
-      targetTileColor: colors.FOOD_PACK_GRID_TARGET_TILE,
-      grid: {
-        backgroundColor: colors.FOOD_PACK_GRID_BG,
-      } as ViewStyle,
-      cell: {
-        backgroundColor: colors.FOOD_PACK_GRID_CELL,
-        borderWidth: 3,
-        borderColor: colors.BLACK,
-      } as ViewStyle,
-      text: {
-        fontFamily: fonts.family.regular,
-        color: colors.WORD_PACK_TITLE,
-      } as TextStyle,
-    },
-
-    // Target word
-    targetWord: {
-      title: {
-        color: colors.FOOD_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.foodLabel,
-        textShadowRadius: 0,
-        top: layouts.FOOD_PACK_TITLE_TOP,
-      } as TextStyle,
-      word: {
-        fontFamily: "Food",
-        fontSize: fonts.size.targetWordSize.food,
-        color: colors.FOOD_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.foodWord,
-        textShadowRadius: 0,
-        letterSpacing: layouts.FOOD_PACK_LETTER_SPACING,
-        top: layouts.FOOD_PACK_WORD_TOP,
-        marginBottom: layouts.FOOD_PACK_WORD_MARGIN_BOTTOM,
-      } as TextStyle,
-    },
-  },
-
-  // ======================= ANIMALS PACK =======================
-  animals: {
-    // Score + Pops board
-    gameBoard: {
-      board: {
-        backgroundColor: colors.ANIMALS_PACK_BOARD,
-        borderColor: colors.BLACK,
-        boxShadow: fonts.shadow.packGameBoard,
-      } as ViewStyle,
-      text: {
-        color: colors.ANIMALS_PACK_BOARD_TEXT,
-      } as TextStyle,
-    },
-
-    // Game grid
-    gameGrid: {
-      tileColor: colors.ANIMALS_PACK_GRID_TILE,
-      targetTileColor: colors.ANIMALS_PACK_GRID_TARGET_TILE,
-      grid: {
-        backgroundColor: colors.ANIMALS_PACK_GRID_BG,
-      } as ViewStyle,
-      cell: {
-        backgroundColor: colors.ANIMALS_PACK_GRID_CELL,
-        borderWidth: 3,
-        borderColor: colors.BLACK,
-      } as ViewStyle,
-      text: {
-        fontFamily: fonts.family.regular,
-        color: colors.WORD_PACK_TITLE,
-      } as TextStyle,
-    },
-
-    // Target word
-    targetWord: {
-      title: {
-        color: colors.WHITE,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.animalsLabel,
-        textShadowRadius: 0,
-        top: layouts.ANIMALS_PACK_TITLE_TOP,
-      } as TextStyle,
-      word: {
-        fontFamily: "Animals",
-        fontSize: fonts.size.targetWordSize.animals,
-        color: colors.ANIMALS_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.animalsWord,
-        textShadowRadius: 0,
-        letterSpacing: layouts.ANIMALS_PACK_LETTER_SPACING,
-        top: layouts.ANIMALS_PACK_WORD_TOP,
-        marginBottom: layouts.ANIMALS_PACK_WORD_MARGIN_BOTTOM,
-      } as TextStyle,
-    },
-  },
-
-  // ======================= STORY PACK =======================
-  story: {
-    // Score + Pops board
-    gameBoard: {
-      board: {
-        backgroundColor: colors.STORY_PACK_BOARD,
-        borderColor: colors.BLACK,
-        boxShadow: fonts.shadow.packGameBoard,
-      } as ViewStyle,
-      text: {
-        color: colors.STORY_PACK_BOARD_TEXT,
-      } as TextStyle,
-    },
-
-    // Game grid
-    gameGrid: {
-      tileColor: colors.STORY_PACK_GRID_TILE,
-      targetTileColor: colors.STORY_PACK_GRID_TARGET_TILE,
-      grid: {
-        backgroundColor: colors.STORY_PACK_GRID_BG,
-      } as ViewStyle,
-      cell: {
-        backgroundColor: colors.STORY_PACK_GRID_CELL,
-        borderWidth: 3,
-        borderColor: colors.BLACK,
-      } as ViewStyle,
-      text: {
-        fontFamily: fonts.family.regular,
-        color: colors.WORD_PACK_TITLE,
-      } as TextStyle,
-    },
-
-    // Target word
-    targetWord: {
-      title: {
-        color: colors.STORY_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.storyLabel,
-        textShadowRadius: 0,
-        top: layouts.STORY_PACK_TITLE_TOP,
-      } as TextStyle,
-      word: {
-        fontFamily: "Story",
-        fontSize: fonts.size.targetWordSize.story,
-        color: colors.STORY_PACK_TARGET_WORD,
-        textShadowColor: colors.BLACK,
-        textShadowOffset: fonts.shadow.offset.storyWord,
-        textShadowRadius: 0,
-        letterSpacing: layouts.STORY_PACK_LETTER_SPACING,
-        top: layouts.STORY_PACK_WORD_TOP,
-        marginBottom: layouts.STORY_PACK_WORD_MARGIN_BOTTOM,
-      } as TextStyle,
-    },
-  },
-};
-
-export default packThemes;
+  return themes;
+}

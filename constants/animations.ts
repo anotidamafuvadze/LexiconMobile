@@ -2,11 +2,11 @@ import {
   BounceIn,
   Easing,
   Keyframe,
-  LightSpeedInRight,
+  LightSpeedInRight
 } from "react-native-reanimated";
 
 const animations = {
-  // ====================== FALL FAST ======================
+  // ========== FAST FALL ==========
   FALL_FAST: new Keyframe({
     0: {
       opacity: 0,
@@ -31,7 +31,7 @@ const animations = {
     },
   }).duration(1000),
 
-  // ====================== FALL SLOW ======================
+  // ========== SLOW FALL ==========
   FALL_SLOW: new Keyframe({
     0: {
       opacity: 0,
@@ -56,15 +56,10 @@ const animations = {
     },
   }).duration(1800),
 
-  // ====================== SLIDE IN ======================
-  SLIDE_IN: () =>
-    LightSpeedInRight.duration(600)
-      .easing(Easing.out(Easing.exp))
-      .withInitialValues({
-        transform: [{ translateX: 100 }, { skewX: "-5deg" }],
-      }),
+  // ========== SLIDE IN ==========
+  SLIDE_IN: LightSpeedInRight.duration(800),
 
-  // ====================== BOUNCE IN ======================
+  // ========== BOUNCE IN ==========
   BOUNCE_IN: BounceIn.duration(600),
 };
 

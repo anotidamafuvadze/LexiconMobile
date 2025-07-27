@@ -1,4 +1,3 @@
-import { Theme, themeToScreenPath } from "@/util/navigation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, {
   createContext,
@@ -11,9 +10,8 @@ import wordBanks from "../constants/wordBanks";
 
 /**
  * WordProvider
- * - Manages the current target word and theme state
- * - Loads a saved word from AsyncStorage on app launch
- * - Generates new words and updates theme dynamically
+ * - Handles target word and theme
+ * - Loads saved word, generates new words, and updates theme
  */
 
 type WordContextType = {
@@ -47,7 +45,6 @@ export const WordProvider = ({
       const bank = wordBanks.find((b) => b.name === activeTheme);
 
       if (!bank || bank.words.length === 0) return;
-
       let newWord = targetWord;
       let attempts = 0;
       const maxAttempts = 10;
@@ -86,12 +83,6 @@ export const WordProvider = ({
       setCurrentTheme(stored);
     } else {
       await setCurrentTheme(defaultTheme);
-    }
-
-    if ((currentTheme as Theme) in themeToScreenPath) {
-      themeToScreenPath[currentTheme as Theme](currentTheme);
-    } else {
-      console.warn(`No screen path defined for theme: ${currentTheme}`);
     }
   }, [defaultTheme, generateNewWord]);
 

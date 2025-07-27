@@ -1,9 +1,12 @@
 
 // -------- CORE GAME FEATURES --------
-// TODO: UX — Auto-show “How to Play” on first app launch using AsyncStorage
-// TODO: INTEGRATION — Link “Rate Us” button to App Store
-// TODO: SHARE - Have a sharable screen that pops up when a user wins so they can share their win on social media
-// TODO: Add accessibility labels
+// TODO: Fix ViewState
+// TODO: Fix linking error
+// TODO: Once yulie gives you laptop background adjust background for ipad to be ipad background 
+
+// TODO: Fix bug in android tablets
+// TODO: Test everything (test winning and losing in ios phone/ipad and android phone/ipad)
+// TODO: Polish everything
 
 // -------- DOMAIN SETUP --------
 // TODO: Set lexicongame.app as the primary domain in Porkbun
@@ -11,22 +14,31 @@
 // TODO: Configure Universal Links (iOS) and App Links (Android) so visiting .app opens the app if installed
 
 
+// -------- MARKETING -------
+// TODO: Write 2 week adverstising/marketing plan (watch lots of videos as research)
+
+
 // -------- FINAL TOUCHES --------
 
-// TODO: FIX - Fix weird shadow that appears when you reload 
-// TODO: FIX - Disable button clicking while you win animation is playing
 // TODO: ANDROID — Test and polish Android version
 // TODO: WEB — Test and polish web version using React Native for Web
-// TODO: ADS & SHOP — Add AdScreen and ShopScreen (for buying word packs)
-// TODO: UTILS — Create AdManager and ShopManager (research logic via videos/open-source)
+// TODO: Check on all different types of simulators and check on your phone to
 // TODO: GITHUB — Publish final project repo to GitHub (make private) add to linkedin (projects)
+// TODO: Publish on app store and website
+// TODO: Link “Rate Us” button to App Store
+// TODO: Implement marketing plan
 
 // -------- LEARNING --------
 
 // TODO: LEARNING — Watch key videos to solidify understanding
+// - useRouter: https://www.youtube.com/watch?v=JtvUBiNgyDg&t=70s
 // - useContext: https://www.youtube.com/watch?v=05ZM4ymK9Nc
+// - useCallBack: https://www.youtube.com/watch?v=tLvG7AGVO2c
+// - useReducer: https://www.youtube.com/watch?v=kK_Wqx3RnHk
 // - AsyncStorage: https://www.youtube.com/watch?v=UQrkf0kKLTM
 // - Reanimated: https://www.youtube.com/watch?v=8hW5Dnuu99Q
+// - React Native: https://www.youtube.com/watch?v=f8Z9JyB2EIE
+
 
 
 

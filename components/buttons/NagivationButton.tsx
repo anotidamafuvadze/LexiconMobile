@@ -1,31 +1,35 @@
-import { getScreenPath, ScreenName } from "@/util/navigation";
-import { useRouter } from "expo-router";
 import React from "react";
-import type { AccessibilityRole } from "react-native";
-import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import { useRouter } from "expo-router";
+import { getScreenPath, ScreenName } from "@/util/navigation";
+import BaseButton from "./BaseButton";
+
+import type { AccessibilityRole, ImageSourcePropType } from "react-native";
+import type { ImageStyle, TextStyle, ViewStyle } from "react-native";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
 } from "react-native-reanimated";
-import BaseButton from "./BaseButton";
 
 /**
  * NavigationButton
- * - Reusable animated button that plays a sound and navigates to a target screen
- * - Optionally passes a "from" screen parameter to the destination route
+ * - Reusable animated button that navigates to a target screen
  */
+
 function NavigationButton({
   title,
+  icon,
   soundEffect,
   entering,
   toScreen,
   fromScreen,
-  style: styleSet,
+  style,
+  iconAdjust,
   styleAdjust,
   accessibilityRole,
   accessibilityLabel,
 }: {
   title?: string;
+  icon?: ImageSourcePropType;
   soundEffect: () => void;
   entering?: EntryExitAnimationFunction | LayoutAnimation;
   toScreen: ScreenName;
@@ -37,17 +41,18 @@ function NavigationButton({
     textRow?: ViewStyle;
     textColumn?: ViewStyle;
   };
+  iconAdjust?: ImageStyle;
   styleAdjust?: ViewStyle;
   accessibilityRole: AccessibilityRole;
   accessibilityLabel: string;
 }): React.JSX.Element {
   const router = useRouter();
 
-  // Handles navigation and sound effect
+  // Play sound and navigate to target screen
   const handlePress = () => {
     soundEffect();
     router.push({
-      pathname: getScreenPath(toScreen as ScreenName),
+      pathname: getScreenPath(toScreen),
       params: { from: fromScreen },
     });
   };
@@ -55,12 +60,14 @@ function NavigationButton({
   return (
     <BaseButton
       title={title}
+      icon={icon}
       onPress={handlePress}
       entering={entering}
-      buttonStyle={[styleSet.button, styleAdjust]}
-      titleStyle={styleSet.title}
-      textRowStyle={styleSet.textRow}
-      textColumnStyle={styleSet.textColumn}
+      buttonStyle={[style.button, styleAdjust]}
+      iconStyle={[style.icon, iconAdjust]}
+      titleStyle={style.title}
+      textRowStyle={style.textRow}
+      textColumnStyle={style.textColumn}
       accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
     />

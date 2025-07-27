@@ -3,10 +3,9 @@ import { Text, TextStyle, View, ViewStyle } from "react-native";
 
 /**
  * BaseHeader
- * - Reusable header component with a title and subtitle
- * - Supports optional bold text appended to the subtitle
- * - Accepts custom styles for layout and text
+ * - Reusable title and subtitle header
  */
+
 function BaseHeader({
   title,
   subtitle,
@@ -18,7 +17,7 @@ function BaseHeader({
 }: {
   title?: string;
   subtitle?: string;
-  boldText?: string; // Optional bold text appended to subtitle
+  boldText?: string;
   containerStyle?: ViewStyle;
   titleStyle?: TextStyle;
   subtitleStyle?: TextStyle;
@@ -26,14 +25,13 @@ function BaseHeader({
 }): React.JSX.Element {
   return (
     <View style={containerStyle}>
-      {/* Title */}
-      <Text style={titleStyle}>{title}</Text>
-
-      {/* Subtitle */}
-      <Text style={subtitleStyle}>
-        {subtitle}
-        {boldText && <Text style={boldTextStyle}>{boldText}</Text>}
-      </Text>
+      {title && <Text style={titleStyle}>{title}</Text>}
+      {subtitle && (
+        <Text style={subtitleStyle}>
+          {subtitle}
+          {boldText && <Text style={boldTextStyle}>{boldText}</Text>}
+        </Text>
+      )}
     </View>
   );
 }

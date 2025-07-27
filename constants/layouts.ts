@@ -1,131 +1,138 @@
-import { Dimensions } from "react-native";
+import { useMemo } from "react";
+import { useWindowDimensions } from "react-native";
 
-const { width, height } = Dimensions.get("window");
+export default function useLayouts() {
+  const { width, height } = useWindowDimensions();
+  const BASE_HEIGHT = 926;
+  const BASE_WIDTH = 428;
 
-// Base dimensions
-const BASE_WIDTH = 428;
-const BASE_HEIGHT = 926;
+  const scaleHeight = height / BASE_HEIGHT;
+  const scaleWidth = width / BASE_WIDTH;
+  const isTablet = Math.min(width, height) >= 768;
+  const isPortrait = height > width;
 
-// Calculate raw scales
-const rawScaleW = width / BASE_WIDTH;
-const rawScaleH = height / BASE_HEIGHT;
+  return useMemo(() => ({
+    // ======================= HOME SCREEN =======================
+    HOME_HEADER_TOP: 5 * scaleHeight,
+    HOME_TARGET_WORD_TOP: 447 * scaleHeight,
+    HOME_BUTTON_TOP: 458 * scaleHeight,
+    HOME_BUTTON_GAP: 30 * scaleHeight,
+    HOME_BUTTON_PADDING_HORIZONTAL: 15 * scaleHeight,
+    HOME_BUTTON_PADDING_VERTICAL: 5 * scaleHeight,
+    HOME_BUTTON_BORDER_RADIUS: 21 * scaleHeight,
+    HOME_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
 
-// Clamp scales: don’t let it grow too big on iPads
-const scaleW = Math.min(rawScaleW, 1.0); // cap at 1.0 for width
-const scaleH = Math.min(rawScaleH, 1.0); // cap at 1.0 for height
+    // ======================= GAME BOARD =======================
+    GAME_BOARD_TOP: 25 * scaleHeight,
+    GAME_BOARD_HEIGHT: 83 * scaleHeight,
+    GAME_BOARD_BORDER_WIDTH: 2,
+    GAME_BOARD_BORDER_RADIUS: 27 * scaleHeight,
+    GAME_BOARD_GAP: 35 * scaleHeight,
+    GAME_BOARD_PADDING_HORIZONTAL: 20 * scaleHeight,
+    GAME_BOARD_COUNT_HEIGHT: 40 * scaleHeight,
+    SCORE_BOARD_WIDTH: 160 * scaleHeight,
+    POPS_BOARD_WIDTH: 120 * scaleHeight,
 
-const isTablet = Math.min(width, height) >= 768;
+    // ======================= GAME GRID =======================
+    GAME_GRID_TOP: 246 * scaleHeight,
+    GAME_GRID_SIZE: 380 * scaleHeight,
+    GAME_GRID_WIDTH: 366 * scaleHeight,
+    GAME_GRID_BORDER_RADIUS: 13 * scaleHeight,
+    GAME_GRID_PADDING: 7 * scaleHeight,
+    GAME_GRID_CELL_DIVISOR: 4.6,
+    GAME_GRID_CELL_MARGIN: 4 * scaleHeight,
+    GAME_GRID_CELL_BORDER_WIDTH: 3 * scaleHeight,
+    TILE_SIZE: 380 * scaleHeight / 4.6 ,
+    TILE_MARGIN_TOP: 4 * (isPortrait ? scaleWidth : scaleHeight),
+    TILE_MARGIN_BOTTOM: 4 * (isPortrait ? scaleWidth : scaleHeight),
+    TILE_MARGIN_LEFT: 4 * (isPortrait ? scaleWidth : scaleHeight),
+    TILE_MARGIN_RIGHT: 4 * (isPortrait ? scaleWidth : scaleHeight),
+    TILE_BORDER_WIDTH: 3 * scaleHeight,
 
-const layouts = {
-  // ======================= HOME SCREEN =======================
-  HOME_HEADER_TOP: (5 * rawScaleH) + (isTablet ? 50 : 0),
-  TARGET_WORD_TOP: (453 * rawScaleH) + (isTablet ? -50 : 0),
-  HOME_BUTTON_TOP: (465 * rawScaleH) + (isTablet ? -50 : 0),
-  HOME_BUTTON_GAP: 30 * scaleH,
-  HOME_BUTTON_PADDING_HORIZONTAL: 15 * scaleW,
-  HOME_BUTTON_PADDING_VERTICAL: 5 * scaleH,
-  HOME_BUTTON_BORDER_RADIUS: 20 * scaleW,
-  HOME_BUTTON_BORDER_WIDTH: 2 * scaleW,
+    // ======================= MENU SCREEN =======================
+    SOUND_BUTTON_TOP: 135 * scaleHeight,
+    MENU_BUTTON_TOP: 215 * scaleHeight,
+    MENU_BUTTON_MARGIN_TOP: 25 * scaleHeight,
+    MENU_BUTTON_BORDER_RADIUS: 33 * scaleHeight,
+    MENU_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
+    MENU_BUTTON_PADDING_HORIZONTAL: 25 * scaleHeight,
+    MENU_BUTTON_PADDING_VERTICAL: 10 * scaleHeight,
+    RESUME_BUTTON_MARGIN_BOTTOM: 20 * scaleHeight,
+    RESUME_BUTTON_SCALE: 1.18,
 
-  // ======================= GAME GRID =======================
-  GAME_GRID_TOP: 247 * rawScaleH,
-  GAME_GRID_SIZE: 380 * scaleW,
-  GAME_GRID_WIDTH: 366 * scaleW,
-  GAME_GRID_BORDER_RADIUS: 13 * scaleW,
-  GAME_GRID_PADDING: 7 * scaleW,
-  GAME_GRID_CELL_DIVISOR: 4.6,
-  GAME_GRID_CELL_MARGIN: 4 * scaleW,
-  GAME_GRID_CELL_BORDER_WIDTH: 3 * scaleW,
-  TILE_SIZE: (380 / 4.6) * scaleW,
-  TILE_MARGIN_TOP: 4 * scaleH,
-  TILE_MARGIN_BOTTOM: 4 * scaleH,
-  TILE_MARGIN_LEFT: 4 * scaleW,
-  TILE_MARGIN_RIGHT: 4 * scaleW,
-  TILE_BORDER_WIDTH: 3 * scaleW,
+    // ======================= WORD PACK SCREEN =======================
+    WORD_PACK_TITLE_TOP: 50 * scaleHeight,
+    WORD_PACK_BUTTON_TOP: 60 * scaleHeight,
+    WORD_PACK_BUTTON_WIDTH: 310 * scaleHeight,
+    WORD_PACK_BUTTON_HEIGHT: 80 * scaleHeight,
+    WORD_PACK_BUTTON_MARGIN_TOP: 23 * scaleHeight,
+    WORD_PACK_BUTTON_BORDER_RADIUS: 30 * scaleHeight,
+    WORD_PACK_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
+    WORD_PACK_ICON_SIZE: 80 * scaleHeight,
+    WORD_PACK_ICON_MARGIN_LEFT: 20 * scaleHeight,
+    WORD_PACK_TEXT_MARGIN_LEFT: 9 * scaleHeight,
+    WORD_PACK_TEXT_MARGIN_TOP: -10 * scaleHeight,
+    WORD_PACK_TITLE_WIDTH: 400 * scaleHeight,
+    WORD_PACK_TITLE_HEIGHT: 56 * scaleHeight,
+    WORD_PACK_TITLE_MARGIN_BOTTOM: 18 * scaleHeight,
+    WORD_PACK_SUBTITLE_WIDTH: 340 * scaleHeight,
+    WORD_PACK_SUBTITLE_MARGIN_TOP: -3 * scaleHeight,
+    NATURE_ICON_TOP: -5 * scaleHeight,
+    FOOD_ICON_TOP: -5 * scaleHeight * scaleHeight,
+    ANIMALS_ICON_SCALE: 1.05,
 
-  // ======================= GAME BOARD =======================
-  GAME_BOARD_TOP: (25 * rawScaleH) + (isTablet ? 50 : 0),
-  GAME_BOARD_HEIGHT: 83 * scaleH,
-  GAME_BOARD_BORDER_WIDTH: 2 * scaleW,
-  GAME_BOARD_BORDER_RADIUS: 27 * scaleW,
-  GAME_BOARD_GAP: 35 * scaleW,
-  GAME_BOARD_PADDING_HORIZONTAL: 20 * scaleW,
-  GAME_BOARD_COUNT_HEIGHT: 40 * scaleH,
-  SCORE_BOARD_WIDTH: 160 * scaleW,
-  POPS_BOARD_WIDTH: 120 * scaleW,
+    // ======================= DIFFICULTY SCREEN =======================
+    DIFFICULTY_BUTTON_TOP: 230 * scaleHeight,
+    DIFFICULTY_BUTTON_WIDTH: 310 * scaleHeight,
+    DIFFICULTY_BUTTON_HEIGHT: 100 * scaleHeight,
+    DIFFICULTY_BUTTON_MARGIN_TOP: 25 * scaleHeight,
+    DIFFICULTY_BUTTON_BORDER_WIDTH: 5,
+    DIFFICULTY_BUTTON_BORDER_RADIUS: 40 * scaleHeight,
+    EASY_BUTTON_SCALE: 0.23 * scaleHeight,
+    NORMAL_BUTTON_SCALE: 0.3 * scaleHeight,
+    HARD_BUTTON_SCALE: 0.32 * scaleHeight,
 
-  // ======================= MENU SCREEN =======================
-  SOUND_BUTTON_TOP: 135 * rawScaleH,
-  MENU_BUTTON_TOP: 215 * rawScaleH,
-  MENU_BUTTON_MARGIN_TOP: 25 * scaleH,
-  MENU_BUTTON_BORDER_RADIUS: 33 * scaleW,
-  MENU_BUTTON_BORDER_WIDTH: 2 * scaleW,
-  MENU_BUTTON_PADDING_HORIZONTAL: 25 * scaleW,
-  MENU_BUTTON_PADDING_VERTICAL: 10 * scaleH,
-  RESUME_BUTTON_MARGIN_BOTTOM: 20 * scaleH,
-  RESUME_BUTTON_SCALE: 1.18,
-  RATE_BUTTON_SCALE: 1.1,
+    // ======================= INSTRUCTION SCREEN =======================
 
-  // ======================= WORD PACK SCREEN =======================
-  WORD_PACK_TITLE_TOP: 0 + (isTablet ? 80 : 0),
-  WORD_PACK_BUTTON_WIDTH: 310 * scaleW,
-  WORD_PACK_BUTTON_HEIGHT: 80 * scaleH,
-  WORD_PACK_BUTTON_BORDER_RADIUS: 30 * scaleW,
-  WORD_PACK_BUTTON_BORDER_WIDTH: 2 * scaleW,
-  WORD_PACK_BUTTON_TOP: 10 * rawScaleH + (isTablet ? 80 : 0),
-  WORD_PACK_BUTTON_MARGIN_TOP: 23 * scaleH,
-  WORD_PACK_ICON_SIZE: 80 * scaleW,
-  WORD_PACK_ICON_MARGIN_LEFT: 20 * scaleW,
-  WORD_PACK_TEXT_MARGIN_LEFT: 9 * scaleW,
-  WORD_PACK_TEXT_MARGIN_TOP: -10 * scaleH,
-  WORD_PACK_TITLE_WIDTH: 400 * scaleW,
-  WORD_PACK_TITLE_HEIGHT: 56 * scaleH,
-  WORD_PACK_TITLE_MARGIN_BOTTOM: 18 * scaleH,
-  WORD_PACK_SUBTITLE_WIDTH: 340 * scaleW,
-  WORD_PACK_SUBTITLE_MARGIN_TOP: 4 * scaleH,
-  NATURE_ICON_TOP: -5 * scaleH,
-  FOOD_ICON_TOP: -5 * scaleH,
-  ANIMALS_ICON_SCALE: 1.05,
+    INSTRUCTION_BUTTON_TOP: 700 * scaleHeight + (isTablet ? 80 : 0),
+    INSTRUCTION_BUTTON_TOP_NEW: 720 * scaleHeight + (isTablet ? 80 : 0),
+    INSTRUCTION_BUTTON_WIDTH: 220 * scaleHeight,
 
-  // ======================= DIFFICULTY SCREEN =======================
-  DIFFICULTY_BUTTON_WIDTH: 350 * scaleW,
-  DIFFICULTY_BUTTON_HEIGHT: 100 * scaleH,
-  DIFFICULTY_BUTTON_BORDER_RADIUS: 30 * scaleW,
-  DIFFICULTY_BUTTON_BORDER_WIDTH: 4 * scaleW,
-  DIFFICULTY_BUTTON_MARGIN_TOP: 25 * scaleH,
+    // ======================= ICON SIZES =======================
+    BACK_ICON_SIZE: 70 * scaleHeight,
+    SOUND_ICON_SIZE: 70 * scaleHeight,
+    RESUME_ICON_SIZE: 50 * scaleHeight,
+    MENU_ICON_MARGIN_RIGHT: 8 * scaleHeight,
 
-  // ======================= ICON SIZES & SPACING =======================
-  BACK_ICON_SIZE: 70 * scaleW,
-  SOUND_ICON_SIZE: 70 * scaleW,
-  RESUME_ICON_SIZE: 50 * scaleW,
-  MENU_ICON_MARGIN_RIGHT: 8 * scaleW,
+    // ======================= LETTER SPACING =======================
+    LETTER_SPACING_XS: 0.5,
+    LETTER_SPACING_SMALL: 1,
+    LETTER_SPACING_MEDIUM: 1.5,
+    LETTER_SPACING_LARGE: 2.5,
 
-  // ======================= GENERAL LETTER SPACING =======================
-  LETTER_SPACING_XS: 0.5,
-  LETTER_SPACING_SMALL: 1,
-  LETTER_SPACING_MEDIUM: 1.5,
-  LETTER_SPACING_LARGE: 2.5,
+    // ======================= THEME PACKS =======================
 
-  // ======================= PACKS =======================
-  NATURE_PACK_TITLE_TOP: -3 * scaleH,
-  NATURE_PACK_WORD_TOP: -8 * scaleH,
-  NATURE_PACK_WORD_MARGIN_BOTTOM: -23 * scaleH,
-  NATURE_PACK_LETTER_SPACING: 5,
+    DEFAULT_TARGET_WORD_TOP: -2 * scaleHeight,
+    DEFAULT_TARGET_WORD_MARGIN_BOTTOM: -10 * scaleHeight,
 
-  FOOD_PACK_TITLE_TOP: -7 * scaleH,
-  FOOD_PACK_WORD_TOP: -6 * scaleH,
-  FOOD_PACK_WORD_MARGIN_BOTTOM: -3 * scaleH,
-  FOOD_PACK_LETTER_SPACING: 5,
+    NATURE_PACK_TARGET_WORD_TOP: -2 * scaleHeight,
+    NATURE_PACK_TARGET_WORD_MARGIN_TOP: -7 * scaleHeight,
+    NATURE_PACK_TARGET_WORD_MARGIN_BOTTOM: -21 * scaleHeight,
+    NATURE_PACK_LETTER_SPACING: 5,
 
-  ANIMALS_PACK_TITLE_TOP: -10 * scaleH,
-  ANIMALS_PACK_WORD_TOP: -15 * scaleH,
-  ANIMALS_PACK_WORD_MARGIN_BOTTOM: -20 * scaleH,
-  ANIMALS_PACK_LETTER_SPACING: 5,
+    FOOD_PACK_TARGER_WORD_TOP: -3 * scaleHeight,
+    FOOD_PACK_TARGER_WORD_MARGIN_TOP: -5 * scaleHeight,
+    FOOD_PACK_TARGET_WORD_MARGIN_BOTTOM: -13 * scaleHeight,
+    FOOD_PACK_LETTER_SPACING: 5,
 
-  STORY_PACK_TITLE_TOP: 4 * scaleH,
-  STORY_PACK_WORD_TOP: 10 * scaleH,
-  STORY_PACK_WORD_MARGIN_BOTTOM: 14 * scaleH,
-  STORY_PACK_LETTER_SPACING: -1,
-};
+    ANIMALS_PACK_TARGET_WORD_TOP: -4 * scaleHeight,
+    ANIMALS_PACK_TARGET_WORD_MARGIN_TOP: 10 * scaleHeight,
+    ANIMALS_PACK_TARGET_WORD_MARGIN_BOTTOM: -15 * scaleHeight,
+    ANIMALS_PACK_LETTER_SPACING: 5,
 
-export default layouts;
+    STORY_PACK_TARGET_WORD_TOP: -2 * scaleHeight,
+    STORY_PACK_TARGET_WORD_MARGIN_TOP: 10 * scaleHeight,
+    STORY_PACK_TARGET_WORD_MARGIN_BOTTOM: -2 * scaleHeight,
+    STORY_PACK_LETTER_SPACING: -1,
+  }), [width, height]);
+}

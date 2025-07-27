@@ -1,55 +1,65 @@
-import colors from "@/constants/colors";
-import fonts from "@/constants/fonts";
-import layouts from "@/constants/layouts";
+import { useMemo } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 
-const gameBoard = {
-  // Board container
-  board: {
-    backgroundColor: colors.GAME_BOARD_BG,
-    borderColor: colors.GAME_BOARD_BORDER,
-    borderRadius: layouts.GAME_BOARD_BORDER_RADIUS,
-    borderWidth: layouts.GAME_BOARD_BORDER_WIDTH,
-    height: layouts.GAME_BOARD_HEIGHT,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    boxShadow: fonts.shadow.gameBoard,
-  } as ViewStyle,
+import colors from "@/constants/colors";
+import useFonts from "@/constants/fonts";
+import useLayouts from "@/constants/layouts";
 
-  // Score/Pop label
-  title: {
-    fontSize: fonts.size.scoreLabel,
-    fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
-    fontFamily: fonts.family.regular,
-    color: colors.GAME_BOARD_TITLE,
-    textAlign: "center",
-  } as TextStyle,
+export default function useGameBoardStyles() {
+  const layouts = useLayouts();
+  const fonts = useFonts();
 
-  // Score/Pop number
-  count: {
-    fontSize: fonts.size.scoreValue,
-    fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
-    fontFamily: fonts.family.count,
-    color: colors.GAME_BOARD_TITLE,
-    textAlign: "center",
-    textAlignVertical: "bottom",
-    paddingHorizontal: layouts.GAME_BOARD_PADDING_HORIZONTAL,
-  } as TextStyle,
+  const styles = useMemo(() => ({
+    // ======================= Outer Container =======================
+    container: {
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+    } as ViewStyle,
 
-  // Outer container
-  container: {
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  } as ViewStyle,
+    // ======================= Board =======================
+    board: {
+      height: layouts.GAME_BOARD_HEIGHT,
+      borderRadius: layouts.GAME_BOARD_BORDER_RADIUS,
+      borderWidth: layouts.GAME_BOARD_BORDER_WIDTH,
+      borderColor: colors.GAME_BOARD_BORDER,
+      backgroundColor: colors.DEFAULT_BOARD_BG,
+      justifyContent: "flex-start",
+      alignItems: "center",
+      shadowColor: fonts.shadow.gameBoard.color,
+      shadowOpacity: fonts.shadow.gameBoard.opacity,
+      shadowRadius: fonts.shadow.gameBoard.radius,
+      shadowOffset: fonts.shadow.offset.gameBoard,
+    } as ViewStyle,
 
-  // Score/Pop wrapper
-  countWrapper: {
-    height: layouts.GAME_BOARD_COUNT_HEIGHT,
-    width: "100%",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  } as ViewStyle,
-};
+    // ======================= Score/Pop Wrapper =======================
+    countWrapper: {
+      width: "100%",
+      height: layouts.GAME_BOARD_COUNT_HEIGHT,
+      justifyContent: "flex-end",
+      alignItems: "center",
+    } as ViewStyle,
 
-export default gameBoard;
+    // ======================= Score/Pop Label =======================
+    title: {
+      fontSize: fonts.size.scoreLabel,
+      fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
+      fontFamily: fonts.family.primary,
+      color: colors.DEFAULT_BOARD_TEXT,
+      textAlign: "center",
+    } as TextStyle,
+
+    // ======================= Score/Pop Number =======================
+    count: {
+      fontSize: fonts.size.scoreValue,
+      fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
+      fontFamily: fonts.family.secondary,
+      color: colors.DEFAULT_BOARD_TEXT,
+      textAlign: "center",
+      textAlignVertical: "bottom",
+      paddingHorizontal: layouts.GAME_BOARD_PADDING_HORIZONTAL,
+    } as TextStyle,
+  }), [layouts]);
+
+  return styles;
+}

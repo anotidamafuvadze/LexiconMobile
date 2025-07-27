@@ -1,33 +1,39 @@
-import colors from "@/constants/colors";
-import layouts from "@/constants/layouts";
+import { useMemo } from "react";
 import { ViewStyle } from "react-native";
 
-const gameGrid = {
-  // Outer grid container
-  grid: {
-    top: layouts.GAME_GRID_TOP,
-    width: layouts.GAME_GRID_SIZE,
-    height: layouts.GAME_GRID_SIZE,
-    alignSelf: "center",
-    backgroundColor: colors.HOME_GRID_BG,
-    borderRadius: layouts.GAME_GRID_BORDER_RADIUS,
-    position: "absolute",
-    padding: layouts.GAME_GRID_PADDING,
-  } as ViewStyle,
+import colors from "@/constants/colors";
+import useLayouts from "@/constants/layouts";
 
-  // Individual empty tile cell
-  cell: {
-    width: layouts.GAME_GRID_SIZE / layouts.GAME_GRID_CELL_DIVISOR,
-    height: layouts.GAME_GRID_SIZE / layouts.GAME_GRID_CELL_DIVISOR,
-    marginTop: layouts.GAME_GRID_CELL_MARGIN,
-    marginBottom: layouts.GAME_GRID_CELL_MARGIN,
-    marginLeft: layouts.GAME_GRID_CELL_MARGIN,
-    marginRight: layouts.GAME_GRID_CELL_MARGIN,
-    backgroundColor: colors.HOME_GRID_CELL,
-    borderWidth: layouts.GAME_GRID_CELL_BORDER_WIDTH,
-    borderColor: colors.BLACK,
-    borderRadius: layouts.GAME_GRID_BORDER_RADIUS,
-  } as ViewStyle,
-};
+export default function useGameGridStyles() {
+  const layouts = useLayouts();
 
-export default gameGrid;
+  const styles = useMemo(() => ({
+    // ======================= Grid Container =======================
+    grid: {
+      position: "absolute",
+      top: layouts.GAME_GRID_TOP,
+      alignSelf: "center",
+      width: layouts.GAME_GRID_SIZE,
+      height: layouts.GAME_GRID_SIZE,
+      padding: layouts.GAME_GRID_PADDING,
+      borderRadius: layouts.GAME_GRID_BORDER_RADIUS,
+      backgroundColor: colors.DEFAULT_GRID_BG,
+    } as ViewStyle,
+
+    // ======================= Individual Empty Tile Cell =======================
+    cell: {
+      width: layouts.GAME_GRID_SIZE / layouts.GAME_GRID_CELL_DIVISOR,
+      height: layouts.GAME_GRID_SIZE / layouts.GAME_GRID_CELL_DIVISOR,
+      marginTop: layouts.GAME_GRID_CELL_MARGIN,
+      marginBottom: layouts.GAME_GRID_CELL_MARGIN,
+      marginLeft: layouts.GAME_GRID_CELL_MARGIN,
+      marginRight: layouts.GAME_GRID_CELL_MARGIN,
+      borderRadius: layouts.GAME_GRID_BORDER_RADIUS,
+      borderWidth: layouts.GAME_GRID_CELL_BORDER_WIDTH,
+      borderColor: colors.BLACK,
+      backgroundColor: colors.DEFAULT_GRID_CELL,
+    } as ViewStyle,
+  }), [layouts]);
+
+  return styles;
+}

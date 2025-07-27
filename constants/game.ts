@@ -13,33 +13,27 @@ const CONFETTI_COLORS = [
 
 // ======================= GAME SETTINGS =======================
 const game = {
-  // Board dimensions
+  // Board & layout
   TILE_COUNT_PER_DIMENSION: 4,
-  NUMBER_OF_ROWS: 4,
-  NUMBER_OF_COLS: 4,
 
-  // Animation durations (ms)
+  // Animations & splash (ms)
   MOVE_ANIMATION_DURATION: 130,
   MERGE_ANIMATION_DURATION: 150,
-  POP_ANIMATION_DURATION: 1150,
-
-  // Splash screen
-  SPLASH_TIMEOUT: 1250,
+  POP_ANIMATION_DURATION: 1800,
+  SPLASH_TIMEOUT: 1200,
   SPLASH_DURATION: 500,
+  SHARE_TIMEOUT: 5250,
 
   // Confetti
   CONFETTI_COUNT: 100,
   CONFETTI_COLORS,
   CONFETTI_FALL_SPEED: 3000,
-  CONFETTI_ORIGIN: { x: 0, y: 800 },
   CONFETTI_EXPLOSION_SPEED: 5,
+  CONFETTI_ORIGIN: { x: 0, y: 800 },
 
-  // Points
+  // Scoring & pops
   POINTS_FROM_MERGE,
-
-  // Pops
   STARTING_POPS: 3,
-
 };
 
 export default game;

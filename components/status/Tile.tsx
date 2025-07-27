@@ -1,9 +1,9 @@
 import colors from "@/constants/colors";
 import game from "@/constants/game";
-import layouts from "@/constants/layouts";
 import { useGame } from "@/context/GameContext";
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
+import useLayouts from "@/constants/layouts";
 import usePreviousProps from "@/hooks/usePreviousProps";
 import React, { useEffect, useRef, useState } from "react";
 import { Pressable, Text, TextStyle, ViewStyle } from "react-native";
@@ -19,22 +19,22 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-type TileComponentProps = {
+type TileProps = {
   tileStyle: ViewStyle;
   tileColor: string;
-  letterStyle: TextStyle;
   targetTileColor: string;
+  letterStyle: TextStyle;
   position: [number, number];
   value: string;
-  justCreated?: boolean;
   tileID: string;
+  justCreated?: boolean;
 };
 
 /**
  * Tile
  * - Displays a letter tile with movement, merge, lock, and pop animations
- * - Supports target word highlighting and lock state
  */
+
 function Tile({
   tileID: tileId,
   position,
@@ -44,7 +44,8 @@ function Tile({
   tileColor,
   targetTileColor: targetColor,
   letterStyle,
-}: TileComponentProps): React.JSX.Element {
+}: TileProps): React.JSX.Element {
+  const layouts = useLayouts();
   const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
   const TILE_DIMENSION = layouts.GAME_GRID_WIDTH / game.TILE_COUNT_PER_DIMENSION;
 
@@ -60,6 +61,7 @@ function Tile({
     playLockSound,
     playUnlockSound,
   } = useSound();
+
   const { targetWord } = useWord();
   const { status, gameWinningTiles, popTile, pops, lockTile, unlockTile, isAbleToLock } =
     useGame();
@@ -77,33 +79,27 @@ function Tile({
   const progress = useSharedValue(0);
 
   // ===== Handlers =====
-
   const handleLongPress = () => {
     if (pops <= 0) return;
     playGrowSound();
-    scale.value = withTiming(1.18, { duration: game.POP_ANIMATION_DURATION });
-
-    holdStartRef.current = Date.now(); // start timer
+    scale.value = withTiming(1.25, { duration: game.POP_ANIMATION_DURATION });
+    holdStartRef.current = Date.now();
   };
 
   const handlePressOut = () => {
     if (pops <= 0) return;
     stopGrowSound();
-
     const holdDuration =
       holdStartRef.current != null ? Date.now() - holdStartRef.current : 0;
-
-    holdStartRef.current = null; // reset
+    holdStartRef.current = null;
 
     if (holdDuration >= game.POP_ANIMATION_DURATION) {
       playPopSound();
-
       if (isLocked) {
         unlockTile();
       }
       popTile(tileId);
     }
-
     scale.value = withTiming(1, { duration: 100 });
   };
 
@@ -124,7 +120,6 @@ function Tile({
   // Animate tile movement
   useEffect(() => {
     if (!position || TILE_DIMENSION === 0) return;
-
     const x = position[0] * TILE_DIMENSION;
     const y = position[1] * TILE_DIMENSION;
 
@@ -137,6 +132,10 @@ function Tile({
       duration: game.MOVE_ANIMATION_DURATION,
       easing: Easing.out(Easing.quad),
     });
+
+    if (!justCreated && !hasChanged) {
+      playWhooshSound();
+    }
   }, [position, value]);
 
   // Animate scale when tile is created or merged
@@ -147,9 +146,9 @@ function Tile({
         withTiming(1, { duration: game.MERGE_ANIMATION_DURATION / 2 })
       );
 
-      if (hasChanged) playPopSound();
-    } else {
-      playWhooshSound();
+      if (hasChanged) {
+        playPopSound();
+      }
     }
   }, [hasChanged, justCreated, playPopSound, playWhooshSound]);
 
@@ -171,13 +170,11 @@ function Tile({
 
   // Animate border when tile is locked
   useEffect(() => {
-    // Scale effect
     scale.value = withSequence(
       withTiming(1.2, { duration: game.MERGE_ANIMATION_DURATION / 2 }),
       withTiming(1, { duration: game.MERGE_ANIMATION_DURATION / 2 })
     );
 
-    // Border animation
     if (isLocked) {
       progress.value = withRepeat(
         withSequence(
@@ -198,7 +195,7 @@ function Tile({
     const borderColorTarget = interpolateColor(
       progress.value,
       [0, 1],
-      [colors.LOCKED_TILE_BORDER, targetColor]
+      [colors.WHITE, targetColor]
     );
     const borderColorNotTarget = interpolateColor(
       progress.value,

@@ -1,4 +1,4 @@
-// TODO: Adjust word bank words (letter before L)
+// TODO: Adjust word bank words (letter before M)
 const wordBank = [
   // ======================= DEFAULT =======================
   {
@@ -41,17 +41,6 @@ const wordBank = [
     ],
   },
 
-  // ======================= ANIMALS =======================
-  {
-    name: "animals",
-    words: [
-      "LION", "BEAR", "DEER", "FROG", "GOAT", "WOLF", "MULE", "SWAN", "DUCK", "CRAB",
-      "MOLE", "HARE", "PUMA", "TOAD", "MOTH", "NEWT", "CALF", "FOAL", "CUBS", "PONY",
-      "DOGS", "CATS", "BATS", "OWLS", "HENS", "ELKS", "LARK", "BOAR", "TUNA", "CARP",
-      "EELS", "YAKS", "GNAT", "FERN", "FISH", "LAMB", "RATS", "MICE",
-    ],
-  },
-
   // ======================= NATURE =======================
   {
     name: "nature",
@@ -71,6 +60,17 @@ const wordBank = [
       "MEAT", "NUTS", "SALT", "LOAF", "BARS", "BEAN", "YAMS", "OATS", "POPS", "ROLL",
       "PIES", "TUNA", "CORN", "COLA", "WINE", "SODA", "BREW", "HOPS", "CURY", "MINT",
       "LIME", "KIWI",
+    ],
+  },
+
+  // ======================= ANIMALS =======================
+  {
+    name: "animals",
+    words: [
+      "LION", "BEAR", "DEER", "FROG", "GOAT", "WOLF", "MULE", "SWAN", "DUCK", "CRAB",
+      "MOLE", "HARE", "PUMA", "TOAD", "MOTH", "NEWT", "CALF", "FOAL", "CUBS", "PONY",
+      "DOGS", "CATS", "BATS", "OWLS", "HENS", "ELKS", "LARK", "BOAR", "TUNA", "CARP",
+      "EELS", "YAKS", "GNAT", "FERN", "FISH", "LAMB", "RATS", "MICE",
     ],
   },
 

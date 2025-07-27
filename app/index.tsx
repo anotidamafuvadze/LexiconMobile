@@ -1,38 +1,41 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { useEffect, useRef } from "react";
-import { ActivityIndicator, View } from "react-native";
+import * as ScreenOrientation from "expo-screen-orientation";
+import React, { useEffect } from "react";
+import { ActivityIndicator, Dimensions, View } from "react-native";
 
-// In index.tsx
+/**
+ * Index
+ * - Entry point of the app
+ * - Checks if user has played before and navigates accordingly
+ */
+
 export default function Index() {
   const router = useRouter();
-  const navigationLock = useRef(false); // Add a navigation lock
+  const { width, height } = Dimensions.get("window");
+  const isTablet = Math.min(width, height) >= 768;
 
   useEffect(() => {
-    const checkFirstLaunch = async () => {
-      if (navigationLock.current) return;
-      navigationLock.current = true;
-
-      try {
-        const hasSeen = await AsyncStorage.getItem("hasSeenInstructions");
-        
-        if (hasSeen !== "true") {
-          console.log("First launch - showing instructions");
-          await AsyncStorage.setItem("hasSeenInstructions", "true");
-          router.replace("/screens/FirstInstructionScreen");
-        } else {
-          console.log("Returning user - going to home");
-          router.replace("/screens/HomeScreen");
-        }
-      } catch (error) {
-        console.error("Error checking first launch:", error);
-        router.replace("/screens/HomeScreen");
-      } finally {
-        navigationLock.current = false;
+    const lockOrientation = async () => {
+      if (!isTablet) {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
       }
     };
 
-    checkFirstLaunch();
+    lockOrientation();
+  }, []);
+
+  useEffect(() => {
+    const checkIfPlayed = async () => {
+      const stored = await AsyncStorage.getItem("gameState");
+      if (stored) {
+        router.push("/screens/HomeScreen");
+      } else {
+        router.push("/screens/InstructionScreen");
+      }
+    };
+
+    checkIfPlayed();
   }, [router]);
 
   return (

@@ -8,13 +8,21 @@
     "scheme": "lexicon",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./app/assets/images/branding/splash_screen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "icon": "./app/assets/images/branding/app-logo.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.anotidamafuvadze.lexicon",
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio"
+        "UIBackgroundModes": ["audio"],
+        "UISupportedInterfaceOrientations": [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight"
         ]
       }
     },
@@ -38,6 +46,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "PORTRAIT"
+        }
+      ],
       "expo-router",
       "expo-font",
       "expo-audio",

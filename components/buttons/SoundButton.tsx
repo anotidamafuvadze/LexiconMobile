@@ -1,7 +1,7 @@
 import colors from "@/constants/colors";
-import fonts from "@/constants/fonts";
+import useFonts from "@/constants/fonts";
 import images from "@/constants/images";
-import metrics from "@/constants/layouts";
+import useLayouts from "@/constants/layouts";
 import { useSound } from "@/context/SoundContext";
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, TextStyle } from "react-native";
@@ -9,8 +9,8 @@ import { Image, Pressable, StyleSheet, Text, TextStyle } from "react-native";
 /**
  * SoundButton
  * - Toggles app sound on/off
- * - Manages background music state
  */
+
 function SoundButton() {
   const {
     soundOn,
@@ -19,13 +19,15 @@ function SoundButton() {
     playBackgroundMusic,
     stopBackgroundMusic,
   } = useSound();
+  const layouts = useLayouts();
+  const fonts = useFonts();
 
-  // Handles toggle between sound on/off
+  // Toggle sound and background music
   const handlePress = () => {
-    const isTurningSoundOn = !soundOn;
-    setSoundOn(isTurningSoundOn);
+    const nextState = !soundOn;
+    setSoundOn(nextState);
 
-    if (isTurningSoundOn) {
+    if (nextState) {
       playClickSound(true);
       playBackgroundMusic();
     } else {
@@ -33,46 +35,43 @@ function SoundButton() {
     }
   };
 
+  const styles = StyleSheet.create({
+    button: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 8,
+    },
+    icon: {
+      width: layouts.SOUND_ICON_SIZE,
+      height: layouts.SOUND_ICON_SIZE,
+      tintColor: colors.SOUND_ICON_BG,
+    },
+    title: {
+      fontSize: fonts.size.soundButton,
+      fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
+      fontFamily: fonts.family.primary,
+      color: colors.SOUND_BUTTON_TITLE,
+      letterSpacing: layouts.LETTER_SPACING_SMALL,
+      textAlign: "center",
+    },
+  });
+
   return (
     <Pressable
       onPress={handlePress}
       style={styles.button}
-      accessible={true}
+      accessible
       accessibilityRole="button"
       accessibilityLabel={soundOn ? "Turn sound off" : "Turn sound on"}
     >
-      {/* Sound icon */}
       <Image
         source={soundOn ? images.icons.soundOn : images.icons.soundOff}
         style={styles.icon}
         resizeMode="contain"
       />
-      {/* Sound label */}
       <Text style={styles.title}>{soundOn ? "Sound On" : "Sound Off"}</Text>
     </Pressable>
   );
 }
-
-// Styles
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 8,
-  },
-  title: {
-    fontSize: fonts.size.soundButton,
-    fontWeight: fonts.weight.bold as TextStyle["fontWeight"],
-    fontFamily: fonts.family.regular,
-    color: colors.SOUND_BUTTON_TITLE,
-    letterSpacing: metrics.LETTER_SPACING_SMALL,
-    textAlign: "center",
-  },
-  icon: {
-    width: metrics.SOUND_ICON_SIZE,
-    height: metrics.SOUND_ICON_SIZE,
-    tintColor: colors.SOUND_ICON_TINT,
-  },
-});
 
 export default SoundButton;

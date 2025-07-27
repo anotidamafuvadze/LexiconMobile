@@ -9,22 +9,20 @@ import Animated from "react-native-reanimated";
 
 /**
  * GameBoard
- * - Animated UI block that displays a scrore and pops
- * - Supports custom styling and entry animation
+ * - Animated board displaying a title and count (e.g., score, pops)
  */
 
 function GameBoard({
   title,
   count,
   entering,
-  style: style,
-  styleAdjust: styleAdjust,
+  style,
+  styleAdjust,
   width,
 }: {
   title?: string;
   count?: string;
   entering?: EntryExitAnimationFunction | LayoutAnimation;
-
   style: {
     board: ViewStyle;
     container: StyleProp<ViewStyle>;
@@ -32,7 +30,6 @@ function GameBoard({
     title?: TextStyle;
     count?: TextStyle;
   };
-  // Style override for themed packs
   styleAdjust?: {
     board: ViewStyle;
     text: TextStyle;
@@ -43,15 +40,15 @@ function GameBoard({
     <Animated.View
       style={[style.board, styleAdjust?.board, width]}
       entering={asEntry(entering)}
-      accessible={true}
+      accessible
       accessibilityRole="text"
       accessibilityLabel={`${title}: ${count}`}
     >
       <View style={style.container}>
-        {/* Title label */}
+        {/* Title */}
         <Text style={[style.title, styleAdjust?.text]}>{title}</Text>
 
-        {/* Count value */}
+        {/* Count */}
         <View style={style.countWrapper}>
           <Text
             style={[style.count, styleAdjust?.text]}

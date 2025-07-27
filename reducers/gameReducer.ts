@@ -451,8 +451,8 @@ function gameReducer(state: State = initialState, action: Action): State {
       const newTiles: TileMap = { ...state.tiles };
       const newTilesByIds = state.tilesByIds.filter(id => id !== action.tileId);
 
-      for (let row = 0; row < game.NUMBER_OF_ROWS; row++) {
-        for (let col = 0; col < game.NUMBER_OF_COLS; col++) {
+      for (let row = 0; row < game.TILE_COUNT_PER_DIMENSION; row++) {
+        for (let col = 0; col < game.TILE_COUNT_PER_DIMENSION; col++) {
           const tileId = state.board[row][col];
           if (tileId === action.tileId) {
             newBoard[row][col] = undefined;

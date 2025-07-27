@@ -1,5 +1,3 @@
-// ======================= TILE TYPES =======================
-
 // Single tile
 export type Tile = {
   id: string;

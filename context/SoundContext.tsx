@@ -10,10 +10,11 @@ import React, {
 
 /**
  * SoundProvider
- * - Manages global sound state and audio playback
- * - Plays background music and sound effects
- * - Allows toggling, stopping, and resuming music
+ * - Manages global sound and audio playback
+ * - Plays, toggles, and resumes background music and effects
  */
+
+// TODO: put all numbers (win sound) into constants
 
 // ===== Sound files =====
 const backgroundMusic = require("../app/assets/sounds/background-music.mp3");

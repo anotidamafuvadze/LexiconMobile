@@ -1,18 +1,16 @@
 import React from "react";
-import type { AccessibilityRole } from "react-native";
-import { ImageSourcePropType, ImageStyle, TextStyle, ViewStyle } from "react-native";
+import BaseButton from "./BaseButton";
 import type {
   EntryExitAnimationFunction,
   LayoutAnimation,
 } from "react-native-reanimated";
-import BaseButton from "./BaseButton";
+import type { AccessibilityRole, ImageSourcePropType, ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 /**
  * GameButton
- * - Reusable button component with icon, title, and subtitle
- * - Accepts a styleSet for layout and optional overrides via imageAdjust/styleAdjust
- * - Supports optional entry animations
+ * - Reusable animated button
  */
+
 function GameButton({
   title,
   subtitle,

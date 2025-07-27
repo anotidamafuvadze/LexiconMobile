@@ -1,114 +1,128 @@
-import BackButton from "@/components/buttons/BackButton";
-import GameButton from "@/components/buttons/GameButton";
-import animations from "@/constants/animations";
-import colors from "@/constants/colors";
-import images from "@/constants/images";
-import { useGame } from "@/context/GameContext";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import buttons from "@/styles/buttons";
-import { asEntry } from "@/util/animations";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import GameButton from "@/components/buttons/GameButton";
+import NavigationButton from "@/components/buttons/NagivationButton";
+import { useGame } from "@/context/GameContext";
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
+import useLayouts from "@/constants/layouts";
+
+import animations from "@/constants/animations";
+import colors from "@/constants/colors";
+import images from "@/constants/images";
+import { asEntry } from "@/util/animations";
+import useButtons from "@/styles/buttons";
+
 /**
- * Difficulty selection screen
- * - Allows users to choose between an Easy, Normal, or Hard difficulty
+ * DifficultySelection
+ * - Lets users choose between Easy, Normal, or Hard difficulty.
  */
+
 function DifficultySelection() {
   const router = useRouter();
-  const { generateNewWord, setTheme } = useWord();
   const { startNewGame } = useGame();
-  const { playPopSound } = useSound();
+  const { generateNewWord, setTheme } = useWord();
+  const { playClickSound, playPopSound } = useSound();
+  const layouts = useLayouts();
+  const buttons = useButtons();
 
-  // Handles difficulty selection
+  // Handle difficulty button press
   const handleButtonPress = (mode: string) => {
     playPopSound();
     setTheme(mode);
-    generateNewWord(mode); // Update theme and word
+    generateNewWord(mode);
     startNewGame();
-    router.push("/screens/HomeScreen"); // Go to home screen
+    router.push("/screens/HomeScreen");
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    background: {
+      flex: 1,
+      backgroundColor: colors.WHITE,
+    },
+    buttonGroup: {
+      flex: 1,
+      top: layouts.DIFFICULTY_BUTTON_TOP,
+      alignItems: "center",
+    },
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        style={styles.background}
         source={images.backgrounds.difficultySelectionScreen}
+        style={styles.background}
         resizeMode="cover"
       >
-        {/* Back Button */}
-        <BackButton toScreen="MenuScreen" from="DifficultyScreen" />
+        {/* Back button */}
+        <NavigationButton
+          icon={images.icons.backButton}
+          style={buttons.backButton}
+          toScreen="MenuScreen"
+          fromScreen="DifficultyScreen"
+          soundEffect={playClickSound}
+          accessibilityRole="button"
+          accessibilityLabel="Go back to menu"
+        />
 
         <View style={styles.buttonGroup}>
           {/* Easy */}
           <GameButton
             icon={images.labels.easy}
-            onPress={() => handleButtonPress("easy")}
             style={buttons.difficulty}
-            entering={asEntry(animations.BOUNCE_IN)}
-            styleAdjust={{ backgroundColor: colors.EASY_BUTTON }}
+            styleAdjust={{ backgroundColor: colors.EASY_BUTTON_BG }}
             iconAdjust={{
-              transform: [{ scale: 0.23 }],
-              alignContent: "center",
+              transform: [{ scale: layouts.EASY_BUTTON_SCALE }],
               position: "absolute",
+              alignContent: "center",
             }}
-            accessibilityRole={"button"}
-            accessibilityLabel={"Select easy"}
+            entering={asEntry(animations.BOUNCE_IN)}
+            onPress={() => handleButtonPress("easy")}
+            accessibilityRole="button"
+            accessibilityLabel="Select easy"
           />
 
           {/* Normal */}
           <GameButton
             icon={images.labels.normal}
-            onPress={() => handleButtonPress("normal")}
             style={buttons.difficulty}
-            entering={asEntry(animations.BOUNCE_IN)}
-            styleAdjust={{ backgroundColor: colors.NORMAL_BUTTON }}
+            styleAdjust={{ backgroundColor: colors.NORMAL_BUTTON_BG }}
             iconAdjust={{
-              transform: [{ scale: 0.3 }],
-              alignContent: "center",
+              transform: [{ scale: layouts.NORMAL_BUTTON_SCALE }],
               position: "absolute",
+              alignContent: "center",
             }}
-            accessibilityRole={"button"}
-            accessibilityLabel={"Select normal"}
+            entering={asEntry(animations.BOUNCE_IN)}
+            onPress={() => handleButtonPress("normal")}
+            accessibilityRole="button"
+            accessibilityLabel="Select normal"
           />
 
           {/* Hard */}
           <GameButton
             icon={images.labels.hard}
-            onPress={() => handleButtonPress("hard")}
             style={buttons.difficulty}
-            entering={asEntry(animations.BOUNCE_IN)}
-            styleAdjust={{ backgroundColor: colors.HARD_BUTTON }}
+            styleAdjust={{ backgroundColor: colors.HARD_BUTTON_BG }}
             iconAdjust={{
-              transform: [{ scale: 0.32 }],
-              alignContent: "center",
+              transform: [{ scale: layouts.HARD_BUTTON_SCALE }],
               position: "absolute",
+              alignContent: "center",
             }}
-            accessibilityRole={"button"}
-            accessibilityLabel={"Select hard"}
+            entering={asEntry(animations.BOUNCE_IN)}
+            onPress={() => handleButtonPress("hard")}
+            accessibilityRole="button"
+            accessibilityLabel="Select hard"
           />
         </View>
       </ImageBackground>
     </SafeAreaView>
   );
 }
-
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  background: {
-    flex: 1,
-  },
-  buttonGroup: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default DifficultySelection;

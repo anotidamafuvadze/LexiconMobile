@@ -1,134 +1,60 @@
-import GameButton from "@/components/buttons/GameButton";
-import SoundButton from "@/components/buttons/SoundButton";
-import images from "@/constants/images";
-import layouts from "@/constants/layouts";
-import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
-import buttons from "@/styles/buttons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import GameButton from "@/components/buttons/GameButton";
+import NavigationButton from "@/components/buttons/NagivationButton";
+import SoundButton from "@/components/buttons/SoundButton";
+
+import { useSound } from "@/context/SoundContext";
+import { useWord } from "@/context/WordContext";
+import useLayouts from "@/constants/layouts";
+
+import images from "@/constants/images";
+import useButtons from "@/styles/buttons";
+
+
 /**
- * Main menu screen
- * - Allows users resume, choose Word Packs, change difficulty,
- * view instructions, or rate the app.
+ * MenuScreen
+ * - Main menu: choose word pack, change difficulty, view instructions, rate app
  */
 
 function MenuScreen() {
   const router = useRouter();
   const { playClickSound } = useSound();
   const { currentTheme } = useWord();
+  const layouts = useLayouts();
+  const buttons = useButtons();
 
   // Handle menu button presses
-  const handleButtonPress = (buttonPressed: string) => () => {
+  const handleButtonPress = (button: string) => () => {
     playClickSound();
 
-    switch (buttonPressed) {
-      // Resume play
+    switch (button) {
       case "Resume":
-        if (["default", "easy", "normal", "hard"].includes(currentTheme)) {
-          router.push("/screens/HomeScreen"); // Go to Home Screen for default difficulty
-        } else {
-          router.push({
-            pathname: "/screens/PackHomeScreen", // Go to Pack screen for custom theme
-            params: { packName: currentTheme },
-          });
-        }
+        router.push({
+          pathname: "/screens/HomeScreen",
+          params: { packName: currentTheme },
+        });
         break;
 
-      // Navigate buttons
       case "WordPack":
       case "Difficulty":
-      case "FirstInstruction":
-        router.push(`/screens/${buttonPressed}Screen`);
+      case "Instruction":
+        router.push(`/screens/${button}Screen`);
         break;
 
-      // App Rating
       case "Rate":
         // TODO: Open app store for rating
         break;
 
       default:
-        if (__DEV__) console.warn(`Unhandled MenuScreen button press: ${buttonPressed}`);
-        break;
+        if (__DEV__) console.warn(`Unhandled MenuScreen button: ${button}`);
     }
   };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ImageBackground
-        style={styles.background}
-        source={images.backgrounds.menuScreen}
-        resizeMode="cover"
-      >
-        {/* Sound toggle */}
-        <View style={styles.soundWrapper}>
-          <SoundButton />
-        </View>
-
-        <View style={styles.buttonGroup}>
-          {/* Resume */}
-          <GameButton
-            title="Resume"
-            icon={images.icons.resumeButton}
-            onPress={handleButtonPress("Resume")}
-            style={buttons.menuScreen}
-            styleAdjust={{
-              transform: [{ scale: layouts.RESUME_BUTTON_SCALE }],
-              marginBottom: layouts.RESUME_BUTTON_MARGIN_BOTTOM,
-            }}
-            accessibilityRole={"button"}
-            accessibilityLabel="Resume your game"
-          />
-
-          {/* Word Packs */}
-          <GameButton
-            title="Word Packs"
-            onPress={handleButtonPress("WordPack")}
-            style={buttons.menuScreen}
-            accessibilityRole={"button"}
-            accessibilityLabel="Choose a word pack"
-          />
-
-          {/* Difficulty */}
-          <GameButton
-            title="Difficulty"
-            onPress={handleButtonPress("Difficulty")}
-            style={buttons.menuScreen}
-            accessibilityRole={"button"}
-            accessibilityLabel="Change the difficulty"
-          />
-
-          {/* Instructions */}
-          <GameButton
-            title="How To Play"
-            onPress={handleButtonPress("FirstInstruction")}
-            style={buttons.menuScreen}
-            accessibilityRole={"button"}
-            accessibilityLabel="Learn how to play the game"
-          />
-
-          {/* App Rating */}
-          <GameButton
-            title="Rate Us"
-            onPress={handleButtonPress("Rate")}
-            style={buttons.menuScreen}
-            styleAdjust={{
-              transform: [{ scale: layouts.RATE_BUTTON_SCALE }],
-            }}
-            accessibilityRole={"button"}
-            accessibilityLabel="Rate this app"
-          />
-        </View>
-      </ImageBackground>
-    </SafeAreaView>
-  );
-}
-
-// Styles
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -140,10 +66,80 @@ const styles = StyleSheet.create({
     top: layouts.SOUND_BUTTON_TOP,
     alignSelf: "center",
   },
-  buttonGroup: {
+  buttonWrapper: {
     top: layouts.MENU_BUTTON_TOP,
     alignItems: "center",
   },
 });
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={images.backgrounds.menuScreen}
+        style={styles.background}
+        resizeMode="cover"
+      >
+        {/* Sound toggle */}
+        <View style={styles.soundWrapper}>
+          <SoundButton />
+        </View>
+
+        <View style={styles.buttonWrapper}>
+          {/* Resume */}
+          <NavigationButton
+            soundEffect={playClickSound}
+            title="Resume"
+            icon={images.icons.resumeButton}
+            toScreen="HomeScreen"
+            fromScreen="MenuScreen"
+            style={buttons.menuScreen}
+            styleAdjust={{
+              transform: [{ scale: layouts.RESUME_BUTTON_SCALE }],
+              marginBottom: layouts.RESUME_BUTTON_MARGIN_BOTTOM,
+            }}
+            accessibilityRole="button"
+            accessibilityLabel="Resume your game"
+          />
+
+          {/* Word Packs */}
+          <GameButton
+            title="Word Packs"
+            onPress={handleButtonPress("WordPack")}
+            style={buttons.menuScreen}
+            accessibilityRole="button"
+            accessibilityLabel="Choose a word pack"
+          />
+
+          {/* Difficulty */}
+          <GameButton
+            title="Difficulty"
+            onPress={handleButtonPress("Difficulty")}
+            style={buttons.menuScreen}
+            accessibilityRole="button"
+            accessibilityLabel="Change the difficulty"
+          />
+
+          {/* Instructions */}
+          <GameButton
+            title="How To Play"
+            onPress={handleButtonPress("Instruction")}
+            style={buttons.menuScreen}
+            accessibilityRole="button"
+            accessibilityLabel="Learn how to play"
+          />
+
+          {/* Rate Us */}
+          <GameButton
+            title="Rate Us"
+            onPress={handleButtonPress("Rate")}
+            style={buttons.menuScreen}
+            accessibilityRole="button"
+            accessibilityLabel="Rate this app"
+          />
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
+  );
+}
 
 export default MenuScreen;

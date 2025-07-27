@@ -1,19 +1,18 @@
 const images = {
   // ======================= BACKGROUNDS =======================
   backgrounds: {
-    // General screens
-    defaultScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),
-    difficultySelectionScreen: require("@/app/assets/images/backgrounds/menu-screen-background.png"),
-    gameLabScreen: require("@/app/assets/images/backgrounds/lab-screen-background.png"),
+    // General
     menuScreen: require("@/app/assets/images/backgrounds/menu-screen-background.png"),
-    wordPackSelectionScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),
+    difficultySelectionScreen: require("@/app/assets/images/backgrounds/menu-screen-background.png"),
     instructionScreen: require("@/app/assets/images/backgrounds/instruction-screen-background.png"),
+    wordPackSelectionScreen: require("@/app/assets/images/backgrounds/default-screen-background.png"),
 
-    // Word pack screens
+    // Word packs
     packs: {
-      animals: require("@/app/assets/images/backgrounds/wordPacks/animals-screen-background.png"),
-      food: require("@/app/assets/images/backgrounds/wordPacks/food-screen-background.png"),
+      default: require("@/app/assets/images/backgrounds/default-screen-background.png"),
       nature: require("@/app/assets/images/backgrounds/wordPacks/nature-screen-background.png"),
+      food: require("@/app/assets/images/backgrounds/wordPacks/food-screen-background.png"),
+      animals: require("@/app/assets/images/backgrounds/wordPacks/animals-screen-background.png"),
       story: require("@/app/assets/images/backgrounds/wordPacks/story-screen-background.png"),
     },
   },
@@ -27,19 +26,18 @@ const images = {
 
   // ======================= ICONS =======================
   icons: {
-    // Navigation icons
+    // Navigation
     backButton: require("@/app/assets/images/icons/back-button-icon.png"),
     resumeButton: require("@/app/assets/images/icons/resume-button-icon.png"),
     soundOn: require("@/app/assets/images/icons/sound-on-icon.png"),
     soundOff: require("@/app/assets/images/icons/sound-off-icon.png"),
 
-    // Word pack icons
-    classicPack: require("@/app/assets/images/icons/wordPacks/classic-icon.png"),
+    // Word packs
     naturePack: require("@/app/assets/images/icons/wordPacks/nature-icon.png"),
-    animalsPack: require("@/app/assets/images/icons/wordPacks/animals-icon.png"),
     foodPack: require("@/app/assets/images/icons/wordPacks/food-icon.png"),
+    animalsPack: require("@/app/assets/images/icons/wordPacks/animals-icon.png"),
     storyPack: require("@/app/assets/images/icons/wordPacks/story-icon.png"),
-
+    classicPack: require("@/app/assets/images/icons/wordPacks/classic-icon.png"),
   },
 
   // ======================= BRANDING =======================
