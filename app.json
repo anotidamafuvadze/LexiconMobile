@@ -23,7 +23,9 @@
           "UIInterfaceOrientationPortrait",
           "UIInterfaceOrientationLandscapeLeft",
           "UIInterfaceOrientationLandscapeRight"
-        ]
+        ],
+        "NSPhotoLibraryUsageDescription": "Allow Lexicon to access your Photos to save or share game screenshots.",
+        "NSPhotoLibraryAddUsageDescription": "Allow Lexicon to add images to your Photo Library when you save or share."
       }
     },
     "android": {

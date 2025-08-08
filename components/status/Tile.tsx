@@ -133,9 +133,6 @@ function Tile({
       easing: Easing.out(Easing.quad),
     });
 
-    if (!justCreated && !hasChanged) {
-      playWhooshSound();
-    }
   }, [position, value]);
 
   // Animate scale when tile is created or merged
