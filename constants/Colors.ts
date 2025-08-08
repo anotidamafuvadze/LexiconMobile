@@ -40,9 +40,10 @@ const colors = {
   DEFAULT_GRID_BG: "rgb(66, 56, 48)",
   DEFAULT_GRID_CELL: "rgb(132, 114, 100)",
   DEFAULT_GRID_TILE: "rgb(89, 83, 74)",
+  DEFAULT_GRID_LETTER: "rgba(252, 246, 242, 1)",
   DEFAULT_GRID_TARGET_TILE: "rgb(115, 121, 105)",
   DEFAULT_TARGET_WORD: "rgb(46, 46, 43)",
-  DEFAULT_GRID_LETTER: "rgba(252, 246, 242, 1)",
+ 
 
   // ======================= NATURE PACK =======================
   NATURE_PACK_BOARD_BG: "rgb(240, 242, 228)",

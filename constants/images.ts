@@ -38,6 +38,10 @@ const images = {
     animalsPack: require("@/app/assets/images/icons/wordPacks/animals-icon.png"),
     storyPack: require("@/app/assets/images/icons/wordPacks/story-icon.png"),
     classicPack: require("@/app/assets/images/icons/wordPacks/classic-icon.png"),
+
+    instagramLogo: require("@/app/assets/images/icons/instagram-icon.png"),
+    xLogo: require("@/app/assets/images/icons/x-icon.png"),
+    tiktokLogo: require("@/app/assets/images/icons/tiktok-icon.png"),
   },
 
   // ======================= BRANDING =======================

@@ -70,6 +70,20 @@ export default function useButtons() {
         letterSpacing: layouts.LETTER_SPACING_SMALL,
         textAlign: "center",
       } as TextStyle,
+
+      socialMediaButton: {
+        marginTop: layouts.SOCIAL_MEDIA_BUTTON_MARGIN_TOP,
+        paddingHorizontal: layouts.SOCIAL_MEDIA_BUTTON_PADDING_HORIZONATAL,
+        backgroundColor: 'transparent',
+      } as ViewStyle,
+
+      socialMediaIcon: {
+        width: layouts.SOCIAL_MEDIA_BUTTON_SIZE,
+        height: layouts.SOCIAL_MEDIA_BUTTON_SIZE,
+        alignSelf: 'center',
+      } as ImageStyle,
+
+
     },
 
     // ======================= Word Pack Screen =======================

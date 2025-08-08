@@ -50,8 +50,8 @@ export default function useLayouts() {
     TILE_BORDER_WIDTH: 3 * scaleHeight,
 
     // ======================= MENU SCREEN =======================
-    SOUND_BUTTON_TOP: 135 * scaleHeight,
-    MENU_BUTTON_TOP: 215 * scaleHeight,
+    SOUND_BUTTON_TOP: 85 * scaleHeight,
+    MENU_BUTTON_TOP: 165 * scaleHeight,
     MENU_BUTTON_MARGIN_TOP: 25 * scaleHeight,
     MENU_BUTTON_BORDER_RADIUS: 33 * scaleHeight,
     MENU_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
@@ -59,6 +59,9 @@ export default function useLayouts() {
     MENU_BUTTON_PADDING_VERTICAL: 10 * scaleHeight,
     RESUME_BUTTON_MARGIN_BOTTOM: 20 * scaleHeight,
     RESUME_BUTTON_SCALE: 1.18,
+    SOCIAL_MEDIA_BUTTON_MARGIN_TOP: 25 * scaleHeight,
+    SOCIAL_MEDIA_BUTTON_PADDING_HORIZONATAL: 12 * scaleWidth,
+    SOCIAL_MEDIA_BUTTON_SIZE: 62 * scaleHeight,
 
     // ======================= WORD PACK SCREEN =======================
     WORD_PACK_TITLE_TOP: 50 * scaleHeight,

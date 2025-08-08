@@ -1,7 +1,5 @@
 import { useWindowDimensions } from "react-native";
 
-const BASE_WIDTH = 428;
-
 export default function useFonts() {
   const { width, height } = useWindowDimensions();
 

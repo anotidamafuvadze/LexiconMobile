@@ -47,7 +47,7 @@ function HomeScreen() {
   const packThemes = usePackThemes();
   const tile = useTileStyles();
 
-  // Default theme for built-in packs
+  //Default theme for built-in packs
   const effectiveTheme = ["easy", "normal", "hard"].includes(currentTheme)
     ? "default"
     : currentTheme;
@@ -85,15 +85,7 @@ function HomeScreen() {
 
       await Share.open(shareOptions);
     } catch (error: any) {
-      // Ignore user cancelation
-      if (
-        error.message?.includes("User did not share") ||
-        error.error?.includes("User did not share")
-      ) {
-        console.log("User canceled sharing.");
-      } else {
-        console.error("Sharing failed:", error);
-      }
+    
     }
   };
 

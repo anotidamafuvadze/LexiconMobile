@@ -50,7 +50,7 @@ export const WordProvider = ({
       const maxAttempts = 10;
 
       while (newWord === targetWord && attempts < maxAttempts) {
-        newWord = bank.words[Math.floor(Math.random() * bank.words.length)];
+        newWord = bank.words[Math.floor(Math.random() * bank.words.length)]!;
         attempts++;
       }
 

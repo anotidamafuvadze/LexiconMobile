@@ -13,6 +13,7 @@ import useLayouts from "@/constants/layouts";
 
 import images from "@/constants/images";
 import useButtons from "@/styles/buttons";
+import LinkingButton from "@/components/buttons/LinkingButton";
 
 
 /**
@@ -136,6 +137,14 @@ function MenuScreen() {
             accessibilityRole="button"
             accessibilityLabel="Rate this app"
           />
+
+          {/* Social Media Links */}
+
+          <View style={{flexDirection: "row"}}>
+            <LinkingButton icon={images.icons.tiktokLogo} buttonStyle={buttons.menuScreen.socialMediaButton} iconStyle={buttons.menuScreen.socialMediaIcon} appUrl={"tiktok://user/@lexiconthegame"} webUrl={"https://www.tiktok.com/@lexiconthegame"} accessibilityRole={"none"} accessibilityLabel={""}/>
+            <LinkingButton icon={images.icons.instagramLogo} buttonStyle={buttons.menuScreen.socialMediaButton} iconStyle={buttons.menuScreen.socialMediaIcon} appUrl={"instagram://user?username=lexiconthegame"} webUrl={"https://www.instagram.com/lexiconthegame"} accessibilityRole={"none"} accessibilityLabel={""}/>
+            <LinkingButton icon={images.icons.xLogo} buttonStyle={buttons.menuScreen.socialMediaButton} iconStyle={buttons.menuScreen.socialMediaIcon} appUrl={"twitter://user?screen_name=lexiconthegame"} webUrl={"https://x.com/lexiconthegame"} accessibilityRole={"none"} accessibilityLabel={""}/>
+          </View>
         </View>
       </ImageBackground>
     </SafeAreaView>
