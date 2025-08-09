@@ -29,10 +29,7 @@ function InstructionScreen() {
   const title = hasPlayedBefore ? "Resume" : "New Game";
   const accessibilityLabel = hasPlayedBefore ? "Resume your game" : "Start a new game";
 
-  const baseTop = hasPlayedBefore
-    ? layouts.INSTRUCTION_BUTTON_TOP
-    : layouts.INSTRUCTION_BUTTON_TOP_NEW;
-
+  const baseTop = layouts.INSTRUCTION_BUTTON_TOP_NEW;
   const adjustedTop = Platform.OS === "android" && !isTablet ? baseTop + 40 : baseTop;
 
   useEffect(() => {
@@ -50,19 +47,7 @@ function InstructionScreen() {
         style={styles.background}
         resizeMode={isTablet ? "contain" : "cover"}
       >
-        {/* Back button */}
-        {hasPlayedBefore && (
-          <NavigationButton
-            icon={images.icons.backButton}
-            style={buttons.backButton}
-            toScreen="MenuScreen"
-            fromScreen="InstructionScreen"
-            soundEffect={playClickSound}
-            accessibilityRole="button"
-            accessibilityLabel="Go back to menu"
-          />
-        )}
-
+ 
         {/* Action button: "New Game" or "Resume" */}
         <NavigationButton
           title={title}

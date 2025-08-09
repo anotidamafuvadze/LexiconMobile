@@ -14,8 +14,8 @@ export default function useLayouts() {
   return useMemo(() => ({
     // ======================= HOME SCREEN =======================
     HOME_HEADER_TOP: 5 * scaleHeight,
-    HOME_TARGET_WORD_TOP: 447 * scaleHeight,
-    HOME_BUTTON_TOP: 458 * scaleHeight,
+    HOME_TARGET_WORD_TOP: 440 * scaleHeight,
+    HOME_BUTTON_TOP: 446 * scaleHeight,
     HOME_BUTTON_GAP: 30 * scaleHeight,
     HOME_BUTTON_PADDING_HORIZONTAL: 15 * scaleHeight,
     HOME_BUTTON_PADDING_VERTICAL: 5 * scaleHeight,
@@ -99,7 +99,7 @@ export default function useLayouts() {
 
     INSTRUCTION_BUTTON_TOP: 700 * scaleHeight + (isTablet ? 80 : 0),
     INSTRUCTION_BUTTON_TOP_NEW: 720 * scaleHeight + (isTablet ? 80 : 0),
-    INSTRUCTION_BUTTON_WIDTH: 220 * scaleHeight,
+    INSTRUCTION_BUTTON_WIDTH: 240 * scaleHeight,
 
     // ======================= ICON SIZES =======================
     BACK_ICON_SIZE: 70 * scaleHeight,

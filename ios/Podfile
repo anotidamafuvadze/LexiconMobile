@@ -60,5 +60,20 @@ target 'Lexicon' do
         end
       end
     end
+
+    # --- Ensure Pods (including hermes-engine) generate/keep dSYMs ---
+    installer.pods_project.targets.each do |t|
+      t.build_configurations.each do |config|
+        # Generate dSYMs for all configs (Debug/Release)
+        config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf-with-dsym'
+        # Do not strip symbols from frameworks
+        config.build_settings['STRIP_DEBUG_SYMBOLS'] = 'NO'
+        config.build_settings['STRIP_INSTALLED_PRODUCT'] = 'NO'
+        config.build_settings['COPY_PHASE_STRIP'] = 'NO'
+        # Avoid mismatched slices causing UUID mismatches
+        config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+      end
+    end
+    # ----------------------------------------------------------------
   end
 end

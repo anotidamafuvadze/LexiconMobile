@@ -24,14 +24,14 @@ export default function useFonts() {
     // ======================= SIZES =======================
     size: {
       homeTitle: 70 * scale + (isTablet ? 5 : 0),
-      homeSubtitle: 21 * scale,
-      homeButton: 30 * scale,
+      homeSubtitle: 19 * scale,
+      homeButton: 22 * scale,
       tileLetter: 40 * scale,
       menuButton: 40 * scale,
       soundButton: 50 * scale,
-      instruction: 30 * scale,
+      instruction: 25 * scale,
       wordPackTitle: 53 * scale,
-      wordPackSubtitle: 20 * scale,
+      wordPackSubtitle: 18 * scale,
       wordPackButtonTitle: 30 * scale,
       wordPackButtonSubtitle: 17 * scale,
       targetTitle: 30 * scale,

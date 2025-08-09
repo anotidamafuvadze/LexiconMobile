@@ -1,29 +1,45 @@
 pluginManagement {
-  def reactNativeGradlePlugin = new File(
-    providers.exec {
-      workingDir(rootDir)
-      commandLine("node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })")
-    }.standardOutput.asText.get().trim()
-  ).getParentFile().absolutePath
-  includeBuild(reactNativeGradlePlugin)
-  
-  def expoPluginsPath = new File(
-    providers.exec {
-      workingDir(rootDir)
-      commandLine("node", "--print", "require.resolve('expo-modules-autolinking/package.json', { paths: [require.resolve('expo/package.json')] })")
-    }.standardOutput.asText.get().trim(),
-    "../android/expo-gradle-plugin"
-  ).absolutePath
-  includeBuild(expoPluginsPath)
+  repositories {
+    gradlePluginPortal()
+    google()
+    mavenCentral()
+    maven { url = "https://www.jitpack.io" }
+  }
+
+  // Resolve paths relative to the project root (../)
+  def repoRoot = rootDir.getParentFile()
+
+  // ---- React Native gradle plugin as included build (no version pin) ----
+  def rnGradlePluginPkg = providers.exec {
+    workingDir(repoRoot)
+    commandLine(
+      "node", "--print",
+      "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"
+    )
+  }.standardOutput.asText.get().trim()
+  // include the directory that contains the plugin's build
+  includeBuild(file(rnGradlePluginPkg).getParentFile())
+
+  // ---- Expo autolinking gradle plugin as included build ----
+  def expoAutolinkingPkg = providers.exec {
+    workingDir(repoRoot)
+    commandLine(
+      "node", "--print",
+      "require.resolve('expo-modules-autolinking/package.json', { paths: [require.resolve('expo/package.json')] })"
+    )
+  }.standardOutput.asText.get().trim()
+  def expoPluginsDir = file(expoAutolinkingPkg).getParentFile()
+      .toPath().resolve("../android/expo-gradle-plugin").normalize().toFile()
+  includeBuild(expoPluginsDir)
 }
 
 plugins {
-  id("com.facebook.react.settings")
+  id("com.facebook.react.settings")       // provided by includeBuild above
   id("expo-autolinking-settings")
 }
 
 extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
-  if (System.getenv('EXPO_USE_COMMUNITY_AUTOLINKING') == '1') {
+  if (System.getenv("EXPO_USE_COMMUNITY_AUTOLINKING") == "1") {
     ex.autolinkLibrariesFromCommand()
   } else {
     ex.autolinkLibrariesFromCommand(expoAutolinking.rnConfigCommand)
@@ -31,9 +47,24 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 }
 expoAutolinking.useExpoModules()
 
-rootProject.name = 'Lexicon'
+rootProject.name = "Lexicon"
 
 expoAutolinking.useExpoVersionCatalog()
 
-include ':app'
-includeBuild(expoAutolinking.reactNativeGradlePlugin)
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+  repositories {
+    google()
+    mavenCentral()
+    // RN / JSC (relative to android/)
+    maven { url = "$rootDir/../node_modules/react-native/android" }
+    maven { url = "$rootDir/../node_modules/jsc-android/dist" }
+    // Expo
+    maven { url = "$rootDir/../node_modules/expo-updates/android" }
+    maven { url = "$rootDir/../node_modules/expo-modules-core/android" }
+    // JitPack if needed
+    maven { url = "https://www.jitpack.io" }
+  }
+}
+
+include(":app")
