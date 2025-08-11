@@ -1,20 +1,19 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ImageBackground, StatusBar, StyleSheet, View } from "react-native";
 
 import GameButton from "@/components/buttons/GameButton";
 import NavigationButton from "@/components/buttons/NagivationButton";
+import useLayouts from "@/constants/layouts";
 import { useGame } from "@/context/GameContext";
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-import useLayouts from "@/constants/layouts";
 
 import animations from "@/constants/animations";
 import colors from "@/constants/colors";
 import images from "@/constants/images";
-import { asEntry } from "@/util/animations";
 import useButtons from "@/styles/buttons";
+import { asEntry } from "@/util/animations";
 
 /**
  * DifficultySelection
@@ -54,7 +53,7 @@ function DifficultySelection() {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <ImageBackground
         source={images.backgrounds.difficultySelectionScreen}
         style={styles.background}
@@ -121,7 +120,7 @@ function DifficultySelection() {
           />
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </>
   );
 }
 

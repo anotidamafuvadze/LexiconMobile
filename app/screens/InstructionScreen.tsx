@@ -1,7 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { Dimensions, ImageBackground, Platform, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  Dimensions,
+  ImageBackground,
+  Platform,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
 
 import NavigationButton from "@/components/buttons/NagivationButton";
 import useLayouts from "@/constants/layouts";
@@ -41,13 +46,12 @@ function InstructionScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <ImageBackground
         source={images.backgrounds.instructionScreen}
         style={styles.background}
         resizeMode={isTablet ? "contain" : "cover"}
       >
- 
         {/* Action button: "New Game" or "Resume" */}
         <NavigationButton
           title={title}
@@ -60,7 +64,7 @@ function InstructionScreen() {
           accessibilityLabel={accessibilityLabel}
         />
       </ImageBackground>
-    </SafeAreaView>
+    </>
   );
 }
 

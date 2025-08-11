@@ -1,7 +1,6 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import GameButton from "@/components/buttons/GameButton";
 import NavigationButton from "@/components/buttons/NagivationButton";
@@ -14,9 +13,9 @@ import { useWord } from "@/context/WordContext";
 
 import animations from "@/constants/animations";
 import images from "@/constants/images";
-import { asEntry } from "@/util/animations";
 import useButtons from "@/styles/buttons";
 import useHeaderStyles from "@/styles/headers";
+import { asEntry } from "@/util/animations";
 
 /**
  * WordPacks
@@ -55,7 +54,7 @@ function WordPacks() {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <ImageBackground
         source={images.backgrounds.wordPackSelectionScreen}
         style={styles.background}
@@ -146,7 +145,7 @@ function WordPacks() {
           />
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </>
   );
 }
 

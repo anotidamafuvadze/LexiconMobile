@@ -1,20 +1,19 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { Alert, ImageBackground, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Alert, ImageBackground, StatusBar, StyleSheet, View } from "react-native";
+import * as StoreReview from "expo-store-review";
 
 import GameButton from "@/components/buttons/GameButton";
 import NavigationButton from "@/components/buttons/NagivationButton";
 import SoundButton from "@/components/buttons/SoundButton";
 
+import useLayouts from "@/constants/layouts";
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-import useLayouts from "@/constants/layouts";
 
+import LinkingButton from "@/components/buttons/LinkingButton";
 import images from "@/constants/images";
 import useButtons from "@/styles/buttons";
-import LinkingButton from "@/components/buttons/LinkingButton";
-
 
 /**
  * MenuScreen
@@ -29,7 +28,7 @@ function MenuScreen() {
   const buttons = useButtons();
 
   // Handle menu button presses
-  const handleButtonPress = (button: string) => () => {
+  const handleButtonPress = (button: string) => async () => {
     playClickSound();
 
     switch (button) {
@@ -47,8 +46,18 @@ function MenuScreen() {
         break;
 
       case "Rate":
-        Alert.alert("Coming Soon", "You'll be able to rate the app once it's live!");
-        break;
+      try {
+        const available = await StoreReview.isAvailableAsync();
+        if (available) {
+          StoreReview.requestReview();
+        } else {
+          Alert.alert("Thanks!", "Ratings will be available once the app is live.");
+        }
+      } catch {
+        Alert.alert("Thanks!", "Ratings will be available once the app is live.");
+      }
+      break;
+
 
       default:
         if (__DEV__) console.warn(`Unhandled MenuScreen button: ${button}`);
@@ -56,25 +65,25 @@ function MenuScreen() {
   };
 
   const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  background: {
-    flex: 1,
-  },
-  soundWrapper: {
-    position: "absolute",
-    top: layouts.SOUND_BUTTON_TOP,
-    alignSelf: "center",
-  },
-  buttonWrapper: {
-    top: layouts.MENU_BUTTON_TOP,
-    alignItems: "center",
-  },
-});
+    container: {
+      flex: 1,
+    },
+    background: {
+      flex: 1,
+    },
+    soundWrapper: {
+      position: "absolute",
+      top: layouts.SOUND_BUTTON_TOP,
+      alignSelf: "center",
+    },
+    buttonWrapper: {
+      top: layouts.MENU_BUTTON_TOP,
+      alignItems: "center",
+    },
+  });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <ImageBackground
         source={images.backgrounds.menuScreen}
         style={styles.background}
@@ -140,14 +149,38 @@ function MenuScreen() {
 
           {/* Social Media Links */}
 
-          <View style={{flexDirection: "row"}}>
-            <LinkingButton icon={images.icons.tiktokLogo} buttonStyle={buttons.menuScreen.socialMediaButton} iconStyle={buttons.menuScreen.socialMediaIcon} appUrl={"tiktok://user/@lexiconthegame"} webUrl={"https://www.tiktok.com/@lexiconthegame"} accessibilityRole={"none"} accessibilityLabel={""}/>
-            <LinkingButton icon={images.icons.instagramLogo} buttonStyle={buttons.menuScreen.socialMediaButton} iconStyle={buttons.menuScreen.socialMediaIcon} appUrl={"instagram://user?username=lexiconthegame"} webUrl={"https://www.instagram.com/lexiconthegame"} accessibilityRole={"none"} accessibilityLabel={""}/>
-            <LinkingButton icon={images.icons.xLogo} buttonStyle={buttons.menuScreen.socialMediaButton} iconStyle={buttons.menuScreen.socialMediaIcon} appUrl={"twitter://user?screen_name=lexiconthegame"} webUrl={"https://x.com/lexiconthegame"} accessibilityRole={"none"} accessibilityLabel={""}/>
+          <View style={{ flexDirection: "row" }}>
+            <LinkingButton
+              icon={images.icons.tiktokLogo}
+              buttonStyle={buttons.menuScreen.socialMediaButton}
+              iconStyle={buttons.menuScreen.socialMediaIcon}
+              appUrl={"tiktok://user/@lexiconthegame"}
+              webUrl={"https://www.tiktok.com/@lexiconthegame"}
+              accessibilityRole={"none"}
+              accessibilityLabel={""}
+            />
+            <LinkingButton
+              icon={images.icons.instagramLogo}
+              buttonStyle={buttons.menuScreen.socialMediaButton}
+              iconStyle={buttons.menuScreen.socialMediaIcon}
+              appUrl={"instagram://user?username=lexiconthegame"}
+              webUrl={"https://www.instagram.com/lexiconthegame"}
+              accessibilityRole={"none"}
+              accessibilityLabel={""}
+            />
+            <LinkingButton
+              icon={images.icons.xLogo}
+              buttonStyle={buttons.menuScreen.socialMediaButton}
+              iconStyle={buttons.menuScreen.socialMediaIcon}
+              appUrl={"twitter://user?screen_name=lexiconthegame"}
+              webUrl={"https://x.com/lexiconthegame"}
+              accessibilityRole={"none"}
+              accessibilityLabel={""}
+            />
           </View>
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </>
   );
 }
 

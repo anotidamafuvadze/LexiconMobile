@@ -57,11 +57,11 @@ export default function useLayouts() {
     MENU_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
     MENU_BUTTON_PADDING_HORIZONTAL: 25 * scaleHeight,
     MENU_BUTTON_PADDING_VERTICAL: 10 * scaleHeight,
-    RESUME_BUTTON_MARGIN_BOTTOM: 20 * scaleHeight,
-    RESUME_BUTTON_SCALE: 1.18,
-    SOCIAL_MEDIA_BUTTON_MARGIN_TOP: 25 * scaleHeight,
+    RESUME_BUTTON_MARGIN_BOTTOM: 15 * scaleHeight,
+    RESUME_BUTTON_SCALE: 1.1,
+    SOCIAL_MEDIA_BUTTON_MARGIN_TOP: 32 * scaleHeight,
     SOCIAL_MEDIA_BUTTON_PADDING_HORIZONATAL: 12 * scaleWidth,
-    SOCIAL_MEDIA_BUTTON_SIZE: 62 * scaleHeight,
+    SOCIAL_MEDIA_BUTTON_SIZE: 60 * scaleHeight,
 
     // ======================= WORD PACK SCREEN =======================
     WORD_PACK_TITLE_TOP: 50 * scaleHeight,

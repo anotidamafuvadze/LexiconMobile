@@ -1,7 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import { ImageBackground, StyleSheet, useWindowDimensions, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import ViewShot from "react-native-view-shot";
 
 import animations from "@/constants/animations";
@@ -84,9 +83,7 @@ function HomeScreen() {
       };
 
       await Share.open(shareOptions);
-    } catch (error: any) {
-    
-    }
+    } catch (error: any) {}
   };
 
   useEffect(() => {
@@ -111,6 +108,8 @@ function HomeScreen() {
     },
     background: {
       flex: 1,
+      width: "100%", // Add this
+      height: "100%",
     },
     boardWrapper: {
       top: layouts.GAME_BOARD_TOP,
@@ -127,7 +126,7 @@ function HomeScreen() {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <ViewShot
         ref={viewShotRef}
         style={{ flex: 1 }}
@@ -135,91 +134,93 @@ function HomeScreen() {
       >
         <ImageBackground
           source={backgroundImage}
-          style={styles.background}
+          style={StyleSheet.absoluteFill}
           resizeMode={isTablet ? "contain" : "cover"}
         >
-          {/* Header */}
-          <BaseHeader
-            title={effectiveTheme === "default" ? "LEXICON" : " "}
-            subtitle={
-              effectiveTheme === "default" ? "Merge the letters and spell the" : " "
-            }
-            boldText={effectiveTheme === "default" ? " word!" : undefined}
-            containerStyle={headers.home.container}
-            titleStyle={headers.home.title}
-            subtitleStyle={headers.home.subtitle}
-            boldTextStyle={headers.home.boldSubtitle}
-          />
-
-          {/* Score and Pops */}
-          <View style={styles.boardWrapper}>
-            <GameBoard
-              title="SCORE"
-              count={String(score)}
-              style={gameBoard}
-              styleAdjust={theme.gameBoard}
-              width={{ width: layouts.SCORE_BOARD_WIDTH }}
-              entering={asEntry(animations.FALL_FAST)}
-            />
-            <GameBoard
-              title="POPS"
-              count={String(pops)}
-              style={gameBoard}
-              styleAdjust={theme.gameBoard}
-              width={{ width: layouts.POPS_BOARD_WIDTH }}
-              entering={asEntry(animations.FALL_SLOW)}
-            />
-          </View>
-
-          {/* Game Grid */}
-          <GameGrid
-            gridStyle={gameGrid}
-            gridStyleAdjust={theme.gameGrid}
-            tileStyle={tile}
-            tileColor={tileColor}
-            targetTileColor={targetTileColor}
-          />
-
-          {/* Target Word */}
-          <TargetWord
-            style={{ top: layouts.HOME_TARGET_WORD_TOP }}
-            styleAdjust={theme.targetWord}
-          />
-
-          {/* Buttons */}
-          <View style={styles.buttonWrapper}>
-            <GameButton
-              title="New Game"
-              style={buttons.home}
-              styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
-              onPress={async () => {
-                if (canClick) {
-                  hasSharedWin.current = false;
-                  playClickSound();
-                  generateNewWord(currentTheme);
-                  startNewGame();
-                }
-              }}
-              accessibilityRole="button"
-              accessibilityLabel="Start a new game"
+          <View style={{ flex: 1 }}>
+            {/* Header */}
+            <BaseHeader
+              title={effectiveTheme === "default" ? "LEXICON" : " "}
+              subtitle={
+                effectiveTheme === "default" ? "Merge the letters and spell the" : " "
+              }
+              boldText={effectiveTheme === "default" ? " word!" : undefined}
+              containerStyle={headers.home.container}
+              titleStyle={headers.home.title}
+              subtitleStyle={headers.home.subtitle}
+              boldTextStyle={headers.home.boldSubtitle}
             />
 
-            <GameButton
-              title="Menu"
-              style={buttons.home}
-              onPress={async () => {
-                if (canClick) {
-                  playClickSound();
-                  router.push("/screens/MenuScreen");
-                }
-              }}
-              accessibilityRole="button"
-              accessibilityLabel="Go to menu"
+            {/* Score and Pops */}
+            <View style={styles.boardWrapper}>
+              <GameBoard
+                title="SCORE"
+                count={String(score)}
+                style={gameBoard}
+                styleAdjust={theme.gameBoard}
+                width={{ width: layouts.SCORE_BOARD_WIDTH }}
+                entering={asEntry(animations.FALL_FAST)}
+              />
+              <GameBoard
+                title="POPS"
+                count={String(pops)}
+                style={gameBoard}
+                styleAdjust={theme.gameBoard}
+                width={{ width: layouts.POPS_BOARD_WIDTH }}
+                entering={asEntry(animations.FALL_SLOW)}
+              />
+            </View>
+
+            {/* Game Grid */}
+            <GameGrid
+              gridStyle={gameGrid}
+              gridStyleAdjust={theme.gameGrid}
+              tileStyle={tile}
+              tileColor={tileColor}
+              targetTileColor={targetTileColor}
             />
+
+            {/* Target Word */}
+            <TargetWord
+              style={{ top: layouts.HOME_TARGET_WORD_TOP }}
+              styleAdjust={theme.targetWord}
+            />
+
+            {/* Buttons */}
+            <View style={styles.buttonWrapper}>
+              <GameButton
+                title="New Game"
+                style={buttons.home}
+                styleAdjust={{ backgroundColor: colors.NEW_GAME_BUTTON_BG }}
+                onPress={async () => {
+                  if (canClick) {
+                    hasSharedWin.current = false;
+                    playClickSound();
+                    generateNewWord(currentTheme);
+                    startNewGame();
+                  }
+                }}
+                accessibilityRole="button"
+                accessibilityLabel="Start a new game"
+              />
+
+              <GameButton
+                title="Menu"
+                style={buttons.home}
+                onPress={async () => {
+                  if (canClick) {
+                    playClickSound();
+                    router.push("/screens/MenuScreen");
+                  }
+                }}
+                accessibilityRole="button"
+                accessibilityLabel="Go to menu"
+              />
+            </View>
           </View>
         </ImageBackground>
       </ViewShot>
-    </SafeAreaView>
+    </>
   );
 }
 
