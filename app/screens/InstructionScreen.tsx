@@ -4,7 +4,6 @@ import {
   Dimensions,
   ImageBackground,
   Platform,
-  StatusBar,
   StyleSheet,
 } from "react-native";
 
@@ -46,25 +45,23 @@ function InstructionScreen() {
   }, []);
 
   return (
-    <>
-      <ImageBackground
-        source={images.backgrounds.instructionScreen}
-        style={styles.background}
-        resizeMode={isTablet ? "contain" : "cover"}
-      >
-        {/* Action button: "New Game" or "Resume" */}
-        <NavigationButton
-          title={title}
-          soundEffect={playClickSound}
-          toScreen="HomeScreen"
-          fromScreen="DifficultyScreen"
-          style={buttons.instruction}
-          styleAdjust={{ top: adjustedTop }}
-          accessibilityRole="button"
-          accessibilityLabel={accessibilityLabel}
-        />
-      </ImageBackground>
-    </>
+    <ImageBackground
+      source={images.backgrounds.instructionScreen}
+      style={styles.background}
+      resizeMode={isTablet ? "contain" : "cover"}
+    >
+      {/* Action button: "New Game" or "Resume" */}
+      <NavigationButton
+        title={title}
+        soundEffect={playClickSound}
+        toScreen="HomeScreen"
+        fromScreen="DifficultyScreen"
+        style={buttons.instruction}
+        styleAdjust={{ top: adjustedTop }}
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+      />
+    </ImageBackground>
   );
 }
 

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
@@ -29,28 +29,27 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <View style={[StyleSheet.absoluteFill, { backgroundColor: "#FBF7EF" }]} />
-        <WordProvider>
-          <GameProvider>
-            <SoundProvider>
-              <Stack
-                screenOptions={{
-                  headerShown: false,
-                  contentStyle: { backgroundColor: "transparent" },
-                  statusBarHidden: true,
-                }}
-              >
-                <Stack.Screen name="HomeScreen" options={{ animation: "none" }} />
-                <Stack.Screen name="MenuScreen" options={getMenuScreenOptions} />
-                <Stack.Screen name="WordPackScreen" options={{ animation: "slide_from_right" }} />
-                <Stack.Screen name="DifficultyScreen" options={{ animation: "fade" }} />
-                <Stack.Screen name="InstructionScreen" options={{ animation: "slide_from_right" }} />
-              </Stack>
-            </SoundProvider>
-          </GameProvider>
-        </WordProvider>
-      </View>
+      <StatusBar hidden />
+      <View style={[StyleSheet.absoluteFill, { backgroundColor: "#FBF7EF" }]} />
+      <WordProvider>
+        <GameProvider>
+          <SoundProvider>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { backgroundColor: "transparent" },
+                statusBarHidden: true,
+              }}
+            >
+              <Stack.Screen name="HomeScreen" options={{ animation: "none" }} />
+              <Stack.Screen name="MenuScreen" options={getMenuScreenOptions} />
+              <Stack.Screen name="WordPackScreen" options={{ animation: "slide_from_right" }} />
+              <Stack.Screen name="DifficultyScreen" options={{ animation: "fade" }} />
+              <Stack.Screen name="InstructionScreen" options={{ animation: "slide_from_right" }} />
+            </Stack>
+          </SoundProvider>
+        </GameProvider>
+      </WordProvider>
     </GestureHandlerRootView>
   );
 }

@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { Alert, ImageBackground, StatusBar, StyleSheet, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, View } from "react-native";
 import * as StoreReview from "expo-store-review";
 
 import GameButton from "@/components/buttons/GameButton";
@@ -83,104 +83,102 @@ function MenuScreen() {
   });
 
   return (
-    <>
-      <ImageBackground
-        source={images.backgrounds.menuScreen}
-        style={styles.background}
-        resizeMode="cover"
-      >
-        {/* Sound toggle */}
-        <View style={styles.soundWrapper}>
-          <SoundButton />
+    <ImageBackground
+      source={images.backgrounds.menuScreen}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      {/* Sound toggle */}
+      <View style={styles.soundWrapper}>
+        <SoundButton />
+      </View>
+
+      <View style={styles.buttonWrapper}>
+        {/* Resume */}
+        <NavigationButton
+          soundEffect={playClickSound}
+          title="Resume"
+          icon={images.icons.resumeButton}
+          toScreen="HomeScreen"
+          fromScreen="MenuScreen"
+          style={buttons.menuScreen}
+          styleAdjust={{
+            transform: [{ scale: layouts.RESUME_BUTTON_SCALE }],
+            marginBottom: layouts.RESUME_BUTTON_MARGIN_BOTTOM,
+          }}
+          accessibilityRole="button"
+          accessibilityLabel="Resume your game"
+        />
+
+        {/* Word Packs */}
+        <GameButton
+          title="Word Packs"
+          onPress={handleButtonPress("WordPack")}
+          style={buttons.menuScreen}
+          accessibilityRole="button"
+          accessibilityLabel="Choose a word pack"
+        />
+
+        {/* Difficulty */}
+        <GameButton
+          title="Difficulty"
+          onPress={handleButtonPress("Difficulty")}
+          style={buttons.menuScreen}
+          accessibilityRole="button"
+          accessibilityLabel="Change the difficulty"
+        />
+
+        {/* Instructions */}
+        <GameButton
+          title="How To Play"
+          onPress={handleButtonPress("Instruction")}
+          style={buttons.menuScreen}
+          accessibilityRole="button"
+          accessibilityLabel="Learn how to play"
+        />
+
+        {/* Rate Us */}
+        <GameButton
+          title="Rate Us"
+          onPress={handleButtonPress("Rate")}
+          style={buttons.menuScreen}
+          accessibilityRole="button"
+          accessibilityLabel="Rate this app"
+        />
+
+        {/* Social Media Links */}
+
+        <View style={{ flexDirection: "row" }}>
+          <LinkingButton
+            icon={images.icons.tiktokLogo}
+            buttonStyle={buttons.menuScreen.socialMediaButton}
+            iconStyle={buttons.menuScreen.socialMediaIcon}
+            appUrl={"tiktok://user/@lexiconthegame"}
+            webUrl={"https://www.tiktok.com/@lexiconthegame"}
+            accessibilityRole={"none"}
+            accessibilityLabel={""}
+          />
+          <LinkingButton
+            icon={images.icons.instagramLogo}
+            buttonStyle={buttons.menuScreen.socialMediaButton}
+            iconStyle={buttons.menuScreen.socialMediaIcon}
+            appUrl={"instagram://user?username=lexiconthegame"}
+            webUrl={"https://www.instagram.com/lexiconthegame"}
+            accessibilityRole={"none"}
+            accessibilityLabel={""}
+          />
+          <LinkingButton
+            icon={images.icons.xLogo}
+            buttonStyle={buttons.menuScreen.socialMediaButton}
+            iconStyle={buttons.menuScreen.socialMediaIcon}
+            appUrl={"twitter://user?screen_name=lexiconthegame"}
+            webUrl={"https://x.com/lexiconthegame"}
+            accessibilityRole={"none"}
+            accessibilityLabel={""}
+          />
         </View>
-
-        <View style={styles.buttonWrapper}>
-          {/* Resume */}
-          <NavigationButton
-            soundEffect={playClickSound}
-            title="Resume"
-            icon={images.icons.resumeButton}
-            toScreen="HomeScreen"
-            fromScreen="MenuScreen"
-            style={buttons.menuScreen}
-            styleAdjust={{
-              transform: [{ scale: layouts.RESUME_BUTTON_SCALE }],
-              marginBottom: layouts.RESUME_BUTTON_MARGIN_BOTTOM,
-            }}
-            accessibilityRole="button"
-            accessibilityLabel="Resume your game"
-          />
-
-          {/* Word Packs */}
-          <GameButton
-            title="Word Packs"
-            onPress={handleButtonPress("WordPack")}
-            style={buttons.menuScreen}
-            accessibilityRole="button"
-            accessibilityLabel="Choose a word pack"
-          />
-
-          {/* Difficulty */}
-          <GameButton
-            title="Difficulty"
-            onPress={handleButtonPress("Difficulty")}
-            style={buttons.menuScreen}
-            accessibilityRole="button"
-            accessibilityLabel="Change the difficulty"
-          />
-
-          {/* Instructions */}
-          <GameButton
-            title="How To Play"
-            onPress={handleButtonPress("Instruction")}
-            style={buttons.menuScreen}
-            accessibilityRole="button"
-            accessibilityLabel="Learn how to play"
-          />
-
-          {/* Rate Us */}
-          <GameButton
-            title="Rate Us"
-            onPress={handleButtonPress("Rate")}
-            style={buttons.menuScreen}
-            accessibilityRole="button"
-            accessibilityLabel="Rate this app"
-          />
-
-          {/* Social Media Links */}
-
-          <View style={{ flexDirection: "row" }}>
-            <LinkingButton
-              icon={images.icons.tiktokLogo}
-              buttonStyle={buttons.menuScreen.socialMediaButton}
-              iconStyle={buttons.menuScreen.socialMediaIcon}
-              appUrl={"tiktok://user/@lexiconthegame"}
-              webUrl={"https://www.tiktok.com/@lexiconthegame"}
-              accessibilityRole={"none"}
-              accessibilityLabel={""}
-            />
-            <LinkingButton
-              icon={images.icons.instagramLogo}
-              buttonStyle={buttons.menuScreen.socialMediaButton}
-              iconStyle={buttons.menuScreen.socialMediaIcon}
-              appUrl={"instagram://user?username=lexiconthegame"}
-              webUrl={"https://www.instagram.com/lexiconthegame"}
-              accessibilityRole={"none"}
-              accessibilityLabel={""}
-            />
-            <LinkingButton
-              icon={images.icons.xLogo}
-              buttonStyle={buttons.menuScreen.socialMediaButton}
-              iconStyle={buttons.menuScreen.socialMediaIcon}
-              appUrl={"twitter://user?screen_name=lexiconthegame"}
-              webUrl={"https://x.com/lexiconthegame"}
-              accessibilityRole={"none"}
-              accessibilityLabel={""}
-            />
-          </View>
-        </View>
-      </ImageBackground>
-    </>
+      </View>
+    </ImageBackground>
   );
 }
 
