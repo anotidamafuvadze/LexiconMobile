@@ -16,14 +16,14 @@ import React, {
 
 
 // ===== Sound files =====
-const backgroundMusic = require("../app/assets/sounds/background-music.mp3");
-const clickSound = require("../app/assets/sounds/button-click-sound.mp3");
-const whooshSound = require("../app/assets/sounds/screen-whoosh-sound.mp3");
-const popSound = require("../app/assets/sounds/button-pop-sound.mp3");
-const winSound = require("../app/assets/sounds/win-sound.mp3");
-const tileGrow = require("../app/assets/sounds/tile-grow-sound.mp3");
-const tileLock = require("../app/assets/sounds/tile-lock-sound.mp3");
-const tileUnlock = require("../app/assets/sounds/tile-unlock-sound.mp3");
+const backgroundMusic = require("../assets/sounds/background-music.mp3");
+const clickSound = require("../assets/sounds/button-click-sound.mp3");
+const whooshSound = require("../assets/sounds/screen-whoosh-sound.mp3");
+const popSound = require("../assets/sounds/button-pop-sound.mp3");
+const winSound = require("../assets/sounds/win-sound.mp3");
+const tileGrow = require("../assets/sounds/tile-grow-sound.mp3");
+const tileLock = require("../assets/sounds/tile-lock-sound.mp3");
+const tileUnlock = require("../assets/sounds/tile-unlock-sound.mp3");
 
 type SoundContextType = {
   soundOn: boolean;

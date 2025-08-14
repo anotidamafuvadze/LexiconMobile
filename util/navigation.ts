@@ -1,20 +1,17 @@
-// Valid screen paths
 export type ScreenPath =
-  | "/screens/HomeScreen"
-  | "/screens/InstructionScreen"
-  | "/screens/MenuScreen"
-  | "/screens/DifficultyScreen"
-  | "/screens/WordPackScreen"
+  | "/(screens)"                  
+  | "/(screens)/InstructionScreen"             
+  | "/(screens)/MenuScreen"
+  | "/(screens)/DifficultyScreen"
+  | "/(screens)/WordPackScreen";
 
-// Valid screen names
 export type ScreenName =
   | "HomeScreen"
   | "InstructionScreen"
   | "MenuScreen"
   | "DifficultyScreen"
-  | "WordPackScreen"
+  | "WordPackScreen";
 
-// Theme names
 export type Theme =
   | "default"
   | "easy"
@@ -26,5 +23,16 @@ export type Theme =
   | "story";
 
 export function getScreenPath(screen: ScreenName): ScreenPath {
-  return `/screens/${screen}` as ScreenPath;
+  switch (screen) {
+    case "HomeScreen":
+      return "/(screens)";
+    case "InstructionScreen":
+      return "/(screens)/InstructionScreen";
+    case "MenuScreen":
+      return "/(screens)/MenuScreen";
+    case "DifficultyScreen":
+      return "/(screens)/DifficultyScreen";
+    case "WordPackScreen":
+      return "/(screens)/WordPackScreen";
+  }
 }

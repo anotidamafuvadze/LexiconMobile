@@ -13,9 +13,9 @@ export default function useLayouts() {
 
   return useMemo(() => ({
     // ======================= HOME SCREEN =======================
-    HOME_HEADER_TOP: 5 * scaleHeight,
-    HOME_TARGET_WORD_TOP: 440 * scaleHeight,
-    HOME_BUTTON_TOP: 446 * scaleHeight,
+    HOME_HEADER_TOP: 60 * scaleHeight,
+    HOME_TARGET_WORD_TOP: 500 * scaleHeight,
+    HOME_BUTTON_TOP: 520 * scaleHeight,
     HOME_BUTTON_GAP: 30 * scaleHeight,
     HOME_BUTTON_PADDING_HORIZONTAL: 15 * scaleHeight,
     HOME_BUTTON_PADDING_VERTICAL: 5 * scaleHeight,
@@ -23,7 +23,7 @@ export default function useLayouts() {
     HOME_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
 
     // ======================= GAME BOARD =======================
-    GAME_BOARD_TOP: 25 * scaleHeight,
+    GAME_BOARD_TOP: 80 * scaleHeight,
     GAME_BOARD_HEIGHT: 83 * scaleHeight,
     GAME_BOARD_BORDER_WIDTH: 2,
     GAME_BOARD_BORDER_RADIUS: 27 * scaleHeight,
@@ -34,7 +34,7 @@ export default function useLayouts() {
     POPS_BOARD_WIDTH: 120 * scaleHeight,
 
     // ======================= GAME GRID =======================
-    GAME_GRID_TOP: 246 * scaleHeight,
+    GAME_GRID_TOP: 300 * scaleHeight,
     GAME_GRID_SIZE: 380 * scaleHeight,
     GAME_GRID_WIDTH: 366 * scaleHeight,
     GAME_GRID_BORDER_RADIUS: 13 * scaleHeight,
@@ -50,8 +50,8 @@ export default function useLayouts() {
     TILE_BORDER_WIDTH: 3 * scaleHeight,
 
     // ======================= MENU SCREEN =======================
-    SOUND_BUTTON_TOP: 85 * scaleHeight,
-    MENU_BUTTON_TOP: 165 * scaleHeight,
+    SOUND_BUTTON_TOP: 130 * scaleHeight,
+    MENU_BUTTON_TOP: 230 * scaleHeight,
     MENU_BUTTON_MARGIN_TOP: 25 * scaleHeight,
     MENU_BUTTON_BORDER_RADIUS: 33 * scaleHeight,
     MENU_BUTTON_BORDER_WIDTH: 2 * scaleHeight,
@@ -64,8 +64,8 @@ export default function useLayouts() {
     SOCIAL_MEDIA_BUTTON_SIZE: 60 * scaleHeight,
 
     // ======================= WORD PACK SCREEN =======================
-    WORD_PACK_TITLE_TOP: 50 * scaleHeight,
-    WORD_PACK_BUTTON_TOP: 60 * scaleHeight,
+    WORD_PACK_TITLE_TOP: 115 * scaleHeight,
+    WORD_PACK_BUTTON_TOP: 130 * scaleHeight,
     WORD_PACK_BUTTON_WIDTH: 310 * scaleHeight,
     WORD_PACK_BUTTON_HEIGHT: 80 * scaleHeight,
     WORD_PACK_BUTTON_MARGIN_TOP: 23 * scaleHeight,
@@ -85,7 +85,7 @@ export default function useLayouts() {
     ANIMALS_ICON_SCALE: 1.05,
 
     // ======================= DIFFICULTY SCREEN =======================
-    DIFFICULTY_BUTTON_TOP: 230 * scaleHeight,
+    DIFFICULTY_BUTTON_TOP: 280 * scaleHeight,
     DIFFICULTY_BUTTON_WIDTH: 310 * scaleHeight,
     DIFFICULTY_BUTTON_HEIGHT: 100 * scaleHeight,
     DIFFICULTY_BUTTON_MARGIN_TOP: 25 * scaleHeight,
@@ -97,12 +97,13 @@ export default function useLayouts() {
 
     // ======================= INSTRUCTION SCREEN =======================
 
-    INSTRUCTION_BUTTON_TOP: 700 * scaleHeight + (isTablet ? 80 : 0),
-    INSTRUCTION_BUTTON_TOP_NEW: 720 * scaleHeight + (isTablet ? 80 : 0),
+    INSTRUCTION_BUTTON_TOP: 805 * scaleHeight + (isTablet ? 80 : 0),
     INSTRUCTION_BUTTON_WIDTH: 240 * scaleHeight,
 
     // ======================= ICON SIZES =======================
     BACK_ICON_SIZE: 70 * scaleHeight,
+    BACK_BUTTON_TOP: 45 * scaleHeight,
+    BACK_BUTTON_LEFT: 8 * scaleHeight,
     SOUND_ICON_SIZE: 70 * scaleHeight,
     RESUME_ICON_SIZE: 50 * scaleHeight,
     MENU_ICON_MARGIN_RIGHT: 8 * scaleHeight,

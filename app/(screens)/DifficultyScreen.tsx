@@ -34,7 +34,7 @@ function DifficultySelection() {
     setTheme(mode);
     generateNewWord(mode);
     startNewGame();
-    router.push("/screens/HomeScreen");
+    router.push("/(screens)");
   };
 
   const styles = StyleSheet.create({

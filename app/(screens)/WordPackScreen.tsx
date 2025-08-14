@@ -37,7 +37,7 @@ function WordPacks() {
     generateNewWord(pack);
     startNewGame();
     playWhooshSound();
-    router.push({ pathname: "/screens/HomeScreen" });
+    router.push({ pathname: "/(screens)" });
   };
 
   const styles = StyleSheet.create({
@@ -65,7 +65,7 @@ function WordPacks() {
           soundEffect={playClickSound}
           icon={images.icons.backButton}
           toScreen="MenuScreen"
-          fromScreen="DifficultyScreen"
+          fromScreen="WordPackScreen"
           style={buttons.backButton}
           accessibilityRole="button"
           accessibilityLabel="Go back to menu"

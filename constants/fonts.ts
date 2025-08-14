@@ -3,8 +3,8 @@ import { useWindowDimensions } from "react-native";
 export default function useFonts() {
   const { width, height } = useWindowDimensions();
 
-  const BASE_HEIGHT = 926;
-  const scale = height / BASE_HEIGHT;
+  const BASE_WIDTH = 428; // iPhone 16 Pro assumed width
+  const scale = width / BASE_WIDTH;
 
   const isTablet = Math.min(width, height) >= 768;
 
@@ -25,11 +25,11 @@ export default function useFonts() {
     size: {
       homeTitle: 70 * scale + (isTablet ? 5 : 0),
       homeSubtitle: 19 * scale,
-      homeButton: 22 * scale,
+      homeButton: 27 * scale,
       tileLetter: 40 * scale,
-      menuButton: 35 * scale,
+      menuButton: 37 * scale,
       soundButton: 45 * scale,
-      instruction: 25 * scale,
+      instruction: 30 * scale,
       wordPackTitle: 53 * scale,
       wordPackSubtitle: 18 * scale,
       wordPackButtonTitle: 30 * scale,

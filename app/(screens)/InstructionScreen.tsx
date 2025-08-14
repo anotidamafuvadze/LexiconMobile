@@ -1,11 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
-import {
-  Dimensions,
-  ImageBackground,
-  Platform,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { Dimensions, ImageBackground, Platform, StyleSheet } from "react-native";
 
 import NavigationButton from "@/components/buttons/NagivationButton";
 import useLayouts from "@/constants/layouts";
@@ -23,26 +17,11 @@ import useButtons from "@/styles/buttons";
 
 function InstructionScreen() {
   const { playClickSound } = useSound();
-  const [hasPlayedBefore, setHasPlayedBefore] = useState(false);
   const layouts = useLayouts();
   const buttons = useButtons();
 
   const { width, height } = Dimensions.get("window");
   const isTablet = Math.min(width, height) >= 768;
-
-  const title = hasPlayedBefore ? "Resume" : "New Game";
-  const accessibilityLabel = hasPlayedBefore ? "Resume your game" : "Start a new game";
-
-  const baseTop = layouts.INSTRUCTION_BUTTON_TOP_NEW;
-  const adjustedTop = Platform.OS === "android" && !isTablet ? baseTop + 40 : baseTop;
-
-  useEffect(() => {
-    const checkIfPlayed = async () => {
-      const stored = await AsyncStorage.getItem("gameState");
-      if (stored) setHasPlayedBefore(true);
-    };
-    checkIfPlayed();
-  }, []);
 
   return (
     <ImageBackground
@@ -50,16 +29,16 @@ function InstructionScreen() {
       style={styles.background}
       resizeMode={isTablet ? "contain" : "cover"}
     >
-      {/* Action button: "New Game" or "Resume" */}
+      {/* Resume Button */}
       <NavigationButton
-        title={title}
+        title="Resume"
         soundEffect={playClickSound}
         toScreen="HomeScreen"
-        fromScreen="DifficultyScreen"
+        fromScreen="InstructionScreen"
         style={buttons.instruction}
-        styleAdjust={{ top: adjustedTop }}
+        styleAdjust={{ top: layouts.INSTRUCTION_BUTTON_TOP }}
         accessibilityRole="button"
-        accessibilityLabel={accessibilityLabel}
+        accessibilityLabel="Resume your game"
       />
     </ImageBackground>
   );
@@ -68,10 +47,10 @@ function InstructionScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
   },
   background: {
     flex: 1,
+    backgroundColor: colors.WHITE,
   },
 });
 

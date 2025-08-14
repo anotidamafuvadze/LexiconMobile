@@ -108,7 +108,7 @@ function HomeScreen() {
     },
     background: {
       flex: 1,
-      width: "100%", // Add this
+      width: "100%",
       height: "100%",
     },
     boardWrapper: {
@@ -134,7 +134,7 @@ function HomeScreen() {
       >
         <ImageBackground
           source={backgroundImage}
-          style={StyleSheet.absoluteFill}
+          style={styles.background}
           resizeMode={isTablet ? "contain" : "cover"}
         >
           <View style={{ flex: 1 }}>
@@ -210,7 +210,7 @@ function HomeScreen() {
                 onPress={async () => {
                   if (canClick) {
                     playClickSound();
-                    router.push("/screens/MenuScreen");
+                    router.push("/(screens)/MenuScreen");
                   }
                 }}
                 accessibilityRole="button"

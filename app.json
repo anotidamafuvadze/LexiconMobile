@@ -8,17 +8,34 @@
     "scheme": "lexicon",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./app/assets/images/branding/splash_screen.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./app/assets/images/branding/splash_screen.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "PORTRAIT"
+        }
+      ],
+      "expo-router",
+      "expo-font",
+      "expo-audio",
+      "expo-web-browser"
+    ],
     "ios": {
       "icon": "./app/assets/images/branding/app-logo.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.anotidamafuvadze.lexicon",
       "infoPlist": {
-        "UIBackgroundModes": ["audio"],
+        "UIViewControllerBasedStatusBarAppearance": false,
+        "UIStatusBarHidden": false,
+        "UIBackgroundModes": [], 
         "UISupportedInterfaceOrientations": [
           "UIInterfaceOrientationPortrait",
           "UIInterfaceOrientationLandscapeLeft",
@@ -34,9 +51,11 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
+      "statusBar": {
+        "translucent": true,
+        "backgroundColor": "#00000000"
+      },
       "permissions": [
-        "android.permission.RECORD_AUDIO",
-        "android.permission.MODIFY_AUDIO_SETTINGS",
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
@@ -47,18 +66,6 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      [
-        "expo-screen-orientation",
-        {
-          "initialOrientation": "PORTRAIT"
-        }
-      ],
-      "expo-router",
-      "expo-font",
-      "expo-audio",
-      "expo-web-browser"
-    ],
     "experiments": {
       "typedRoutes": true
     },

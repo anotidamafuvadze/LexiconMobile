@@ -47,7 +47,9 @@ function WinningSplash({ heading = "You Won!" }: { heading?: string }) {
         />
       )}
 
-      <Text style={splash.text}>{heading}</Text>
+      <Text allowFontScaling={false} style={splash.text}>
+        {heading}
+      </Text>
     </Animated.View>
   );
 }

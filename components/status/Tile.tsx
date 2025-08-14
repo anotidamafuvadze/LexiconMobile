@@ -1,9 +1,9 @@
 import colors from "@/constants/colors";
 import game from "@/constants/game";
+import useLayouts from "@/constants/layouts";
 import { useGame } from "@/context/GameContext";
 import { useSound } from "@/context/SoundContext";
 import { useWord } from "@/context/WordContext";
-import useLayouts from "@/constants/layouts";
 import usePreviousProps from "@/hooks/usePreviousProps";
 import React, { useEffect, useRef, useState } from "react";
 import { Pressable, Text, TextStyle, ViewStyle } from "react-native";
@@ -132,7 +132,6 @@ function Tile({
       duration: game.MOVE_ANIMATION_DURATION,
       easing: Easing.out(Easing.quad),
     });
-
   }, [position, value]);
 
   // Animate scale when tile is created or merged
@@ -252,7 +251,9 @@ function Tile({
         onLongPress={handleLongPress}
         onPressOut={handlePressOut}
       >
-        <Text style={letterStyle}>{value}</Text>
+        <Text allowFontScaling={false} style={letterStyle}>
+          {value}
+        </Text>
       </AnimatedPressable>
     </GestureDetector>
   );

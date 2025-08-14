@@ -9,11 +9,12 @@ import SoundButton from "@/components/buttons/SoundButton";
 
 import useLayouts from "@/constants/layouts";
 import { useSound } from "@/context/SoundContext";
-import { useWord } from "@/context/WordContext";
 
 import LinkingButton from "@/components/buttons/LinkingButton";
 import images from "@/constants/images";
 import useButtons from "@/styles/buttons";
+
+// TODO: turn game buttons into navigation buttons and get rid of handle button press
 
 /**
  * MenuScreen
@@ -21,46 +22,25 @@ import useButtons from "@/styles/buttons";
  */
 
 function MenuScreen() {
-  const router = useRouter();
   const { playClickSound } = useSound();
-  const { currentTheme } = useWord();
   const layouts = useLayouts();
   const buttons = useButtons();
 
   // Handle menu button presses
-  const handleButtonPress = (button: string) => async () => {
+  const handleRatePress = () => async () => {
     playClickSound();
-
-    switch (button) {
-      case "Resume":
-        router.push({
-          pathname: "/screens/HomeScreen",
-          params: { packName: currentTheme },
-        });
-        break;
-
-      case "WordPack":
-      case "Difficulty":
-      case "Instruction":
-        router.push(`/screens/${button}Screen`);
-        break;
-
-      case "Rate":
-      try {
-        const available = await StoreReview.isAvailableAsync();
-        if (available) {
-          StoreReview.requestReview();
-        } else {
-          Alert.alert("Thanks!", "Ratings will be available once the app is live.");
-        }
-      } catch {
-        Alert.alert("Thanks!", "Ratings will be available once the app is live.");
+    try {
+      const available = await StoreReview.isAvailableAsync();
+      if (available) {
+        StoreReview.requestReview();
+      } else {
+        Alert.alert(
+          "Thanks!",
+          "Ratings will be available once the app is live."
+        );
       }
-      break;
-
-
-      default:
-        if (__DEV__) console.warn(`Unhandled MenuScreen button: ${button}`);
+    } catch {
+      Alert.alert("Thanks!", "Ratings will be available once the app is live.");
     }
   };
 
@@ -96,11 +76,11 @@ function MenuScreen() {
       <View style={styles.buttonWrapper}>
         {/* Resume */}
         <NavigationButton
-          soundEffect={playClickSound}
           title="Resume"
-          icon={images.icons.resumeButton}
+          soundEffect={playClickSound}
           toScreen="HomeScreen"
           fromScreen="MenuScreen"
+          icon={images.icons.resumeButton}
           style={buttons.menuScreen}
           styleAdjust={{
             transform: [{ scale: layouts.RESUME_BUTTON_SCALE }],
@@ -111,27 +91,33 @@ function MenuScreen() {
         />
 
         {/* Word Packs */}
-        <GameButton
+        <NavigationButton
           title="Word Packs"
-          onPress={handleButtonPress("WordPack")}
+          soundEffect={playClickSound}
+          toScreen="WordPackScreen"
+          fromScreen="MenuScreen"
           style={buttons.menuScreen}
           accessibilityRole="button"
           accessibilityLabel="Choose a word pack"
         />
 
         {/* Difficulty */}
-        <GameButton
+        <NavigationButton
           title="Difficulty"
-          onPress={handleButtonPress("Difficulty")}
+          soundEffect={playClickSound}
+          toScreen="DifficultyScreen"
+          fromScreen="MenuScreen"
           style={buttons.menuScreen}
           accessibilityRole="button"
           accessibilityLabel="Change the difficulty"
         />
 
         {/* Instructions */}
-        <GameButton
+        <NavigationButton
           title="How To Play"
-          onPress={handleButtonPress("Instruction")}
+          soundEffect={playClickSound}
+          toScreen="InstructionScreen"
+          fromScreen="MenuScreen"
           style={buttons.menuScreen}
           accessibilityRole="button"
           accessibilityLabel="Learn how to play"
@@ -140,7 +126,7 @@ function MenuScreen() {
         {/* Rate Us */}
         <GameButton
           title="Rate Us"
-          onPress={handleButtonPress("Rate")}
+          onPress={handleRatePress()}
           style={buttons.menuScreen}
           accessibilityRole="button"
           accessibilityLabel="Rate this app"

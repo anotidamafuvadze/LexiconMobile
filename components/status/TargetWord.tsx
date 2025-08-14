@@ -10,7 +10,7 @@ function TargetWord({
   style,
   styleAdjust,
 }: {
-  style: ViewStyle
+  style: ViewStyle;
   styleAdjust?: {
     title: TextStyle;
     word: TextStyle;
@@ -20,8 +20,10 @@ function TargetWord({
 
   return (
     <View style={style}>
-      <Text style={styleAdjust?.title}>YOUR WORD:</Text>
-      <Text style={styleAdjust?.word}>
+      <Text allowFontScaling={false} style={styleAdjust?.title}>
+        YOUR WORD:
+      </Text>
+      <Text allowFontScaling={false} style={styleAdjust?.word}>
         {targetWord}
       </Text>
     </View>

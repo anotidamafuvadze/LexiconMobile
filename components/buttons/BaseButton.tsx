@@ -64,8 +64,14 @@ function BaseButton({
         <View style={textRowStyle}>
           {icon && <Image source={icon} style={iconStyle} resizeMode="contain" />}
           <View style={textColumnStyle}>
-            <Text style={titleStyle}>{title}</Text>
-            {subtitle && <Text style={subtitleStyle}>{subtitle}</Text>}
+            <Text allowFontScaling={false} style={titleStyle}>
+              {title}
+            </Text>
+            {subtitle && (
+              <Text allowFontScaling={false} style={subtitleStyle}>
+                {subtitle}
+              </Text>
+            )}
           </View>
         </View>
       </Pressable>

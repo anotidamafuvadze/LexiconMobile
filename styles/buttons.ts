@@ -189,6 +189,8 @@ export default function useButtons() {
     backButton: {
       icon: {
         position: "absolute",
+        top: layouts.BACK_BUTTON_TOP,
+        left: layouts.BACK_BUTTON_LEFT,
         width: layouts.BACK_ICON_SIZE,
         height: layouts.BACK_ICON_SIZE,
         tintColor: colors.BACK_ICON_BG,

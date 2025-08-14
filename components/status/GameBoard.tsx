@@ -46,11 +46,14 @@ function GameBoard({
     >
       <View style={style.container}>
         {/* Title */}
-        <Text style={[style.title, styleAdjust?.text]}>{title}</Text>
+        <Text allowFontScaling={false} style={[style.title, styleAdjust?.text]}>
+          {title}
+        </Text>
 
         {/* Count */}
         <View style={style.countWrapper}>
           <Text
+            allowFontScaling={false}
             style={[style.count, styleAdjust?.text]}
             adjustsFontSizeToFit
             numberOfLines={1}

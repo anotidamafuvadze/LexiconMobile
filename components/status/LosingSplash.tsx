@@ -1,8 +1,8 @@
+import game from "@/constants/game";
+import useSplashStyles from "@/styles/splash";
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
-import game from "@/constants/game";
-import useSplashStyles from "@/styles/splash";
 
 /**
  * LosingSplash
@@ -28,7 +28,9 @@ function LosingSplash({ heading = "You Lost" }: { heading?: string }) {
       accessibilityLiveRegion="polite"
       accessibilityLabel={heading}
     >
-      <Text style={splash.text}>{heading}</Text>
+      <Text allowFontScaling={false} style={splash.text}>
+        {heading}
+      </Text>
     </Animated.View>
   );
 }

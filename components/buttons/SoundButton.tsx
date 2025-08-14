@@ -69,7 +69,9 @@ function SoundButton() {
         style={styles.icon}
         resizeMode="contain"
       />
-      <Text style={styles.title}>{soundOn ? "Sound On" : "Sound Off"}</Text>
+      <Text allowFontScaling={false} style={styles.title}>
+        {soundOn ? "Sound On" : "Sound Off"}
+      </Text>
     </Pressable>
   );
 }

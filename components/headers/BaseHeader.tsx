@@ -25,11 +25,19 @@ function BaseHeader({
 }): React.JSX.Element {
   return (
     <View style={containerStyle}>
-      {title && <Text style={titleStyle}>{title}</Text>}
+      {title && (
+        <Text allowFontScaling={false} style={titleStyle}>
+          {title}
+        </Text>
+      )}
       {subtitle && (
-        <Text style={subtitleStyle}>
+        <Text allowFontScaling={false} style={subtitleStyle}>
           {subtitle}
-          {boldText && <Text style={boldTextStyle}>{boldText}</Text>}
+          {boldText && (
+            <Text allowFontScaling={false} style={boldTextStyle}>
+              {boldText}
+            </Text>
+          )}
         </Text>
       )}
     </View>
